@@ -8,7 +8,7 @@ spring:
       password: 123456
 aliyun:
    sms:
-      accessKeyId: LTAIX38F9HO1Ljg0
-      accessKeySecret: G8Uq9aqIV1z0WlKJ5FrVx62CGaOaN5
-      template_code: SMS_165108322
-      sign_name: 微风
+      accessKeyId: 
+      accessKeySecret: 
+      template_code: 
+      sign_name: 
