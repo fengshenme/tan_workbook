@@ -1,0 +1,37 @@
+server: 
+   port: 9050
+   
+logging:
+   level:
+      cn.tan: debug
+     # org.springframework: debug 
+# 连接四大参数
+spring:
+   application:
+      name: crawler #指定服务名
+   datasource:
+      driverClassName: com.mysql.cj.jdbc.Driver #  可省略，SpringBoot自动推断
+      url: jdbc:mysql://00.00.00.00:3306/article_one?characterEncoding=UTF8
+      username: xxx
+      password: xxx
+   jpa:
+      database: MySQL
+      show-sql: true
+      # 连接池配置
+      hikari:
+         idle-timeout: 60000
+         maximum-pool-size: 30
+         minimum-idle: 10  
+ai: #语料库目录 
+   dataPath : D:\\data\\article         
+   #浏览器标记
+        
+# mybatis 
+# mybatis: 
+   #configuration: 
+      #map-underscore-to-camel-case: true
+   # 别名扫描
+   # type-aliases-package: cn.tan.pojo
+   # mapper.xml文件位置,如果没有映射文件，请注释掉
+   # mapper-locations: classpath:mappers/*.xml  
+      

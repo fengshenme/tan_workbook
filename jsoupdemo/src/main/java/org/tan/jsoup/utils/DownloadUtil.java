@@ -1,0 +1,46 @@
+package org.tan.jsoup.utils;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL; 
+
+/**
+ *  下载工具类
+ *  @author 10 
+ */
+public class DownloadUtil { 
+	
+	public static void download(String urlStr,String filename,String savePath) throws IOException {
+		URL url = new URL(urlStr); 
+		//打开url连接 
+		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+		//请求超时时间 
+		connection.setConnectTimeout(5000); 
+		//输入流 
+		InputStream in = connection.getInputStream(); 
+		//缓冲数据1kb1024字节1024byte 
+		byte [] bytes = new byte[1024]; 
+		//数据长度 
+		int len = -1; 
+		//文件 
+		File file = new File(savePath); 
+		if(!file.exists()) { 
+			file.mkdirs();
+		}else { 
+			OutputStream out = new FileOutputStream(file.getPath()+"\\"+filename); 
+			//先读到bytes中 
+			while ((len=in.read(bytes))!=-1){ 
+				//再从bytes中写入文件 
+				out.write(bytes,0,len); 
+			}
+			//关闭IO 
+			out.close(); 
+			in.close(); 
+		}
+	}
+	
+}
