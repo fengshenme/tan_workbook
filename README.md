@@ -1,14 +1,20 @@
 # java
 
-现在先弄了个阿里云短信微服务
+添加一个阿里云的短信微服务
 
-过段时间在上传一个爬虫微服务
+添加一个爬虫微服务
+一个简单的爬虫
 
-各种微服务,各种模块
+添加一个文件微服务
+一个简单的图片微服务,视频微服务,文件微服务,这个文件的前端部分在另一个存储库
 
-书山有路勤为径，学海无涯苦作舟。
+基本都是ssh,springboot,mysql
 
-不得不说爬虫很有意思,前端,后端,网络都要懂才能写出健壮的爬虫
-我是新人
-一个ssm和ssh的基本模板就有了
-现在是骨架有了,现在开始砌墙了..........
+Add an ali cloud SMS micro service
+Add a crawler microservice
+A simple reptile
+Add a file microservice
+A simple picture micro service, video micro service, file micro service, the front part of this file in another repository
+Basically SSH,springboot,mysql
+
+为啥要弄双语言,是为了方便搜索
