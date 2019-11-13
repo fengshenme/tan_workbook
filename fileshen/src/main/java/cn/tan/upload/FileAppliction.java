@@ -13,6 +13,7 @@ import org.springframework.util.unit.DataSize;
 import cn.tan.upload.entity.User;
 import cn.tan.upload.entity.UserFile;
 import cn.tan.upload.entity.WeiBoSearch;
+import cn.tan.upload.entity.WeiboFollow;
 import cn.tan.upload.utils.JwtUtil;
 import cn.tan.upload.utils.SmsUtil;
 
@@ -86,4 +87,12 @@ public class FileAppliction {
     public WeiBoSearch weiBoSearch(){
     	return new WeiBoSearch();
     }
+    
+    @Bean
+    public WeiboFollow weiboFollow(){
+    	return new WeiboFollow();
+    }
+    
 }
+
+

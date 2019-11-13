@@ -11,7 +11,6 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import cn.tan.upload.entity.WeiBoSearch;
@@ -42,16 +41,14 @@ public class ImportFile {
 	* 处理搜索结果页面
 	 * @throws IOException 
 	*/
-	@Scheduled(cron= "30 12 1-5 1/10 * ?")
+	//@Scheduled(cron= "30 12 * * * ?")
 	public void recommendTask() throws IOException{
 	    File file = new File("H:/文件/weibo");
 	    File[] tempList = file.listFiles();
-	    
 	    for (File input : tempList) {
 	    	if(input.isFile() ) {
 	    		Document doc = Jsoup.parse(input, "UTF-8");
 	    		Elements content = doc.getElementById("pl_feed_main").select("div.content");
-	    		
 	    		for (Element element : content) {
 	    			String url = element.select("a.name").attr("href");
 	    			String nickname = element.select("a.name").attr("nick-name");
@@ -69,33 +66,6 @@ public class ImportFile {
 	    		}
 	    	}  
 		}
-	}
-	
-	@Scheduled(cron= "30 12 1-5 1/10 * ?")
-	public static void friends() throws IOException {
-	    File file = new File("H:/文件/weibo/userid");
-	    File[] tempList = file.listFiles();
-	    for (File input : tempList) {
-	    	if(input.isFile()) {
-	    		Document doc = Jsoup.parse(input, "UTF-8");
-	    		Elements elemens = doc.select("div.WB_innerwrap").select("ul.lev_list");
-	    		//String follownum = elemens.select("em.num.S_txt1").first().text();
-	    		System.out.println(elemens.text());
-	    		Elements selects = doc.select("ul.follow_list").select("li.follow_item.S_line2");
-	    		for (Element elem : selects) {
-					String userurl = elem.selectFirst("dl.clearfix").select("dt.mod_pic").select("a").attr("href");
-					String userinfo = elem.selectFirst("dl.clearfix").select("dd.mod_info.S_line1").text();
-					String sex = elem.selectFirst("dl.clearfix").select("dd.mod_info.S_line1").select("div.info_name.W_fb.W_f14").select("i.W_icon").attr("class");
-					String nickname = elem.selectFirst("dl.clearfix").select("dd.mod_info.S_line1").select("div.info_name.W_fb.W_f14").select("a").text();
-					String followfans = elem.selectFirst("dl.clearfix").select("dd.mod_info.S_line1").select("div.info_connect").text();
-					System.out.println(userurl);
-					System.out.println(userinfo);
-					System.out.println(sex);
-					System.out.println(nickname);
-					System.out.println(followfans);
-	    		}
-    		}
-	    }
 	}
 	
 }

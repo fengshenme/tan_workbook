@@ -19,7 +19,7 @@ public class ReadWriterFileUtils {
 	}
 	
 	/**
-	 * 写入文件
+	 * 写入文件 编码GB18030
 	 * @param ff
 	 * @throws IOException
 	 */
