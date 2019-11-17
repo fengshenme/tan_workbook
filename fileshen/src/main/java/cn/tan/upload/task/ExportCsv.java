@@ -47,7 +47,7 @@ public class ExportCsv {
 	 * 文件以gb19030编码写入
 	 * @throws IOException
 	 */
-	@Scheduled(cron = "30 47 * * * ?")
+	//@Scheduled(cron = "30 47 * * * ?")
 	public void saveFollowCsv() throws IOException {
 		List<WeiboFollow> findFollowAll = weiBoSearchService.findFollowAll();
 		String csvheader = "id`userid`friendid`userurl`friendurl`friendinfo`sex`nickname`followfans`addtime";

@@ -5,14 +5,13 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import cn.tan.upload.entity.UserFile;
 
 @Repository
-public interface FileMapper extends JpaRepository<UserFile,String>,JpaSpecificationExecutor<UserFile>{
+public interface FileMapper extends JpaRepository<UserFile,Long>{
 	
 	/**
 	 * 通过用户id查询文件id列表

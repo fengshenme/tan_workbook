@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,8 @@ import cn.tan.upload.mapper.FileMapper;
 public class FileService {
 	
 	@Autowired
-	private FileMapper fileMapper;
+	private FileMapper fileMapper = null;
 	
-	@Autowired
-	private UserFile userFile;
 	
 	/**
 	 * 根据资源id返回文件下载
@@ -42,16 +41,22 @@ public class FileService {
 	 * @throws IOException 
 	 */
 	public ResponseEntity<byte[]> fileDownload(String fileId) throws IOException {
-		HttpHeaders headers = new HttpHeaders();   
-        String filePath = fileMapper.findById(fileId).get().getFileurl();
-        File file = new File(filePath);
-        String fileName = filePath.substring(filePath.lastIndexOf('/'));
-        // 设置响应方式
-        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-        //设置响应文件
-        headers.setContentDispositionFormData("attachment", fileName); 
-        headers.setContentLength(file.length());
-        return new ResponseEntity<>(FileUtils.readFileToByteArray(file), headers, HttpStatus.OK);  
+		HttpHeaders headers = new HttpHeaders();  
+		Optional<UserFile> filefindById = fileMapper.findById(Long.parseLong(fileId));
+		if (filefindById.isPresent()) {
+			String filePath = filefindById.get().getFileurl();
+			File file = new File(filePath);
+	        String fileName = filePath.substring(filePath.lastIndexOf('/'));
+	        // 设置响应方式
+	        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+	        //设置响应文件
+	        headers.setContentDispositionFormData("attachment", fileName); 
+	        headers.setContentLength(file.length());
+	        return new ResponseEntity<>(FileUtils.readFileToByteArray(file), headers, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+          
 	}
 	
 	/**
@@ -66,35 +71,6 @@ public class FileService {
 		return list ;
 	}
 	
-	/**
-	 * 文件保存
-	 * @param file
-	 * @param id
-	 */
-	public synchronized boolean addFile(String filePath,String userId) {
-			String nextId = IdUtil.getSnowflake(1, 1).nextIdStr();
-            userFile.setId(nextId);
-            userFile.setUserid(userId);
-    		userFile.setFileurl(filePath);
-    		userFile.setAddtime(new Date());
-    		String fileType = filePath.substring(filePath.lastIndexOf('.') + 1);
-    		// 1代表图片2代表视频3代表其它
-    		if("png".equals(fileType)||"jpg".equals(fileType)||"jpeg".equals(fileType)) {
-    			userFile.setFiletype("1");
-    		}else if("mp4".equals(fileType)){
-    			userFile.setFiletype("2");
-    		}else {
-    			userFile.setFiletype("3");
-    		}
-	        try {
-	            fileMapper.save(userFile);
-	            return true ;
-	        } catch (Exception e) {
-	        	fileMapper.deleteById(userFile.getId());
-	            e.printStackTrace();
-	            return false ;
-	        } 
-	}
 	
 	/**
 	 * 
@@ -102,15 +78,17 @@ public class FileService {
 	 * @param fileId
 	 * @return
 	 */
-	public  boolean delfile(String fileId) {
-		String filePath = fileMapper.findById(fileId).get().getFileurl();
-        File file = new File(filePath);
-        if(file.delete()) {
-        	fileMapper.deleteById(fileId);
-        	return true;
-        }else {
+	public  boolean delfile(Long fileId) {
+		Optional<UserFile> filefindById = fileMapper.findById(fileId);
+		if (filefindById.isPresent()) {
+	        File file = new File(filefindById.get().getFileurl());
+	        if(file.delete()) {
+	        	fileMapper.deleteById(fileId);
+	        } 
+	        return true;
+        } else {
         	return false;
-        }  
+        }
 	}
 	
 	/**

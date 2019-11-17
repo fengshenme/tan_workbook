@@ -27,6 +27,7 @@ import cn.tan.upload.entity.PageResult;
 import cn.tan.upload.entity.Result;
 import cn.tan.upload.entity.StatusCode;
 import cn.tan.upload.entity.UserFile;
+import cn.tan.upload.service.FileSaveService;
 import cn.tan.upload.service.FileService;
 import cn.tan.upload.utils.FileDirUtils;
 import io.jsonwebtoken.Claims;
@@ -44,14 +45,16 @@ public class FileController {
 	private static final Logger logger =  LoggerFactory.getLogger(FileController.class);
 	private final HttpServletRequest request;
 	private final FileService fileService;
+	private final FileSaveService fileSaveService;
 	
 	@Value("${storessd.filepath}")
 	private String datapath;
 	
 	@Autowired
-	public FileController(HttpServletRequest request, FileService fileService) {
+	public FileController(HttpServletRequest request, FileService fileService,FileSaveService fileSaveService) {
 		this.request = request;
 		this.fileService = fileService;
+		this.fileSaveService = fileSaveService; 
 	}
 	
 	
@@ -133,7 +136,7 @@ public class FileController {
 	        	filea.delete();
 	            return new Result(StatusCode.ERROR,e.getMessage());
 	        }
-	        if(fileService.addFile(filePath,claims.getId())) {
+	        if(fileSaveService.addFile(filePath,claims.getId())) {
 				return new Result(StatusCode.OK,"上传成功");
 			} 
 	     }
@@ -151,7 +154,7 @@ public class FileController {
 		if(claims==null || "".equals(claims.getId())){
 			return new Result(StatusCode.ERROR,"请登录在下载");
 		}else {
-			if(fileService.delfile(fileId)) {
+			if(fileService.delfile(Long.parseLong(fileId))) {
 				return new Result(StatusCode.OK,"删除成功");
 			} else {
 				return new Result(StatusCode.ERROR,"删除失败");

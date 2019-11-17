@@ -30,7 +30,6 @@ public class ImgController {
 		this.imgService = imgService;
 	}
 
-
 	/**
 	 * 单个图片显示
 	 * @param fileName

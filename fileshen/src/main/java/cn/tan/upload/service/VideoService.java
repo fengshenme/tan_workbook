@@ -31,7 +31,7 @@ public class VideoService {
 	 * @return
 	 */
 	public ResponseEntity<Resource> findByVideourl(String fileId ) {
-		String filePath = fileMapper.findById(fileId).get().getFileurl();
+		String filePath = fileMapper.findById(Long.parseLong(fileId)).get().getFileurl();
 		HttpHeaders headers = new HttpHeaders();   
         File file = new File(filePath);
         Resource body = new FileSystemResource(file);

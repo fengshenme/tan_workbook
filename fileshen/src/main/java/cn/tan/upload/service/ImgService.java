@@ -26,7 +26,7 @@ public class ImgService {
 	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 	
 	@Autowired
-	private FileMapper fileMapper;
+	private FileMapper fileMapper = null;
 
 	/**
 	 * 根据资源id返回图片显示
@@ -34,7 +34,7 @@ public class ImgService {
 	 * @return
 	 */
 	public ResponseEntity<Resource> findByFileurl(String fileId) {
-		String filePath = fileMapper.findById(fileId).get().getFileurl();
+		String filePath = fileMapper.findById(Long.parseLong(fileId)).get().getFileurl();
 		logger.debug(filePath);
 		HttpHeaders headers = new HttpHeaders();   
         File file = new File(filePath);

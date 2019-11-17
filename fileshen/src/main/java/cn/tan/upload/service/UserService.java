@@ -25,7 +25,7 @@ public class UserService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 	
-	private final UserMapper userMapper;
+	private final UserMapper userMapper ;
 	private final RedisTemplate<String,String> redisTemplate;
 	private final SmsUtil smsUtil;
 	private final JwtUtil jwtUtil;
@@ -48,7 +48,6 @@ public class UserService {
 	 * @param user
 	 */
 	public synchronized boolean saveUser(User user) {
-		
 		user.setUserid(IdUtil.createSnowflake(1, 1).nextIdStr());
 		Date date = new Date();
 		user.setCreation_time(date);

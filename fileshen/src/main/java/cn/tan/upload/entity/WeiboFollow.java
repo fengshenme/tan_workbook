@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class WeiboFollow {
 	
 	@Id
-	private String id;
+	private Long id;
 	private String userid;
 	private String friendid;
 	private String userurl;
@@ -21,10 +21,12 @@ public class WeiboFollow {
 	private String nickname;
 	private String followfans;
 	private Date addtime;
-	public String getId() {
+	
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getUserid() {
