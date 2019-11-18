@@ -1,6 +1,7 @@
 package cn.tan.upload.service;
 
 import java.io.File;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -11,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import cn.tan.upload.entity.UserFile;
 import cn.tan.upload.mapper.FileMapper;
 
 /**
@@ -22,8 +24,7 @@ import cn.tan.upload.mapper.FileMapper;
 public class VideoService {
 	
 	@Autowired
-	private FileMapper fileMapper;
-	
+	private FileMapper fileMapper = null;
 	
 	/**
 	 * 根据资源id返回视频显示
@@ -31,14 +32,21 @@ public class VideoService {
 	 * @return
 	 */
 	public ResponseEntity<Resource> findByVideourl(String fileId ) {
-		String filePath = fileMapper.findById(Long.parseLong(fileId)).get().getFileurl();
-		HttpHeaders headers = new HttpHeaders();   
-        File file = new File(filePath);
-        Resource body = new FileSystemResource(file);
-        // 设置响应方式
-        headers.setContentType(MediaType.valueOf("video/".concat(filePath.substring(filePath.lastIndexOf('.') + 1)))); 
-        headers.setContentLength(file.length());
-        return new ResponseEntity<>(body,headers, HttpStatus.OK);
+		Optional<UserFile> findById = fileMapper.findById(Long.parseLong(fileId));
+		if (findById.isPresent()) {
+			String filePath = findById.get().getFileurl();
+			HttpHeaders headers = new HttpHeaders();   
+	        File file = new File(filePath);
+	        Resource body = new FileSystemResource(file);
+	        // 设置响应方式
+	        headers.setContentType(MediaType.valueOf("video/".concat(filePath.substring(filePath.lastIndexOf('.') + 1)))); 
+	        headers.setContentLength(file.length());
+	        return new ResponseEntity<>(body,headers, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+        
 	}
 	
 }

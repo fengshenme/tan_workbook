@@ -11,7 +11,6 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import cn.hutool.core.util.IdUtil;
@@ -30,12 +29,10 @@ public class ImportFollowTask {
 	private static final Logger logger = LoggerFactory.getLogger(ImportFollowTask.class);
 	
 	private final WeiBoSearchService weiBoSearchService ;
-	private final WeiboFollow weiboFollow ;
 	
 	@Autowired
-	public ImportFollowTask(WeiBoSearchService weiBoSearchService, WeiboFollow weiboFollow) {
+	public ImportFollowTask(WeiBoSearchService weiBoSearchService) {
 		this.weiBoSearchService = weiBoSearchService;
-		this.weiboFollow = weiboFollow;
 	}
 	
 	/**
@@ -63,6 +60,7 @@ public class ImportFollowTask {
 						String sex = sele.select("div.info_name.W_fb.W_f14").select("i.W_icon").attr("class");
 						String nickname = sele.select("div.info_name.W_fb.W_f14").select("a").text();
 						String followfans = sele.select("div.info_connect").text();
+						WeiboFollow weiboFollow = new WeiboFollow();
 						weiboFollow.setId(IdUtil.getSnowflake(1, 1).nextId());
 						weiboFollow.setUserid(userid);
 						weiboFollow.setFriendid(friendid);

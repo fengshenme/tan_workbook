@@ -26,16 +26,8 @@ public class ImportFile {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ImportFile.class);
 	
-	private final WeiBoSearch weiBoSearch ;
-	private final WeiBoSearchService weiBoSearchService ;
-	
-	
 	@Autowired
-	public ImportFile(WeiBoSearch weiBoSearch, WeiBoSearchService weiBoSearchService) {
-		super();
-		this.weiBoSearch = weiBoSearch;
-		this.weiBoSearchService = weiBoSearchService;
-	}
+	private WeiBoSearchService weiBoSearchService ;
 	
 	/**
 	* 处理搜索结果页面
@@ -43,6 +35,7 @@ public class ImportFile {
 	*/
 	//@Scheduled(cron= "30 12 * * * ?")
 	public void recommendTask() throws IOException{
+		
 	    File file = new File("H:/文件/weibo");
 	    File[] tempList = file.listFiles();
 	    for (File input : tempList) {
@@ -50,6 +43,7 @@ public class ImportFile {
 	    		Document doc = Jsoup.parse(input, "UTF-8");
 	    		Elements content = doc.getElementById("pl_feed_main").select("div.content");
 	    		for (Element element : content) {
+	    			WeiBoSearch weiBoSearch = new WeiBoSearch();
 	    			String url = element.select("a.name").attr("href");
 	    			String nickname = element.select("a.name").attr("nick-name");
 	    			String contenta = element.select("p.txt").text();

@@ -1,6 +1,5 @@
 package cn.tan.upload.service;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import cn.hutool.core.util.IdUtil;
 import cn.tan.upload.entity.User;
 import cn.tan.upload.mapper.UserMapper;
 import cn.tan.upload.utils.JwtUtil;
@@ -27,43 +25,16 @@ public class UserService {
 	
 	private final UserMapper userMapper ;
 	private final RedisTemplate<String,String> redisTemplate;
-	private final SmsUtil smsUtil;
 	private final JwtUtil jwtUtil;
 	private final BCryptPasswordEncoder encoder;
 	
 	@Autowired
-	public UserService(UserMapper userMapper, RedisTemplate<String, String> redisTemplate, SmsUtil smsUtil,
+	public UserService(UserMapper userMapper, RedisTemplate<String, String> redisTemplate,
 			BCryptPasswordEncoder encoder,JwtUtil jwtUtil) {
 		this.userMapper = userMapper;
 		this.redisTemplate = redisTemplate;
-		this.smsUtil = smsUtil;
 		this.encoder = encoder;
 		this.jwtUtil = jwtUtil;
-	}
-
-	
-	
-	/**
-	 * 保存用户信息,注册
-	 * @param user
-	 */
-	public synchronized boolean saveUser(User user) {
-		user.setUserid(IdUtil.createSnowflake(1, 1).nextIdStr());
-		Date date = new Date();
-		user.setCreation_time(date);
-		user.setUpdate_time(date);
-		// 密码加密
-		String newpassword = encoder.encode(user.getPassword());
-		user.setPassword(newpassword);
-		// 保存用户
-		try {
-			userMapper.save(user);
-			return true ;
-		} catch (Exception e) {
-			userMapper.deleteById(user.getUserid());
-			return false;
-		}
-		
 	}
 	
 	/**
@@ -87,6 +58,7 @@ public class UserService {
 		map.put("code", code.toString());
 		logger.debug(map.toString());
 		//调用短信工具类
+		SmsUtil smsUtil = new SmsUtil();
 		smsUtil.sendSms(map);
 	}
 	

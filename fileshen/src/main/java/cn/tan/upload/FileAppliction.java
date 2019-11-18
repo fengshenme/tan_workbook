@@ -10,12 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.unit.DataSize;
 
-import cn.tan.upload.entity.User;
-import cn.tan.upload.entity.UserFile;
-import cn.tan.upload.entity.WeiBoSearch;
-import cn.tan.upload.entity.WeiboFollow;
 import cn.tan.upload.utils.JwtUtil;
-import cn.tan.upload.utils.SmsUtil;
 
 
 /**
@@ -47,15 +42,6 @@ public class FileAppliction {
     }
     
     /**
-     * 发短信用
-     * @return
-     */
-    @Bean
-	public SmsUtil smsUtile(){
-		return new SmsUtil();
-	}
-    
-    /**
      * 加密解密用
      * @return
      */
@@ -72,26 +58,6 @@ public class FileAppliction {
 	public JwtUtil jwtUtil(){
 		return new JwtUtil();
 	}
-    
-    @Bean
-    public UserFile userFile(){
-    	return new UserFile();
-    }
-    
-    @Bean
-    public User user(){
-    	return new User();
-    }
-    
-    @Bean
-    public WeiBoSearch weiBoSearch(){
-    	return new WeiBoSearch();
-    }
-    
-    @Bean
-    public WeiboFollow weiboFollow(){
-    	return new WeiboFollow();
-    }
     
 }
 

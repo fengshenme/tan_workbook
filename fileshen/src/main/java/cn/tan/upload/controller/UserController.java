@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.tan.upload.entity.Result;
 import cn.tan.upload.entity.StatusCode;
 import cn.tan.upload.entity.User;
+import cn.tan.upload.service.UserRegisterService;
 import cn.tan.upload.service.UserService;
 import io.jsonwebtoken.Claims;
 
@@ -34,10 +35,12 @@ public class UserController {
 	private final UserService userService;
 	private final HttpServletRequest request;
 	private final RedisTemplate<String,String> redisTemplate;
+	private final UserRegisterService userRegisterService ;
 	
 	@Autowired
 	public UserController(UserService userService,  HttpServletRequest request,
-			RedisTemplate<String, String> redisTemplate) {
+			RedisTemplate<String, String> redisTemplate,UserRegisterService userRegisterService) {
+		this.userRegisterService = userRegisterService;
 		this.userService = userService;
 		this.request = request;
 		this.redisTemplate = redisTemplate;
@@ -76,7 +79,7 @@ public class UserController {
 		if(!syscode.equals(code)){
 			return new Result(StatusCode.ERROR,"验证码输入不正确");
 		}
-	    if(userService.saveUser(user)) {
+	    if(userRegisterService.saveUser(user)) {
 	    	return new Result(StatusCode.OK,"注册成功");
 	    }else{
 	    	return new Result(StatusCode.ERROR,"注册失败,重新注册");
@@ -100,10 +103,10 @@ public class UserController {
 	@DeleteMapping(value="/logout")
 	public Result logout() {
 		Claims claims=(Claims) request.getAttribute("user_claims");
-		System.out.println(claims.getId());
+		logger.info(claims.getId());
 		Boolean bol = redisTemplate.delete("userid_".concat(claims.getId()));
-		System.out.println(bol);
-		if( bol) { 
+		logger.info("{}",bol);
+		if( Boolean.TRUE.equals(bol)) { 
 			return new Result(StatusCode.OK,"退出成功") ;
 		} else {
 			return new Result(StatusCode.ERROR,"退出失败");
