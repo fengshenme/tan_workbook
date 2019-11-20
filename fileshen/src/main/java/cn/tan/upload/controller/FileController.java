@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,10 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import cn.tan.upload.entity.PageResult;
 import cn.tan.upload.entity.Result;
 import cn.tan.upload.entity.StatusCode;
-import cn.tan.upload.entity.UserFile;
 import cn.tan.upload.service.FileSaveService;
 import cn.tan.upload.service.FileService;
 import cn.tan.upload.utils.FileDirUtils;
@@ -84,8 +81,7 @@ public class FileController {
 			String message = (String) request.getAttribute("error");
 			return new Result(StatusCode.ERROR,message);
 		}else {
-			Page<UserFile> pageList = fileService.findByfileidPage(claims.getId(),fileType,map);
-			return new Result(StatusCode.OK,"查询成功",new PageResult<UserFile>(pageList.getTotalElements(),pageList.getContent()));
+			return new Result(StatusCode.OK,"查询成功",fileService.findByfileidPage(claims.getId(),fileType,map));
 		}
 	}
 	

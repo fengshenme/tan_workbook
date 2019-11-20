@@ -24,7 +24,7 @@ public class UserFile implements Serializable{
 	@Id
 	private Long id ;
 	
-	private String userid;
+	private Long userid;
 	
 	private String fileurl;
 	
@@ -40,11 +40,11 @@ public class UserFile implements Serializable{
 		this.id = id;
 	}
 
-	public String getUserid() {
+	public Long getUserid() {
 		return userid;
 	}
 
-	public void setUserid(String userid) {
+	public void setUserid(Long userid) {
 		this.userid = userid;
 	}
 

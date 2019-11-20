@@ -42,7 +42,7 @@ public class FileSaveService {
 	public boolean addFile(String filePath,String userId) {
 		UserFile userFile = new UserFile();
         userFile.setId(IdUtil.getSnowflake(1, 1).nextId());
-        userFile.setUserid(userId);
+        userFile.setUserid(Long.parseLong(userId));
 		userFile.setFileurl(filePath);
 		userFile.setAddtime(new Date());
 		String fileType = filePath.substring(filePath.lastIndexOf('.') + 1);

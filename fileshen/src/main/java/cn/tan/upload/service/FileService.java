@@ -17,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import cn.tan.upload.entity.PageResult;
 import cn.tan.upload.entity.UserFile;
 import cn.tan.upload.mapper.FileMapper;
 
@@ -61,9 +62,9 @@ public class FileService {
 	 * 根据用户id查询名下所有资源
 	 * @param id
 	 */
-	public List<String> findByfileid(String id ,String fileType) {
-		List<String> list = new ArrayList<>();
-		for (String filecode : fileMapper.selectByIdaa(id,fileType)) {
+	public List<Long> findByfileid(String userid ,String fileType) {
+		List<Long> list = new ArrayList<>();
+		for (Long filecode : fileMapper.selectByIdaa(Long.parseLong(userid),fileType)) {
 			list.add(filecode);
 		}
 		return list ;
@@ -96,10 +97,17 @@ public class FileService {
 	 * @param map
 	 * @return
 	 */
-	public Page<UserFile> findByfileidPage(String id, String fileType, Map<String, String> map) {
+	public PageResult<String> findByfileidPage(String id, String fileType, Map<String, String> map) {
 		int page = Integer.parseInt(map.get("page"));
 		int size = Integer.parseInt(map.get("limit"));
-		return fileMapper.findByUseridAndFiletype(id,fileType, PageRequest.of(page-1,size));
+		 Page<Long> findByUseridAndFiletype = fileMapper.findByUseridAndFiletype(Long.parseLong(id),fileType, PageRequest.of(page-1,size));
+		 
+		 String[] strlist = findByUseridAndFiletype.getContent().toString().split(",");
+		 ArrayList<String> arrayList = new ArrayList<>();
+		 for (String string : strlist) {
+			 arrayList.add(string.replace("[", "").replace("]", "").trim());
+		}
+		return new PageResult<>(findByUseridAndFiletype.getTotalElements(),arrayList);
 	}
 
 }

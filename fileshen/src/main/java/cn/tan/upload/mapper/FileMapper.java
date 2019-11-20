@@ -20,16 +20,19 @@ public interface FileMapper extends JpaRepository<UserFile,Long>{
 	 */
 	@Query(value = "SELECT id FROM userfile where userid = ?1 and filetype= ?2 ",
 			nativeQuery = true)
-	List<String> selectByIdaa(String id,String filetype);
+	List<Long> selectByIdaa(Long userid,String filetype);
 	
 	/**
-	 * 分页定制2
-	 * @param id
+	 * 分页定制
+	 * @param userid
 	 * @param filetype
 	 * @param pageable
 	 * @return
 	 */
-	Page<UserFile> findByUseridAndFiletype(String id , String filetype, Pageable pageable);
+	@Query(value = "SELECT id FROM userfile where userid = ?1 and filetype= ?2",
+		    countQuery = "SELECT count(id) FROM userfile where userid = ?1 and filetype= ?2",
+		    nativeQuery = true)
+	Page<Long> findByUseridAndFiletype(Long userid , String filetype, Pageable pageable);
 	
 	/**
 	 * 计数
