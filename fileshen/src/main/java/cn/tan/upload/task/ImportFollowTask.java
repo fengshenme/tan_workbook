@@ -1,4 +1,4 @@
-package cn.tan.upload.task;
+package tan.wei.feng.task;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,9 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cn.hutool.core.util.IdUtil;
-import cn.tan.upload.entity.WeiboFollow;
-import cn.tan.upload.service.WeiBoSearchService;
+import tan.wei.feng.entity.WeiboFollow;
+import tan.wei.feng.service.WeiBoSearchService;
+import tan.wei.feng.utils.SimpleUtil;
 
 /**
  * 
@@ -61,7 +61,8 @@ public class ImportFollowTask {
 						String nickname = sele.select("div.info_name.W_fb.W_f14").select("a").text();
 						String followfans = sele.select("div.info_connect").text();
 						WeiboFollow weiboFollow = new WeiboFollow();
-						weiboFollow.setId(IdUtil.getSnowflake(1, 1).nextId());
+						SimpleUtil simpleUtil = new SimpleUtil();
+						weiboFollow.setId(simpleUtil.idCreate());
 						weiboFollow.setUserid(userid);
 						weiboFollow.setFriendid(friendid);
 						weiboFollow.setUserurl(userurl);

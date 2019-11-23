@@ -1,12 +1,11 @@
-package cn.tan.upload.task;
+package tan.wei.feng.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import cn.hutool.core.util.IdUtil;
-import cn.tan.upload.entity.Testinsert;
-import cn.tan.upload.service.TestService;
+import tan.wei.feng.entity.Testinsert;
+import tan.wei.feng.service.TestService;
+import tan.wei.feng.utils.SimpleUtil;
 
 @Component
 public class TestTask {
@@ -20,7 +19,8 @@ public class TestTask {
 	public void testInsert() {
 		for (int i = 0; i < 10; i++) {
 			Testinsert testinsert = new Testinsert();
-			testinsert.setId(IdUtil.getSnowflake(1, 1).nextId());
+			SimpleUtil simpleUtil = new SimpleUtil();
+			testinsert.setId(simpleUtil.idCreate());
 			testinsert.setNumber((long) ia++);
 			testService.testSave(testinsert);
 		}

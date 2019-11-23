@@ -1,5 +1,5 @@
 server: 
-   port: 9066
+   port: 666
    
 logging:
    level:
@@ -24,9 +24,9 @@ spring:
          maximum-pool-size: 30
          minimum-idle: 10 
    redis:
-     host: 192.168.0.103
-     #host: 127.0.0.1
+     host: 127.0.0.1
      port: 6379
+     password: 123456
    http:
       multipart:
       #maxFileSize 单个数据大小
@@ -35,20 +35,17 @@ spring:
          maxRequestSize: 500Mb
 ai: #语料库目录 
    dataPath : D:\\data\\article         
-   #浏览器标记
+   #语料库汇总文本文件 
+   wordLib : "D:/data/article/article.txt"
+   #词向量模型 
+   vecModel: "D:/data/article/article.vecmodel"  
+   #神经网络卷积模型 
+   cnnModel: "D:/data/article/article.cnnmodel"
 
 jwt:
    config:
       key: fengshenme
       ttl: 3600000
-
-#mybatis: 
-   #configuration: 
-      #map-underscore-to-camel-case: true
-   # 别名扫描
-   # type-aliases-package: cn.tan.upload.entity
-   # mapper.xml文件位置,如果没有映射文件，请注释掉
-   #mapper-locations: classpath:mapper/*.xml  
    
 aliyun:
    sms:

@@ -1,4 +1,4 @@
-package cn.tan.upload.entity;
+package tan.wei.feng.entity;
 
 /**
 * 状态码实体类

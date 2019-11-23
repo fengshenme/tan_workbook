@@ -1,4 +1,4 @@
-package cn.tan.upload.entity;
+package tan.wei.feng.entity;
 
 import java.util.List;
 
@@ -12,8 +12,23 @@ public class PageResult<T> {
 	
 	private Long total;
 	private List<T> rows;
+	private String fileid;
 	
 	
+	public PageResult(Long total, String fileid) {
+		super();
+		this.total = total;
+		this.fileid = fileid;
+	}
+
+	public String getFileid() {
+		return fileid;
+	}
+
+	public void setFileid(String fileid) {
+		this.fileid = fileid;
+	}
+
 	public PageResult() {
 		super();
 	}

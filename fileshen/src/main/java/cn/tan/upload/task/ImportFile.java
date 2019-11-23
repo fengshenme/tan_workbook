@@ -1,4 +1,4 @@
-package cn.tan.upload.task;
+package tan.wei.feng.task;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,8 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cn.tan.upload.entity.WeiBoSearch;
-import cn.tan.upload.service.WeiBoSearchService;
+import tan.wei.feng.entity.WeiBoSearch;
+import tan.wei.feng.service.WeiBoSearchService;
 
 /**
  * 处理搜索结果页面

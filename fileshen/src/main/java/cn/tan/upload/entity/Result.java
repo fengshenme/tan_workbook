@@ -1,4 +1,4 @@
-package cn.tan.upload.entity;
+package tan.wei.feng.entity;
 
 /**
  * 返回的数据格式

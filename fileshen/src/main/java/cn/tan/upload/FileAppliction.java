@@ -1,4 +1,4 @@
-package cn.tan.upload;
+package tan.wei.feng;
 
 import javax.servlet.MultipartConfigElement;
 
@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.unit.DataSize;
 
-import cn.tan.upload.utils.JwtUtil;
+import tan.wei.feng.utils.JwtUtil;
 
 
 /**

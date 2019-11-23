@@ -1,4 +1,4 @@
-package cn.tan.upload.entity;
+package tan.wei.feng.entity;
 
 import java.io.Serializable;
 import java.util.Date;

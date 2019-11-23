@@ -1,4 +1,4 @@
-package cn.tan.upload.entity;
+package tan.wei.feng.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,20 +16,13 @@ import javax.persistence.Table;
 @Table(name="userfile")
 public class UserFile implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private Long id ;
-	
 	private Long userid;
-	
 	private String fileurl;
-	
 	private Date addtime;
-	
 	private String filetype ;
 
 	public Long getId() {
@@ -82,7 +75,5 @@ public class UserFile implements Serializable{
 				+ ", filetype=" + filetype + "]";
 	}
 
-
-	
 	
 }

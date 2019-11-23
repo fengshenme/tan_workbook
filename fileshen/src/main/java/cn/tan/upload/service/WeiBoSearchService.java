@@ -1,14 +1,14 @@
-package cn.tan.upload.service;
+package tan.wei.feng.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cn.tan.upload.entity.WeiBoSearch;
-import cn.tan.upload.entity.WeiboFollow;
-import cn.tan.upload.mapper.WeiBoFollowMapper;
-import cn.tan.upload.mapper.WeiBoSearchMapper;
+import tan.wei.feng.entity.WeiBoSearch;
+import tan.wei.feng.entity.WeiboFollow;
+import tan.wei.feng.mapper.WeiBoFollowMapper;
+import tan.wei.feng.mapper.WeiBoSearchMapper;
 
 
 @Component

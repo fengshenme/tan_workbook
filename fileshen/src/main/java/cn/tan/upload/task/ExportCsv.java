@@ -1,4 +1,4 @@
-package cn.tan.upload.task;
+package tan.wei.feng.task;
 
 import java.io.IOException;
 import java.util.List;
@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cn.tan.upload.entity.WeiBoSearch;
-import cn.tan.upload.entity.WeiboFollow;
-import cn.tan.upload.service.WeiBoSearchService;
-import cn.tan.upload.utils.ReadWriterFileUtils;
+import tan.wei.feng.entity.WeiBoSearch;
+import tan.wei.feng.entity.WeiboFollow;
+import tan.wei.feng.service.WeiBoSearchService;
+import tan.wei.feng.utils.ReadWriterFileUtils;
 
 /**
  * weibo导出csv文件,导出编码为GB18030

@@ -1,4 +1,4 @@
-package cn.tan.upload.utils;
+package tan.wei.feng.utils;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package cn.tan.upload.service;
+package tan.wei.feng.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import cn.tan.upload.entity.Testinsert;
-import cn.tan.upload.mapper.TestMapper;
+import tan.wei.feng.entity.Testinsert;
+import tan.wei.feng.mapper.TestMapper;
 
 @Service
 public class TestService {

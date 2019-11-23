@@ -1,4 +1,4 @@
-package cn.tan.upload.controller;
+package tan.wei.feng.controller;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.tan.upload.service.ImgService;
+import tan.wei.feng.service.read.ImgService;
 
 /**
  * 图片控制层

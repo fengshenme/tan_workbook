@@ -1,4 +1,4 @@
-package cn.tan.upload.entity;
+package tan.wei.feng.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,7 +17,7 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String userid;
+	private Long userid;
 	
 	private String password;
 	// 昵称
@@ -39,11 +39,11 @@ public class User implements Serializable{
 	
 	
 	
-	public String getUserid() {
+	public Long getUserid() {
 		return userid;
 	}
 
-	public void setUserid(String userid) {
+	public void setUserid(Long userid) {
 		this.userid = userid;
 	}
 

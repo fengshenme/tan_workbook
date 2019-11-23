@@ -1,4 +1,4 @@
-package cn.tan.upload.mapper;
+package tan.wei.feng.mapper;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import cn.tan.upload.entity.UserFile;
+import tan.wei.feng.entity.UserFile;
 
 @Repository
 public interface FileMapper extends JpaRepository<UserFile,Long>{
@@ -29,10 +29,7 @@ public interface FileMapper extends JpaRepository<UserFile,Long>{
 	 * @param pageable
 	 * @return
 	 */
-	@Query(value = "SELECT id FROM userfile where userid = ?1 and filetype= ?2",
-		    countQuery = "SELECT count(id) FROM userfile where userid = ?1 and filetype= ?2",
-		    nativeQuery = true)
-	Page<Long> findByUseridAndFiletype(Long userid , String filetype, Pageable pageable);
+	Page<UserFile> findByUseridAndFiletype(Long userid , String filetype, Pageable pageable);
 	
 	/**
 	 * 计数

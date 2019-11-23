@@ -1,4 +1,4 @@
-package cn.tan.upload.controller;
+package tan.wei.feng.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,12 +22,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import cn.tan.upload.entity.Result;
-import cn.tan.upload.entity.StatusCode;
-import cn.tan.upload.service.FileSaveService;
-import cn.tan.upload.service.FileService;
-import cn.tan.upload.utils.FileDirUtils;
 import io.jsonwebtoken.Claims;
+import tan.wei.feng.entity.Result;
+import tan.wei.feng.entity.StatusCode;
+import tan.wei.feng.service.create.FileSaveService;
+import tan.wei.feng.service.delete.FileDeleteService;
+import tan.wei.feng.service.read.FileDownService;
+import tan.wei.feng.service.read.FileFindService;
+import tan.wei.feng.utils.FileDirUtils;
 
 /**
  * 文件控制层
@@ -40,18 +42,25 @@ import io.jsonwebtoken.Claims;
 public class FileController {
 	
 	private static final Logger logger =  LoggerFactory.getLogger(FileController.class);
+	
 	private final HttpServletRequest request;
-	private final FileService fileService;
+	private final FileDownService fileDownService;
+	private final FileFindService fileFindService;
 	private final FileSaveService fileSaveService;
+	private final FileDeleteService fileDeleteService;
+	
 	
 	@Value("${storessd.filepath}")
 	private String datapath;
 	
 	@Autowired
-	public FileController(HttpServletRequest request, FileService fileService,FileSaveService fileSaveService) {
+	public FileController(HttpServletRequest request, FileDownService fileDownService, FileFindService fileFindService,
+			FileSaveService fileSaveService, FileDeleteService fileDeleteService) {
 		this.request = request;
-		this.fileService = fileService;
-		this.fileSaveService = fileSaveService; 
+		this.fileDownService = fileDownService;
+		this.fileFindService = fileFindService;
+		this.fileSaveService = fileSaveService;
+		this.fileDeleteService = fileDeleteService;
 	}
 	
 	
@@ -66,7 +75,7 @@ public class FileController {
 			String message = (String) request.getAttribute("error");
 			return new Result(StatusCode.ERROR,message);
 		}else {
-			return new Result(StatusCode.OK,"查询成功",fileService.findByfileid(claims.getId(),fileType));
+			return new Result(StatusCode.OK,"查询成功",fileFindService.findByfileid(claims.getId(),fileType));
 		}
 	}
 	
@@ -81,7 +90,7 @@ public class FileController {
 			String message = (String) request.getAttribute("error");
 			return new Result(StatusCode.ERROR,message);
 		}else {
-			return new Result(StatusCode.OK,"查询成功",fileService.findByfileidPage(claims.getId(),fileType,map));
+			return new Result(StatusCode.OK,"查询成功",fileFindService.findByfileidPage(claims.getId(),fileType,map));
 		}
 	}
 	
@@ -102,7 +111,7 @@ public class FileController {
 			// 也可以放置页面,图片等
 			return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
 		} else {
-	        return fileService.fileDownload(filecode);
+	        return fileDownService.fileDownload(filecode);
 		}
 	}
 	
@@ -150,7 +159,7 @@ public class FileController {
 		if(claims==null || "".equals(claims.getId())){
 			return new Result(StatusCode.ERROR,"请登录在下载");
 		}else {
-			if(fileService.delfile(Long.parseLong(fileId))) {
+			if(fileDeleteService.delfile(Long.parseLong(fileId))) {
 				return new Result(StatusCode.OK,"删除成功");
 			} else {
 				return new Result(StatusCode.ERROR,"删除失败");

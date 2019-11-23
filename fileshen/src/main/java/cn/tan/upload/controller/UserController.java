@@ -1,4 +1,4 @@
-package cn.tan.upload.controller;
+package tan.wei.feng.controller;
 
 import java.util.Map;
 
@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.tan.upload.entity.Result;
-import cn.tan.upload.entity.StatusCode;
-import cn.tan.upload.entity.User;
-import cn.tan.upload.service.UserRegisterService;
-import cn.tan.upload.service.UserService;
 import io.jsonwebtoken.Claims;
+import tan.wei.feng.entity.Result;
+import tan.wei.feng.entity.StatusCode;
+import tan.wei.feng.entity.User;
+import tan.wei.feng.service.create.UserRegisterService;
+import tan.wei.feng.service.create.UserService;
 
 
 @RestController
@@ -38,12 +38,13 @@ public class UserController {
 	private final UserRegisterService userRegisterService ;
 	
 	@Autowired
-	public UserController(UserService userService,  HttpServletRequest request,
-			RedisTemplate<String, String> redisTemplate,UserRegisterService userRegisterService) {
-		this.userRegisterService = userRegisterService;
+	public UserController(UserService userService, HttpServletRequest request,
+			RedisTemplate<String, String> redisTemplate, UserRegisterService userRegisterService) {
+		super();
 		this.userService = userService;
 		this.request = request;
 		this.redisTemplate = redisTemplate;
+		this.userRegisterService = userRegisterService;
 	}
 
 	/**
@@ -62,6 +63,8 @@ public class UserController {
 		}
 	}
 	
+	
+
 	/**
 	 * 用户注册
 	 * @param user

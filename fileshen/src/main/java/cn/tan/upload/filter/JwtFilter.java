@@ -1,15 +1,14 @@
-package cn.tan.upload.filter;
+package tan.wei.feng.filter;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import cn.tan.upload.utils.JwtUtil;
+import tan.wei.feng.utils.JwtUtil;
 
 /**
  * 拦截过滤
