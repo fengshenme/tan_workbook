@@ -4,8 +4,27 @@
 
 小型的文件服务器,图片显示,视频播放,
 
-没有推特数据,用微博数据顶替了,数据提取处理,导入导出仓库,导入导出csv
+增加cnn,文本模型训练
 
-更新中....
+打包
+```mvn install```
 
-vscode的git用的很舒服
+Spring boot 启动运行命令
+第一种：
+```java -jar xxxx.jar > error.log 2>&1 &```
+----
+第二种：
+```nohup java -jar xxxx.jar > error.log 2>&1 &```
+-----------
+第三种：
+```java -jar xxxx.jar &```
+第四种
+```setsid java -jar xxxx.jar```
+第五种：
+1、首先先用vim创建文件start.sh
+vim start.sh
+3、在文件中写入java -jar xxxx.jar
+4、在保存一下：wq！
+5、先给文件 chmod 777 start.sh 权限
+6、其次：
+nohup  ./start.sh &
