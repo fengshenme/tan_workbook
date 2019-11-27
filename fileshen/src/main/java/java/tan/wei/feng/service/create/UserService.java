@@ -56,10 +56,11 @@ public class UserService {
 		Map<String, String> map = new HashMap<>();
 		map.put("mobile", mobile);
 		map.put("code", code.toString());
-		logger.debug(map.toString());
+		logger.info(map.toString());
 		//调用短信工具类
-		SmsUtil smsUtil = new SmsUtil();
-		smsUtil.sendSms(map);
+		//SmsUtil smsUtil = new SmsUtil();
+		//smsUtil.sendSms(map);
+		
 	}
 	
 	/**

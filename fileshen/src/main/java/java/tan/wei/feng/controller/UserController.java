@@ -105,14 +105,12 @@ public class UserController {
 	 */
 	@DeleteMapping(value="/logout")
 	public Result logout() {
-		Claims claims=(Claims) request.getAttribute("user_claims");
-		logger.info(claims.getId());
-		Boolean bol = redisTemplate.delete("userid_".concat(claims.getId()));
-		logger.info("{}",bol);
-		if( Boolean.TRUE.equals(bol)) { 
+		try {
+			Claims claims=(Claims) request.getAttribute("user_claims");
+			redisTemplate.delete("userid_".concat(claims.getId()));
 			return new Result(StatusCode.OK,"退出成功") ;
-		} else {
-			return new Result(StatusCode.ERROR,"退出失败");
+		} catch (Exception e) {
+			return new Result(StatusCode.OK,"退出成功") ;
 		}
 	}
 	
