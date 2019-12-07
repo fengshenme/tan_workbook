@@ -18,7 +18,7 @@ import tan.wei.feng.utils.JwtUtil;
 @Component
 public class JwtFilter extends HandlerInterceptorAdapter {
 	@Autowired
-	private JwtUtil jwtUtil;
+	private JwtUtil jwtUtil = null;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request,HttpServletResponse response, Object handler) throws Exception {

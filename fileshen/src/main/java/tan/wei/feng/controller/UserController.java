@@ -4,8 +4,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,28 +23,25 @@ import tan.wei.feng.service.create.UserRegisterService;
 import tan.wei.feng.service.create.UserService;
 
 
+/**
+ * 注册控制
+ * @author 10159
+ *
+ */
 @RestController
 @CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-	
-	private final UserService userService;
-	private final HttpServletRequest request;
-	private final RedisTemplate<String,String> redisTemplate;
-	private final UserRegisterService userRegisterService ;
-	
 	@Autowired
-	public UserController(UserService userService, HttpServletRequest request,
-			RedisTemplate<String, String> redisTemplate, UserRegisterService userRegisterService) {
-		super();
-		this.userService = userService;
-		this.request = request;
-		this.redisTemplate = redisTemplate;
-		this.userRegisterService = userRegisterService;
-	}
-
+	private  UserService userService = null;
+	@Autowired
+	private  HttpServletRequest request = null;
+	@Autowired
+	private  RedisTemplate<String,String> redisTemplate = null ;
+	@Autowired
+	private UserRegisterService userRegisterService = null ;
+	
 	/**
 	 * 用户手机号登陆
 	 * @param mobile

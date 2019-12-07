@@ -1,42 +1,47 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-	<parent>
-     	<groupId>org.springframework.boot</groupId>
-     	<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.3.RELEASE</version>        
-	</parent>
   <groupId>cn.tan.wei.feng</groupId>
   <artifactId>fileshen</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
   <properties>
-	  <dl4j.version>1.0.0-beta3</dl4j.version> 
-	  <dl4j.backend>nd4j-native-platform</dl4j.backend> 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<boot.version>2.1.3.RELEASE</boot.version>
 	</properties>
   
   <dependencies>
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-web</artifactId>
+		    <version>${boot.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<version>${boot.version}</version>
 		</dependency>
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>${boot.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<version>${boot.version}</version>
 		</dependency>
         <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+			<version>${boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<version>${boot.version}</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 		    <groupId>com.aliyun</groupId>
@@ -46,32 +51,29 @@
 		<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+            <version>${boot.version}</version>
             <scope>test</scope>
         </dependency>
 		<dependency>
 		    <groupId>org.junit.jupiter</groupId>
 		    <artifactId>junit-jupiter-api</artifactId>
+		    <version>5.3.2</version>
 		    <scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>${boot.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<version>${boot.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.16</version><!--$NO-MVN-MAN-VER$-->
-		</dependency>
-		<dependency>
-		    <groupId>commons-io</groupId>
-		    <artifactId>commons-io</artifactId>
-		    <version>2.6</version>
-		</dependency>
-		<dependency>
-		    <groupId>commons-fileupload</groupId>
-		    <artifactId>commons-fileupload</artifactId>
-		    <version>1.4</version>
 		</dependency>
 		<!-- 自包含的数学和统计信息组件库，用于解决Java编程语言或commons-lang中没有的最常见的实际问题-->
 		<dependency>
@@ -79,12 +81,6 @@
 		    <artifactId>commons-math3</artifactId>
 		    <version>3.6.1</version>
 		</dependency>
-		<!-- ik分词  -->
-		<dependency>
-		    <groupId>com.janeluo</groupId>
-		    <artifactId>ikanalyzer</artifactId>
-		    <version>2012_u6</version>
-		</dependency>		
 		<!-- token -->
 		<dependency>
 		    <groupId>io.jsonwebtoken</groupId>
@@ -94,6 +90,7 @@
 		<dependency>
 		    <groupId>org.junit.jupiter</groupId>
 		    <artifactId>junit-jupiter-api</artifactId>
+		    <version>5.3.2</version>
 		    <scope>test</scope>
 		</dependency>
 		<dependency>
@@ -101,27 +98,18 @@
 		    <artifactId>jsoup</artifactId>
 		    <version>1.12.1</version>
 		 </dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>4.1.1</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.deeplearning4j</groupId>
-		    <artifactId>deeplearning4j-core</artifactId>
-		    <version>${dl4j.version}</version>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-compiler-plugin</artifactId>
+		    <version>3.8.1</version>
 		</dependency>
-		<dependency>
-		    <groupId>org.deeplearning4j</groupId>
-		    <artifactId>deeplearning4j-nlp</artifactId>
-		    <version>${dl4j.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.nd4j</groupId>
-		    <artifactId>nd4j-native-platform</artifactId>
-		    <version>${dl4j.version}</version>
-		</dependency>
-		
+
   </dependencies>
   
   
@@ -130,9 +118,17 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<executable>true</executable>
-				</configuration>
+				<version>2.1.3.RELEASE</version>
+		        <configuration>
+		            <mainClass>tan.wei.feng</mainClass>
+		        </configuration>
+		        <executions>
+		          <execution>
+		            <goals>
+		              <goal>repackage</goal>
+		            </goals>
+		          </execution>
+		        </executions>
 			</plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

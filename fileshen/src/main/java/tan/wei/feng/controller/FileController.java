@@ -43,26 +43,20 @@ public class FileController {
 	
 	private static final Logger logger =  LoggerFactory.getLogger(FileController.class);
 	
-	private final HttpServletRequest request;
-	private final FileDownService fileDownService;
-	private final FileFindService fileFindService;
-	private final FileSaveService fileSaveService;
-	private final FileDeleteService fileDeleteService;
+	@Autowired
+	private HttpServletRequest request = null;
+	@Autowired
+	private FileDownService fileDownService = null;
+	@Autowired
+	private FileFindService fileFindService = null;
+	@Autowired
+	private FileSaveService fileSaveService = null;
+	@Autowired
+	private FileDeleteService fileDeleteService = null;
 	
 	
 	@Value("${storessd.filepath}")
 	private String datapath;
-	
-	@Autowired
-	public FileController(HttpServletRequest request, FileDownService fileDownService, FileFindService fileFindService,
-			FileSaveService fileSaveService, FileDeleteService fileDeleteService) {
-		this.request = request;
-		this.fileDownService = fileDownService;
-		this.fileFindService = fileFindService;
-		this.fileSaveService = fileSaveService;
-		this.fileDeleteService = fileDeleteService;
-	}
-	
 	
 	/**
 	 * 获取用户下的文件列表
@@ -70,10 +64,11 @@ public class FileController {
 	 */
 	@GetMapping(value = "/fileList/{fileType}")
 	public Result fileUrlList(@PathVariable String fileType){
-		Claims claims=(Claims) request.getAttribute("user_claims");
+		Claims claims = null;
+		claims = (Claims) request.getAttribute("user_claims");
+		logger.info(claims.getId());
 		if(claims==null || "".equals(claims.getId())){
-			String message = (String) request.getAttribute("error");
-			return new Result(StatusCode.ERROR,message);
+			return new Result(StatusCode.ERROR,(String) request.getAttribute("error"));
 		}else {
 			return new Result(StatusCode.OK,"查询成功",fileFindService.findByfileid(claims.getId(),fileType));
 		}
@@ -109,7 +104,7 @@ public class FileController {
 		if(claims==null || "".equals(claims.getId())){
 			Result result = new Result("请登录在下载"); 
 			// 也可以放置页面,图片等
-			return new ResponseEntity<>(result, HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<Result>(result, HttpStatus.UNAUTHORIZED);
 		} else {
 	        return fileDownService.fileDownload(filecode);
 		}
@@ -166,4 +161,5 @@ public class FileController {
 			}
 		}
 	}
+
 }

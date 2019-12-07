@@ -16,12 +16,12 @@ import org.springframework.stereotype.Service;
 import tan.wei.feng.entity.User;
 import tan.wei.feng.mapper.UserMapper;
 import tan.wei.feng.utils.JwtUtil;
-import tan.wei.feng.utils.SmsUtil;
 
 @Service
 public class UserService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+	
 	
 	private final UserMapper userMapper ;
 	private final RedisTemplate<String,String> redisTemplate;

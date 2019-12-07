@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import tan.wei.feng.entity.Article;
 import tan.wei.feng.entity.WeiBoSearch;
 import tan.wei.feng.entity.WeiboFollow;
 import tan.wei.feng.service.WeiBoSearchService;
+import tan.wei.feng.service.read.ArticleFindService;
 import tan.wei.feng.utils.ReadWriterFileUtils;
 
 /**
@@ -18,13 +20,11 @@ import tan.wei.feng.utils.ReadWriterFileUtils;
  */
 @Component
 public class ExportCsv {
-	
-	private final WeiBoSearchService weiBoSearchService ;
+	@Autowired
+	private WeiBoSearchService weiBoSearchService = null ;
 	
 	@Autowired
-	public ExportCsv( WeiBoSearchService weiBoSearchService) {
-		this.weiBoSearchService = weiBoSearchService;
-	}
+	private ArticleFindService articleFindService = null;
 	
 	/**
 	 * 写入内容
@@ -57,6 +57,20 @@ public class ExportCsv {
 	    // 写入内容
 	    for (WeiboFollow weiboFoll : findFollowAll) {
 	    	ReadWriterFileUtils.writer(weiboFoll.toCsv(),savefile);
+		}
+	}
+	
+//	@Scheduled(cron = "30 50 * * * ?")
+	public void exportBlogsCsv() throws IOException {
+		List<Article> articles = articleFindService.findAll();
+		String csvheader = "columnid`content";
+		String savefile = "H:/blogs.csv";
+	    //写入头部ㄅŒ
+	    ReadWriterFileUtils.writer(csvheader,savefile);
+	    for (Article article : articles) {
+	    	ReadWriterFileUtils.writer(article.getColumnid().toString()
+	    			.concat("`").concat(article.getTitle())
+	    			.concat(article.getContent()), savefile);
 		}
 	}
 	

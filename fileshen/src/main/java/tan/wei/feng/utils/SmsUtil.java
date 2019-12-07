@@ -62,9 +62,9 @@ public class SmsUtil {
             CommonResponse response = client.getCommonResponse(request);
             logger.info(response.getData());
         } catch (ServerException e) {
-            e.printStackTrace();
-        } catch (ClientException e) {
-            e.printStackTrace();
+        	logger.info(e.getMessage());
+        } catch (ClientException f) {
+        	logger.info(f.getMessage());
         }
     	
     }

@@ -19,27 +19,28 @@ public class Article implements Serializable{
     private static final long serialVersionUID = 1L;
 
 	@Id
-	private String id;//ID
+	private Long id;//ID
 	 
-	private String columnid;//专栏ID
+	private Integer columnid;//专栏ID
 	private String userid;//用户ID
 	private String title;//标题
 	private String content;//文章正文
 	private Date createtime;//发表日期
 	private Integer visits;//浏览量
-	private Integer thumbup;//点赞数
 	private Integer comment;//评论数
 	private String url;//URL
-	public String getId() {
+	
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getColumnid() {
+	public Integer getColumnid() {
 		return columnid;
 	}
-	public void setColumnid(String columnid) {
+	public void setColumnid(Integer columnid) {
 		this.columnid = columnid;
 	}
 	public String getUserid() {
@@ -60,10 +61,10 @@ public class Article implements Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public java.util.Date getCreatetime() {
+	public Date getCreatetime() {
 		return createtime;
 	}
-	public void setCreatetime(java.util.Date createtime) {
+	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
 	}
 	public Integer getVisits() {
@@ -71,12 +72,6 @@ public class Article implements Serializable{
 	}
 	public void setVisits(Integer visits) {
 		this.visits = visits;
-	}
-	public Integer getThumbup() {
-		return thumbup;
-	}
-	public void setThumbup(Integer thumbup) {
-		this.thumbup = thumbup;
 	}
 	public Integer getComment() {
 		return comment;
@@ -90,5 +85,10 @@ public class Article implements Serializable{
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
 
 }

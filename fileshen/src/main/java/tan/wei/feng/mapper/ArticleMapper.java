@@ -12,5 +12,7 @@ import tan.wei.feng.entity.Article;
  */
 @Repository
 public interface ArticleMapper extends JpaRepository<Article, Long>{
-
+	
+	
+	
 }

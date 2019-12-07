@@ -3,7 +3,6 @@ package tan.wei.feng.utils;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -18,41 +17,19 @@ import java.util.List;
 public class FileUtil { 
 	
 	/**
-	 * * 将多个文本文件合并为一个文本文件 
-	 * * @param outFileName *
-	 *  @param inFileNames * 
-	 *  @throws IOException 
-	 */ 
-	public static void merge(String outFileName ,List<String> inFileNames) throws IOException {
-		FileWriter writer = new FileWriter(outFileName, false); 
-		for(String inFileName :inFileNames ){ 
-			try {
-				String txt= readToString(inFileName);
-				writer.write(txt); 
-				}catch (Exception e){ 
-				} 
-			}
-		writer.close(); 
-	}
-	
-	/**
-	 * 这是一个新方法,旧方法合并的文件编码有问题,将多个文本文件合并为一个文本文件
+	 * 将多个文本文件合并为一个文本文件
 	 * @param fileName
 	 * @param inFileNames
 	 * @throws IOException
 	 */
 	public static void writerFilemerge(String fileName,Iterable<String> inFileNames) throws IOException {
 		Path path = Paths.get(fileName); 
-	    // Collection<String> Iterable<String>
-	    //try (BufferedWriter reader = Files.newBufferedWriter(path, StandardCharsets.UTF_8,StandardOpenOption.CREATE)) {
 	    try (BufferedWriter reader = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
-	    	//reader.write("");
 	    	for(String inFileName :inFileNames ){
 			    	String txt= readToString(inFileName);
 			    	reader.append(txt);
 		    }
 	    	reader.flush();
-	    	reader.close();
 	    }catch (Exception e){ 
 			e.printStackTrace();
 		}
@@ -64,7 +41,7 @@ public class FileUtil {
 	 * @return 
 	 */ 
 	public static List<String> getFiles(String path) { 
-		List<String> files = new ArrayList<String>();
+		List<String> files = new ArrayList<>();
 		File file = new File(path); 
 		File[] tempList = file.listFiles(); 
 		for (int i = 0; i < tempList.length; i++) { 

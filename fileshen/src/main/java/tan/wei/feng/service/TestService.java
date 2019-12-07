@@ -17,16 +17,11 @@ import tan.wei.feng.mapper.TestMapper;
 public class TestService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TestService.class);
+	@Autowired
 	private TestMapper testMapper=null;
+	
 	List<Testinsert> arrayList = new ArrayList<> ();
 	private Integer threshold = 30;
-	
-	
-	@Autowired
-	public TestService(TestMapper testMapper, List<Testinsert> arrayList) {
-		this.testMapper = testMapper;
-		this.arrayList = arrayList;
-	}
 
 	public void testSave(Testinsert testinsert) {
 		testinsert.setAddtime(new Date());
