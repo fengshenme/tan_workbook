@@ -79,7 +79,7 @@ public class UserService {
 			//昵称
 			map.put("name",user.getNickname());
 			// 将用户id放入redis,60分钟过期
-			redisTemplate.opsForValue().set("userid_"+user.getUserid(), user.getMobile(),60,TimeUnit.MINUTES);
+			redisTemplate.opsForValue().set("userid_"+user.getMobile(), user.getUserid().toString(),60,TimeUnit.MINUTES);
 			// 返回token，昵称，头像等信息
 			return map;
 		}else {

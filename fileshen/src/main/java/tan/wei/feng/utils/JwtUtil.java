@@ -2,29 +2,18 @@ package tan.wei.feng.utils;
 
 import java.util.Date;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.data.redis.core.RedisTemplate;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
 
 /**
  * Created by Administrator on 2018/4/11.
  */
 @ConfigurationProperties("jwt.config")
 public class JwtUtil {
-	
-	private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
 	
     private String key ;
     //一个小时
@@ -85,40 +74,9 @@ public class JwtUtil {
                 .getBody();
     }
     
-    private static final String JWTERROR = "error";  
+      
     private static final String ROLES = "roles"; 
-    @Autowired
-	private RedisTemplate<String,String> redisTemplate;
-    /**
-     * 验证权限设置角色
-     * @param request
-     * @param response
-     * @param token
-     */
-    public void verifyJWT(HttpServletRequest request,HttpServletResponse response,String token) {
-    	try {
-			// 对令牌进行验证
-			Claims claims = parseJWT(token);
-			if (redisTemplate.opsForValue().get("userid_"+claims.getId()) != null) {
-				//如果是管理员
-				if("admin".equals(claims.get(ROLES))){
-					request.setAttribute("admin_claims", claims);
-				}
-				//如果是用户
-				if("user".equals(claims.get(ROLES))){
-					request.setAttribute("user_claims", claims);
-				}
-			}
-		} catch (ExpiredJwtException e) {
-			logger.info(e.getMessage(),"token已过期 {}");
-			request.setAttribute(JWTERROR, "token已过期");
-		} catch (SignatureException e) {
-			logger.info(e.getMessage(),"签名校验失败 {}");
-			request.setAttribute(JWTERROR, "签名校验失败");
-		} catch (Exception e) {
-			logger.info(e.getMessage(),"其它错误 {}");
-			request.setAttribute(JWTERROR, "请重新登录");
-		}
-    }
+    
+    
     
 }

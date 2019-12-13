@@ -33,6 +33,7 @@ import tan.wei.feng.service.create.UserService;
 @RequestMapping("/user")
 public class UserController {
 	
+	
 	@Autowired
 	private  UserService userService = null;
 	@Autowired
@@ -49,8 +50,8 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping(value = "/login")
-	public Result login(@RequestBody User user) {
-		Map<String, String> map = userService.findByMobileAndPassword(user.getMobile(), user.getPassword());
+	public Result login(@RequestBody User fileuser) {
+		Map<String, String> map = userService.findByMobileAndPassword(fileuser.getMobile(), fileuser.getPassword());
 		if(map !=null ) {
 			return new  Result(StatusCode.OK,"登录成功",map);
 		}else {
@@ -67,9 +68,9 @@ public class UserController {
 	 * @return
 	 */
     @PostMapping(value="/register/{code}")
-    public Result register( @RequestBody User user ,@PathVariable String code){
+    public Result register( @RequestBody User usera ,@PathVariable String code){
     	//提取缓存中验证码判断验证码是否正确
-		String syscode = redisTemplate.opsForValue().get("smscode_" + user.getMobile());
+		String syscode = redisTemplate.opsForValue().get("smscode_" + usera.getMobile());
 		//提取系统正确的验证码
 		if(syscode==null){
 			return new Result(StatusCode.ERROR,"请点击获取短信验证码");
@@ -77,7 +78,7 @@ public class UserController {
 		if(!syscode.equals(code)){
 			return new Result(StatusCode.ERROR,"验证码输入不正确");
 		}
-	    if(userRegisterService.saveUser(user)) {
+	    if(userRegisterService.saveUser(usera)) {
 	    	return new Result(StatusCode.OK,"注册成功");
 	    }else{
 	    	return new Result(StatusCode.ERROR,"注册失败,重新注册");
@@ -100,13 +101,9 @@ public class UserController {
 	 */
 	@DeleteMapping(value="/logout")
 	public Result logout() {
-		try {
-			Claims claims=(Claims) request.getAttribute("user_claims");
-			redisTemplate.delete("userid_".concat(claims.getId()));
-			return new Result(StatusCode.OK,"退出成功") ;
-		} catch (Exception e) {
-			return new Result(StatusCode.OK,"退出成功") ;
-		}
+		Claims claims=(Claims) request.getAttribute("user_claims");
+		redisTemplate.delete("userid_".concat(claims.getId()));
+		return new Result(StatusCode.OK,"退出成功") ;
 	}
 	
 	/**
@@ -121,6 +118,13 @@ public class UserController {
 		}else {
 			return new Result(StatusCode.OK, "查询成功",userService.findAll());
 		}
+	}
+	@GetMapping(value="/loginstatus/{mobile}")
+	public Result lodinStatus(@PathVariable String mobile) {
+		if( redisTemplate.opsForValue().get("userid_".concat(mobile)) == null) {
+			return new Result(StatusCode.ERROR,"请重新登录");
+		}
+		return new Result(StatusCode.OK);
 	}
 	
 }

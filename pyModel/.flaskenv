@@ -1,2 +1,1 @@
 FLASK_APP=model.py
-FLASK_PORT=9909

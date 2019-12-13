@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.MalformedJwtException;
 import tan.wei.feng.entity.Result;
 import tan.wei.feng.entity.StatusCode;
 import tan.wei.feng.service.create.FileSaveService;
@@ -64,14 +65,19 @@ public class FileController {
 	 */
 	@GetMapping(value = "/fileList/{fileType}")
 	public Result fileUrlList(@PathVariable String fileType){
-		Claims claims = null;
-		claims = (Claims) request.getAttribute("user_claims");
-		logger.info(claims.getId());
-		if(claims==null || "".equals(claims.getId())){
-			return new Result(StatusCode.ERROR,(String) request.getAttribute("error"));
-		}else {
+		
+		try {
+			Claims claims = (Claims) request.getAttribute("user_claims");
+			logger.info(claims.getId());
+			if(claims.getId()==null || "".equals(claims.getId().trim())){
+				return new Result(StatusCode.ERROR);
+			}
 			return new Result(StatusCode.OK,"查询成功",fileFindService.findByfileid(claims.getId(),fileType));
+		}catch (Exception e) {
+			logger.info(e.getMessage());
+			return new Result(StatusCode.ERROR);
 		}
+		
 	}
 	
 	/**
@@ -82,8 +88,7 @@ public class FileController {
 	public Result fetchList(@RequestParam Map<String,String> map,@PathVariable String fileType){
 		Claims claims=(Claims) request.getAttribute("user_claims");
 		if(claims==null || "".equals(claims.getId())){
-			String message = (String) request.getAttribute("error");
-			return new Result(StatusCode.ERROR,message);
+			return new Result(StatusCode.ERROR);
 		}else {
 			return new Result(StatusCode.OK,"查询成功",fileFindService.findByfileidPage(claims.getId(),fileType,map));
 		}
