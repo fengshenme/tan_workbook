@@ -4,11 +4,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import io.jsonwebtoken.Claims;
+import tan.wei.feng.controller.FileController;
 import tan.wei.feng.utils.JwtUtil;
 
 /**
@@ -18,6 +21,9 @@ import tan.wei.feng.utils.JwtUtil;
  */
 @Component
 public class JwtFilter extends HandlerInterceptorAdapter {
+	
+	private static final Logger logger =  LoggerFactory.getLogger(JwtFilter.class);
+	
 	
 	@Autowired
 	private JwtUtil jwtUtil = null;
@@ -36,10 +42,11 @@ public class JwtFilter extends HandlerInterceptorAdapter {
 		 * 拦截器只是负责把头请求头中包含token的令牌进行一个解析验证
 		 */
 		final String authHeader = request.getHeader("Authorization");
-		// 如果不为空并且包含有Authorization头信息,就对其解析 通过网页访问
+		logger.info(authHeader);
 		if (authHeader != null && authHeader.startsWith(BEARER)) {
 			//得到token
 			final String token = authHeader.substring(7);
+			logger.info(token);
 			verifyaa(request,token);
 		}
 		// 通过链接直接访问资源
@@ -56,7 +63,8 @@ public class JwtFilter extends HandlerInterceptorAdapter {
 	}
 	
 	private void verifyaa(HttpServletRequest request,String token ) {
-		if (token != null && "".equals(token.trim())) {
+		if (token != null && !"".equals(token.trim())) {
+			logger.info("22："+token);
 			// 对令牌进行验证
     		Claims claims = jwtUtil.parseJWT(token);
 			//如果是管理员
