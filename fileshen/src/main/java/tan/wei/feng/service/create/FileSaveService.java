@@ -32,7 +32,7 @@ public class FileSaveService {
 	private static final String MP4= "mp4";
 	
 	private int threshold = 30;
-	List<UserFile> fileSaveList = new ArrayList<> ();
+	private List<UserFile> fileSaveList = new ArrayList<> ();
 	
 	/**
 	 * 文件保存synchronized
@@ -56,7 +56,7 @@ public class FileSaveService {
 			userFile.setFiletype("3");
 		}
         try {
-    		if(threshold<=0) {
+    		if(threshold <= 0) {
     			fileSaveList.add(userFile);
             	threshold--;
     		} else {

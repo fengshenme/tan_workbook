@@ -30,7 +30,7 @@ public class ExportXlsx {
 	 * 导出xlsx
 	 * @throws IOException
 	 */
-	@Scheduled(cron = "30 39 * * * ?")
+	//@Scheduled(cron = "30 39 * * * ?")
 	public void exportxlsx () throws IOException {
 		List<Article> articles = articleFindService.findAll();
 	    int rownum = 1;

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import io.jsonwebtoken.Claims;
-import tan.wei.feng.controller.FileController;
 import tan.wei.feng.utils.JwtUtil;
 
 /**
@@ -64,17 +63,21 @@ public class JwtFilter extends HandlerInterceptorAdapter {
 	
 	private void verifyaa(HttpServletRequest request,String token ) {
 		if (token != null && !"".equals(token.trim())) {
-			logger.info("22："+token);
-			// 对令牌进行验证
-    		Claims claims = jwtUtil.parseJWT(token);
-			//如果是管理员
-			if(ADMINLE.equals(claims.get(ROLES))){
-				request.setAttribute("admin_claims", claims);
+			try {
+				// 对令牌进行验证
+	    		Claims claims = jwtUtil.parseJWT(token);
+	    		//如果是管理员
+				if(ADMINLE.equals(claims.get(ROLES))){
+					request.setAttribute("admin_claims", claims);
+				}
+				//如果是用户
+				if(USERLE.equals(claims.get(ROLES))){
+					request.setAttribute("user_claims", claims);
+				}
+			}catch (Exception e) {
+				logger.info(e.getMessage());
 			}
-			//如果是用户
-			if(USERLE.equals(claims.get(ROLES))){
-				request.setAttribute("user_claims", claims);
-			}
+			
 		}
 	}
 	

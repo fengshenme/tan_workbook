@@ -87,11 +87,13 @@ public class FileController {
 	@GetMapping(value = "/filePageList/{fileType}")
 	public Result fetchList(@RequestParam Map<String,String> map,@PathVariable String fileType){
 		Claims claims=(Claims) request.getAttribute("user_claims");
-		if(claims==null || "".equals(claims.getId())){
-			return new Result(StatusCode.ERROR);
-		}else {
+		if(claims == null){
+			return new Result(StatusCode.ERROR,"请登录在查询");
+		}
+		if(claims.getId() != null && !"".equals(claims.getId().trim())){
 			return new Result(StatusCode.OK,"查询成功",fileFindService.findByfileidPage(claims.getId(),fileType,map));
 		}
+		return new Result(StatusCode.ERROR,"请上传文件");
 	}
 	
 	
