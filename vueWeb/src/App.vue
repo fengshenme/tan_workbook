@@ -12,7 +12,7 @@
 
     <!-- 中间的路由router-view区域 -->
     <transition>
-      <router-view/>
+      <router-view />
     </transition>
 
     <!-- 底部Tabbar区域 -->

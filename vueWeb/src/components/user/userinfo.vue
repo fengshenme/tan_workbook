@@ -45,7 +45,7 @@
 							</li>
 						</ul>
 						<ul  class="mui-table-view">
-                            <li v-if ="user.name===undefined||user.name===null" class="mui-table-view-cell" style="text-align: center;">
+                            <li v-if ="user.name===undefined || user.name===null" class="mui-table-view-cell" style="text-align: center;">
 								<router-link to="/user/login"> 请登录</router-link>
 							</li>
 							<li v-else class="mui-table-view-cell" style="text-align: center;">
@@ -71,15 +71,17 @@ export default {
     },
     created() {
 		this.user= getUser();
-	},
-	mounted () {
 		this.loginStatus(this.user.mobile==undefined ? '1':this.user.mobile);
 	},
+	// mounted () {
+	// 	this.loginStatus(this.user.mobile==undefined ? '1':this.user.mobile);
+	// },
    methods: {
 	loginStatus(mobile){
 		LoginStatus(mobile).then(res => {
 			if (res.data.code===1) {
 				removeUser();
+				this.user = getUser();
 			}
 		});
     },

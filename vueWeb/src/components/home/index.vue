@@ -58,15 +58,15 @@ export default {
          this.getlunbotu();
     },
     methods: {
-        // 获取轮播图数据的方法
+        // 获取轮播图数据的方法 ，filetype为6
         getlunbotu(){
-            file.fileShowList(1).then(response => {
+            file.fileShowList(6).then(response => {
                 if (parseInt(response.data.code) === 0) {
                     response.data.data.forEach(element => {
                         this.lunbotuList.push(httpUrl.concat("img/file/").concat(element))
                     });
                 } else {
-                    Toast('获取图片失败')
+                    Toast(response.data.message)
                 }
                 
             });

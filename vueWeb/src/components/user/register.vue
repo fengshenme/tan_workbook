@@ -55,8 +55,8 @@ export default {
   },
   methods: {
     register () {
-      if(this.code== null || this.code.trim() == ''){
-        Toast('请获取验证码')
+      if(this.code == null && this.code.trim() == ''){
+        Toast('请输入验证码')
       }else if(this.inputCheck(this.pojo.password,this.pojo.mobile,this.password2)){
         Register(this.pojo,this.code).then(res => {
           if (res.data.code===0) {

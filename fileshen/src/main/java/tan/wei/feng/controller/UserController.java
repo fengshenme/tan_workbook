@@ -52,9 +52,9 @@ public class UserController {
 	@PostMapping(value = "/login")
 	public Result login(@RequestBody User fileuser) {
 		Map<String, String> map = userService.findByMobileAndPassword(fileuser.getMobile(), fileuser.getPassword());
-		if(map !=null ) {
+		if(map != null ) {
 			return new  Result(StatusCode.OK,"登录成功",map);
-		}else {
+		} else {
 			return new Result(StatusCode.ERROR, "手机号或密码错误");
 		}
 	}
@@ -102,7 +102,9 @@ public class UserController {
 	@DeleteMapping(value="/logout")
 	public Result logout() {
 		Claims claims=(Claims) request.getAttribute("user_claims");
-		redisTemplate.delete("userid_".concat(claims.getId()));
+		if(claims !=null && !"".equals(claims.getId().trim())){
+			redisTemplate.delete("userid_".concat(claims.getId()));
+		}
 		return new Result(StatusCode.OK,"退出成功") ;
 	}
 	
@@ -113,12 +115,17 @@ public class UserController {
 	@GetMapping(value="/findall")
 	public Result findAll() {
 		Claims claims=(Claims) request.getAttribute("user_claims");
-		if(claims==null || "".equals(claims.getId())){
-			return new Result(StatusCode.ERROR,"请重新登录");
-		}else {
+		if(claims !=null && !"".equals(claims.getId().trim())){
 			return new Result(StatusCode.OK, "查询成功",userService.findAll());
 		}
+		return new Result(StatusCode.ERROR,"请重新登录");
 	}
+	
+	/**
+	 * 用户状态检测
+	 * @param mobile
+	 * @return
+	 */
 	@GetMapping(value="/loginstatus/{mobile}")
 	public Result lodinStatus(@PathVariable String mobile) {
 		if( redisTemplate.opsForValue().get("userid_".concat(mobile)) == null) {

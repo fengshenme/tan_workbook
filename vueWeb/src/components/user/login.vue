@@ -49,11 +49,11 @@ export default {
         login () {    
             Login(this.pojo).then( res =>{
                 if(res.data.code === 0){
-                    Toast('登录成功')
                     //保存用户信息 
 					setUser(res.data.data.token, res.data.data.name,this.pojo.mobile)
 					this.pojo = {}
-                    location.href='/#/user/userinfo' //主页
+					location.href='/#/user/userinfo' //主页
+					location.reload()
                 }else{
                     Toast('登录失败')
                 }
