@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import mui from "../../assets/js/mui.min.js"
+import mui from "@/assets/js/mui.min.js"
 export default {
     mounted(){
         // 初始化数字选择框组件
@@ -35,7 +35,6 @@ export default {
 <style lang="scss" scoped>
 
 // 去除用chome时出现的上下箭头
-
 // input::-webkit-outer-spin-button,
 // input::-webkit-inner-spin-button {
 //     -webkit-appearance: none;

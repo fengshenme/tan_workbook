@@ -32,7 +32,7 @@ public class FileSaveService {
 	private static final String MP4= "mp4";
 	
 	private int threshold = 30;
-	private List<UserFile> fileSaveList = new ArrayList<> ();
+	private static List<UserFile> fileSaveList = new ArrayList<> ();
 	
 	/**
 	 * 文件保存synchronized
@@ -41,8 +41,7 @@ public class FileSaveService {
 	 */
 	public boolean addFile(String filePath,String userId) {
 		UserFile userFile = new UserFile();
-		SimpleUtil simpleUtil = new SimpleUtil();
-        userFile.setId(simpleUtil.idCreate());
+        userFile.setId(SimpleUtil.idCreate());
         userFile.setUserid(Long.parseLong(userId));
 		userFile.setFileurl(filePath);
 		userFile.setAddtime(new Date());

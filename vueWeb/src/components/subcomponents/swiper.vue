@@ -10,8 +10,11 @@
 </template>
 
 <script>
+import { Swipe, SwipeItem } from 'mint-ui';
 export default {
-    props:["lunbotuList","isfull"]
+    props:["lunbotuList","isfull"],
+    components: {'mt-swipe':Swipe,'mt-swipe-item':SwipeItem}
+
 };
 </script>
 

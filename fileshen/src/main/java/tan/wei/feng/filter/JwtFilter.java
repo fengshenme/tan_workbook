@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import tan.wei.feng.utils.JwtUtil;
 
 /**
@@ -41,7 +42,6 @@ public class JwtFilter extends HandlerInterceptorAdapter {
 		 * 拦截器只是负责把头请求头中包含token的令牌进行一个解析验证
 		 */
 		final String authHeader = request.getHeader("Authorization");
-		logger.info(authHeader);
 		if (authHeader != null && authHeader.startsWith(BEARER)) {
 			//得到token
 			final String token = authHeader.substring(7);
@@ -74,7 +74,7 @@ public class JwtFilter extends HandlerInterceptorAdapter {
 				if(USERLE.equals(claims.get(ROLES))){
 					request.setAttribute("user_claims", claims);
 				}
-			}catch (Exception e) {
+			}catch (JwtException e) {
 				logger.info(e.getMessage());
 			}
 			

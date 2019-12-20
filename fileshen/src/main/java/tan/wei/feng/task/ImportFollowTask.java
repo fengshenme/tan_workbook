@@ -61,8 +61,7 @@ public class ImportFollowTask {
 						String nickname = sele.select("div.info_name.W_fb.W_f14").select("a").text();
 						String followfans = sele.select("div.info_connect").text();
 						WeiboFollow weiboFollow = new WeiboFollow();
-						SimpleUtil simpleUtil = new SimpleUtil();
-						weiboFollow.setId(simpleUtil.idCreate());
+						weiboFollow.setId(SimpleUtil.idCreate());
 						weiboFollow.setUserid(userid);
 						weiboFollow.setFriendid(friendid);
 						weiboFollow.setUserurl(userurl);

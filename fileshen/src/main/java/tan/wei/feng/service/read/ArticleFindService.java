@@ -25,7 +25,16 @@ public class ArticleFindService {
 		
 		return articleMapper.findAll();
 		
-	} 
+	}
 	
+	/**
+	 * 分页查询
+	 * @param page
+	 * @param pagesize
+	 * @return
+	 */
+	public List<Article> findByPageNews(int page,int pagesize){
+		return articleMapper.findByPageNews(page, pagesize);
+	}
 	
 }

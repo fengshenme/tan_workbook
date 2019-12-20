@@ -35,8 +35,7 @@ public class UserRegisterService {
 	 */
 	public boolean saveUser(User user) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		SimpleUtil simpleUtil = new SimpleUtil();
-		user.setUserid(simpleUtil.idCreate());
+		user.setUserid(SimpleUtil.idCreate());
 		Date date = new Date();
 		user.setCreation_time(date);
 		user.setUpdate_time(date);

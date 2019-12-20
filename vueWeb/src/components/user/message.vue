@@ -11,7 +11,9 @@
 			</div>
 		</div>
 		<div style="text-align:center;">
-			<button class="button"  @click="handleClick" >发送</button>
+			<button class="button01" @click="clearInput" >清除文本</button>
+			<button class="button00"  @click="handleClick" >发送</button>
+			
         </div>
     </div>
 </template>
@@ -22,12 +24,14 @@ export default {
         return {
 			pojo: {content:""},
 			retit: '',
-			tt: "aa"
         }
     },
     created() {
     },
     methods: {
+		clearInput(){
+			this.pojo.content = ''
+		},
         handleClick(){
             Message(this.pojo).then(res => {
 				switch(res.data)
@@ -69,7 +73,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.button {
+.button00 {
     background-color: #555555;
     border: none;
     color: white;
@@ -78,5 +82,13 @@ export default {
     text-decoration: none;
     display: inline-block;
     font-size: 18px;
+}
+.button01{
+	font-size: 18px;
+	margin : 1px 10px;
+	float:left;
+	background-color: #f44336;
+	color: white;
+
 }
 </style>

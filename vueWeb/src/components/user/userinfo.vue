@@ -99,7 +99,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-div.mui-scroll-wrapper{
-    padding-top: 41px;
-}
+// div.mui-scroll-wrapper{
+//     padding-top: 41px;
+// }
+
 </style>

@@ -16,9 +16,9 @@ export default {
       method: 'get'
     })
   },
-  getnewslist () {
+  getnewslist (page,limit) {
     return request({
-      url: `/${grouname}/getnewslist`,
+      url: `/${grouname}/getnewslist/${page}/${limit}`,
       method: 'get'
     })
   },

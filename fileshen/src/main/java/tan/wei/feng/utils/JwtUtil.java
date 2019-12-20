@@ -2,7 +2,7 @@ package tan.wei.feng.utils;
 
 import java.util.Date;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
@@ -12,11 +12,12 @@ import io.jsonwebtoken.SignatureAlgorithm;
 /**
  * Created by Administrator on 2018/4/11.
  */
-@ConfigurationProperties("jwt.config")
 public class JwtUtil {
 	
+	@Value("${jwt.config.key}")
     private String key ;
     //一个小时
+	@Value("${jwt.config.ttl}")
     private long ttl ;
 
     public String getKey() {

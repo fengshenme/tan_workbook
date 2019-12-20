@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-const grouname = 'api'
+const grouname = 'file'
 
 export default {
   uploadFile (pojo) {

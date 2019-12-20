@@ -65,6 +65,12 @@ public class Result {
 		super();
 		this.code = code;
 	}
+
+	public Result(Integer code, Object data) {
+		super();
+		this.code = code;
+		this.data = data;
+	}
 	
 	
 	

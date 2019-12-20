@@ -2,6 +2,9 @@ package tan.wei.feng.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +41,7 @@ import tan.wei.feng.utils.FileDirUtils;
  */
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/file")
 public class FileController {
 	
 	private static final Logger logger =  LoggerFactory.getLogger(FileController.class);
@@ -57,6 +60,8 @@ public class FileController {
 	
 	@Value("${storessd.filepath}")
 	private String datapath;
+	// 用户权限
+	private static final String USERCLA = "user_claims";  
 	
 	/**
 	 * 获取用户下的文件列表
@@ -64,7 +69,7 @@ public class FileController {
 	 */
 	@GetMapping(value = "/fileList/{fileType}")
 	public Result fileUrlList(@PathVariable String fileType){
-		Claims claims = (Claims) request.getAttribute("user_claims");
+		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(claims != null && !"".equals(claims.getId().trim())){
 			return new Result(StatusCode.OK,"查询成功",fileFindService.findByfileid(claims.getId(),fileType));
 		}
@@ -78,7 +83,7 @@ public class FileController {
 	 */
 	@GetMapping(value = "/filePageList/{fileType}")
 	public Result fetchList(@RequestParam Map<String,String> map,@PathVariable String fileType){
-		Claims claims=(Claims) request.getAttribute("user_claims");
+		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(claims != null && !"".equals(claims.getId().trim())){
 			return new Result(StatusCode.OK,"查询成功",fileFindService.findByfileidPage(claims.getId(),fileType,map));
 		}
@@ -95,7 +100,7 @@ public class FileController {
 	 */
 	@GetMapping(value = "/fileDownload/{filecode}")
 	public ResponseEntity<byte[]> fileDownload(@PathVariable String filecode) throws IOException {  
-		Claims claims=(Claims) request.getAttribute("user_claims");
+		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(claims != null && !"".equals(claims.getId().trim())){
 			logger.info(claims.getId());
 	        return fileDownService.fileDownload(filecode);
@@ -113,7 +118,7 @@ public class FileController {
 	 */
 	@PostMapping(value = "/uploadFile")
 	public Result fileSave(@RequestParam("file") MultipartFile file){
-		Claims claims=(Claims) request.getAttribute("user_claims");
+		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(!file.isEmpty() && claims != null && !"".equals(claims.getId().trim())) {
 			// 递归次数
 			int ia = 3;
@@ -124,9 +129,13 @@ public class FileController {
 	            if(fileSaveService.addFile(filePath,claims.getId())) {
 					return new Result(StatusCode.OK,"上传成功");
 				} 
-	        } catch (Exception e) {
-	        	File filea = new File(filePath);
-	        	filea.delete();
+	        } catch (IOException e) {
+	        	try {
+	        		Path path = Paths.get(filePath);
+					Files.delete(path);
+				} catch (IOException e1) {
+					logger.info(e1.getMessage());
+				}
 	            return new Result(StatusCode.ERROR,"上传失败重新上传"+e.getMessage());
 	        }
 		}
@@ -140,7 +149,7 @@ public class FileController {
 	 */
 	@DeleteMapping(value = "/delFile/{fileId}")
 	public  Result delFile(@PathVariable String fileId) {
-		Claims claims=(Claims) request.getAttribute("user_claims");
+		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(claims != null && !"".equals(claims.getId().trim()) && fileDeleteService.delfile(Long.parseLong(fileId))){
 			return new Result(StatusCode.OK,"删除成功");
 		}

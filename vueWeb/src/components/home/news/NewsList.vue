@@ -7,8 +7,8 @@
                     <div class="mui-media-body">
                         <h2>{{item.title}}</h2>
                         <p class='mui-ellipsis'>
-                            <span>发表时间:  {{item.add_time | dateFormat }}</span>
-                            <span>点击: {{item.click}}次</span>
+                            <span>发表时间:  {{item.createtime | dateFormat }}</span>
+                            <span>点击: {{item.visits}}次</span>
                         </p>
                     </div>
                 </router-link>
@@ -24,20 +24,21 @@ export default {
     data() {
         return {
             // 新闻列表
-            newslist:[]
+            newslist:[],
+            page: 1,
+            pagesize: 10
         };
     },
     created(){ // 生命周期函数
          this.getNewsList();
-         
     },
     methods: {
         // 获取新闻列表
         getNewsList(){
-            mobileApi.getnewslist().then(result => {
-                if(result.data.status === 0){
+            mobileApi.getnewslist(this.page,this.pagesize).then(result => {
+                if(result.data.code === 0){
                     // 成功
-                    this.newslist = result.data.message;
+                    this.newslist = result.data.data;
                 }else{
                     // 失败的
                     Toast('获取新闻列表失败...');

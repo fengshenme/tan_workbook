@@ -1,29 +1,25 @@
 <template>
 <div id="app">
   <div class="app-container">
-    <!-- 顶部header区域 -->
-    <mt-header fixed :title="tt">
-      <div slot="left">
-        <div v-if="$route.path !== '/home/index'">
-           <mt-button @click="$router.back(-1)" icon="back">返回</mt-button>
-        </div>
-      </div>
-    </mt-header>
-
     <!-- 中间的路由router-view区域 -->
     <transition>
       <router-view />
     </transition>
-
     <!-- 底部Tabbar区域 -->
     <nav class="mui-bar mui-bar-tab">
+        <div class="mui-tab-item-llb" v-if="$route.path !== '/home/index'">
+           <a @click="$router.back(-1)">
+            <span  class="mui-icon mui-icon-back" style="font-size: 28px;"></span>
+            <span style="font-size: 13px;">返回</span>
+           </a>
+        </div>
 			<router-link class="mui-tab-item-llb" to="/home">
 				<span class="mui-icon mui-icon-home"></span>
 				<span class="mui-tab-label">首页</span>
 			</router-link>
 			<router-link class="mui-tab-item-llb" to="/user">
 				<span class="mui-icon mui-icon-contact"></span>
-				<span class="mui-tab-label">会员</span>
+				<span class="mui-tab-label">解析</span>
 			</router-link>
 			<router-link class="mui-tab-item-llb" to="/shopcar">
 				<span class="mui-icon mui-icon-extra mui-icon-extra-cart">
@@ -57,12 +53,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.mint-header{
-  z-index: 99;
-}
+
 
 .app-container {
-  padding-top: 40px;
+  padding-top: 0px;
   padding-bottom: 50px;
   overflow-x: hidden;
 }
@@ -98,6 +92,7 @@ export default {
   white-space: nowrap;
   text-overflow: ellipsis;
   color: #929292;
+  
 }
 
 .mui-bar-tab .mui-tab-item-llb .mui-icon {
