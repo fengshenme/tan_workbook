@@ -73,9 +73,6 @@ export default {
 		this.user= getUser();
 		this.loginStatus(this.user.mobile==undefined ? '1':this.user.mobile);
 	},
-	// mounted () {
-	// 	this.loginStatus(this.user.mobile==undefined ? '1':this.user.mobile);
-	// },
    methods: {
 	loginStatus(mobile){
 		LoginStatus(mobile).then(res => {

@@ -1,6 +1,9 @@
 package tan.wei.feng.service.read;
 
 import java.io.File;
+import java.math.BigInteger;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -15,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import tan.wei.feng.entity.UserFile;
 import tan.wei.feng.mapper.FileMapper;
 
 /**
@@ -33,20 +37,33 @@ public class ImgService {
 	private RedisTemplate<String,String> redisTemplate = null;
 	
 	/**
+	 * 根据用途查找
+	 * @param filetype
+	 * BigInteger
+	 * @return
+	 */
+	public List<BigInteger> findByfileType(Integer filetype){
+		List<BigInteger> findIdByFiletype =	fileMapper.findByFiletype(filetype);
+		return findIdByFiletype;
+	}
+	
+	/**
 	 * 根据资源id返回图片显示
 	 * @param fileId
 	 * @return
 	 */
 	public ResponseEntity<Resource> findByFileurl(String fileId) {
 		String filePath = redisTemplate.opsForValue().get("fileId_" + fileId);
-		if(filePath == null ||"".equals(filePath.trim()))  {
-			String filePath1 = fileMapper.findById(Long.parseLong(fileId)).get().getFileurl();
-			redisTemplate.opsForValue().set("fileId_" + fileId, filePath1,1,TimeUnit.DAYS);
-			logger.debug(filePath1);
-			return retuFile(filePath1);
-		} else {
-			return retuFile(filePath);
-		} 
+		if(filePath == null || "".equals(filePath.trim()))  {
+			Optional<UserFile> findById = fileMapper.findById(Long.parseLong(fileId));
+			if(findById.isPresent()) {
+				String filePath1 = findById.get().getFileurl();
+				redisTemplate.opsForValue().set("fileId_" + fileId, filePath1,1,TimeUnit.DAYS);
+				logger.debug(filePath1);
+				return retuFile(filePath1);
+			}	
+		}
+		return retuFile(filePath);
 	}
 	
 	/**

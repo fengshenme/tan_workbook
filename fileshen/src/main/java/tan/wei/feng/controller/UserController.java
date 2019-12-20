@@ -50,17 +50,14 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping(value = "/login")
-	public Result login(@RequestBody User fileuser) {
-		Map<String, String> map = userService.findByMobileAndPassword(fileuser.getMobile(), fileuser.getPassword());
-		if(map != null ) {
-			return new  Result(StatusCode.OK,"登录成功",map);
-		} else {
-			return new Result(StatusCode.ERROR, "手机号或密码错误");
-		}
+	public Result login(@RequestBody Map<String,String> map) {
+		Map<String, String> ma = userService.findByMobileAndPassword(map.get("mobile"), map.get("password"));
+		if(ma != null ) {
+			return new  Result(StatusCode.OK,"登录成功",ma);
+		} 
+		return new Result(StatusCode.ERROR, "手机号或密码错误");
 	}
 	
-	
-
 	/**
 	 * 用户注册
 	 * @param user
@@ -71,18 +68,13 @@ public class UserController {
     public Result register( @RequestBody User usera ,@PathVariable String code){
     	//提取缓存中验证码判断验证码是否正确
 		String syscode = redisTemplate.opsForValue().get("smscode_" + usera.getMobile());
-		//提取系统正确的验证码
-		if(syscode==null){
-			return new Result(StatusCode.ERROR,"请点击获取短信验证码");
-		}
-		if(!syscode.equals(code)){
+		if(syscode == null || !syscode.equals(code)){
 			return new Result(StatusCode.ERROR,"验证码输入不正确");
 		}
 	    if(userRegisterService.saveUser(usera)) {
 	    	return new Result(StatusCode.OK,"注册成功");
-	    }else{
-	    	return new Result(StatusCode.ERROR,"注册失败,重新注册");
 	    }
+	    return new Result(StatusCode.ERROR,"注册失败,重新注册");
     }
 	
     /**
@@ -128,7 +120,7 @@ public class UserController {
 	 */
 	@GetMapping(value="/loginstatus/{mobile}")
 	public Result lodinStatus(@PathVariable String mobile) {
-		if( redisTemplate.opsForValue().get("userid_".concat(mobile)) == null) {
+		if(redisTemplate.opsForValue().get("userid_".concat(mobile)) == null){
 			return new Result(StatusCode.ERROR,"请重新登录");
 		}
 		return new Result(StatusCode.OK);

@@ -23,7 +23,7 @@ public class UserFile implements Serializable{
 	private Long userid;
 	private String fileurl;
 	private Date addtime;
-	private String filetype ;
+	private Integer filetype ;
 
 	public Long getId() {
 		return id;
@@ -57,11 +57,11 @@ public class UserFile implements Serializable{
 		this.addtime = addtime;
 	}
 
-	public String getFiletype() {
+	public Integer getFiletype() {
 		return filetype;
 	}
 
-	public void setFiletype(String filetype) {
+	public void setFiletype(Integer filetype) {
 		this.filetype = filetype;
 	}
 

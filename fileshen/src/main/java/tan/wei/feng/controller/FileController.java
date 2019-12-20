@@ -2,9 +2,11 @@ package tan.wei.feng.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -68,10 +70,14 @@ public class FileController {
 	 * @return
 	 */
 	@GetMapping(value = "/fileList/{fileType}")
-	public Result fileUrlList(@PathVariable String fileType){
+	public Result fileUrlList(@PathVariable Integer fileType){
 		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(claims != null && !"".equals(claims.getId().trim())){
-			return new Result(StatusCode.OK,"查询成功",fileFindService.findByfileid(claims.getId(),fileType));
+			List<Long> findByfileid = fileFindService.findByfileid(claims.getId(),fileType);
+			if(findByfileid.isEmpty()) {
+				return new Result(StatusCode.OK,"没有文件,请上传");
+			}
+			return new Result(StatusCode.OK,"查询成功",findByfileid);
 		}
 		return new Result(StatusCode.ERROR,"请登录在查询");
 		
@@ -81,15 +87,15 @@ public class FileController {
 	 * 获取用户下的分页文件列表
 	 * @return
 	 */
-	@GetMapping(value = "/filePageList/{fileType}")
-	public Result fetchList(@RequestParam Map<String,String> map,@PathVariable String fileType){
+	@GetMapping(value = "/filePageList/{fileType}/{page}/{pagesize}")
+	public Result fetchList(@PathVariable Integer fileType , @PathVariable Integer page,@PathVariable Integer pagesize){
 		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(claims != null && !"".equals(claims.getId().trim())){
-			return new Result(StatusCode.OK,"查询成功",fileFindService.findByfileidPage(claims.getId(),fileType,map));
+			return new Result(StatusCode.OK,"查询成功",
+					fileFindService.findByfileidPage(claims.getId(),fileType,page,pagesize));
 		}
 		return new Result(StatusCode.ERROR,"请登录");
 	}
-	
 	
 	/**
 	 * 文件下载

@@ -1,5 +1,6 @@
 package tan.wei.feng.mapper;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -20,7 +21,7 @@ public interface FileMapper extends JpaRepository<UserFile,Long>{
 	 */
 	@Query(value = "SELECT id FROM userfile where userid = ?1 and filetype= ?2 ",
 			nativeQuery = true)
-	List<Long> selectByIdaa(Long userid,String filetype);
+	List<Long> selectByIdaa(Long userid,Integer filetype);
 	
 	/**
 	 * 分页定制
@@ -29,12 +30,16 @@ public interface FileMapper extends JpaRepository<UserFile,Long>{
 	 * @param pageable
 	 * @return
 	 */
-	Page<UserFile> findByUseridAndFiletype(Long userid , String filetype, Pageable pageable);
+	Page<UserFile> findByUseridAndFiletype(Long userid , Integer filetype, Pageable pageable);
 	
 	/**
 	 * 计数
 	 * @return
 	 */
-	Long countByFiletypeAndUserid(String filetype,String userid);
+	Long countByFiletypeAndUserid(Integer filetype,Long userid);
+	
+	@Query(value = "SELECT u.id FROM userfile u where u.filetype= ?1 ",
+			nativeQuery = true)
+	List<BigInteger> findByFiletype(Integer filetype);
 	
 }

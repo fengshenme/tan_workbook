@@ -38,7 +38,7 @@
 
 <script>
 import {Toast} from 'mint-ui'
-import fileApi from '@/api/file'
+import {uploadFile} from '@/api/file'
 import {Upload,Button} from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 export default {
@@ -68,7 +68,7 @@ export default {
               headers: {'Content-Type': 'multipart/form-data'}
             }
             formData.append('file', file);
-            fileApi.uploadFile(formData,config).then(res => {
+            uploadFile(formData,config).then(res => {
                     if (res.data.code === 0) {
                         Toast(res.data.message)
                     } else {

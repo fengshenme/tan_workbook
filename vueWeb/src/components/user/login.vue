@@ -44,12 +44,14 @@ export default {
             pojo: {mobile: '',password: ''},
             checkto : true
         }
-    },
+	},
+	
     methods: {
         login () {    
             Login(this.pojo).then( res =>{
                 if(res.data.code === 0){
-                    //保存用户信息 
+					//保存用户信息 
+					console.log(res.data.data.token)
 					setUser(res.data.data.token, res.data.data.name,this.pojo.mobile)
 					this.pojo = {}
 					location.href='/#/user/userinfo' //主页

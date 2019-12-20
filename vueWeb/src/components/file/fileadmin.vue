@@ -11,8 +11,8 @@
 				</li>
 			</ul>
       <!-- 分页 -->
-      <pagination v-show="total>=0" :total="total" :page.sync="listQuery.page" 
-          :limit.sync="listQuery.limit" @pagination="fetchList" />
+      <pagination v-show="total>=0" :total="total" :page.sync="page" 
+          :limit.sync="page.size" @pagination="fetchList" />
       
   
 </div>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import fileApi from '@/api/file'
+import {FetchList,DelFile} from '@/api/file'
 import {Toast} from 'mint-ui'
 // 分页
 import Pagination from '@/components/subcomponents/Page'
@@ -33,22 +33,20 @@ export default {
         fileList:[],
         srcList:[],
         total: 0,
-        listQuery: {
-          page: 1,
-          limit: 10
-        },
+        page: 1,
+        pagesize: 10
       }
     },
     components: { Pagination },
     created() {
-       this.fetchList();
+       this.fetchList(this.page,this.pagesize);
     },
     methods: {
-      fetchList(){
+      fetchList(page, pagesize){
         const filetype = 1;
         this.fileList = [];
         this.srcList = [];
-        fileApi.fetchList(this.listQuery,filetype).then(response => {
+        FetchList(filetype,page,pagesize).then(response => {
             Toast(response.data.message)
           response.data.data.rows.forEach(element => {
                   const fileurl = this.baseurl.concat("img/file/").concat(element.id)
@@ -66,7 +64,7 @@ export default {
           type: 'warning',
           center: true,
         }).then(() => {
-          fileApi.delFile(id).then(res => {
+          DelFile(id).then(res => {
             if(res.data.code === 0){
               Toast('删除成功' );
               location.reload();

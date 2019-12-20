@@ -48,11 +48,11 @@ public class FileSaveService {
 		String fileType = filePath.substring(filePath.lastIndexOf('.') + 1);
 		// 1代表图片2代表视频3代表其它
 		if(PNG.equals(fileType)||JPG.equals(fileType)||JPEG.equals(fileType)) {
-			userFile.setFiletype("1");
+			userFile.setFiletype(1);
 		}else if(MP4.equals(fileType)){
-			userFile.setFiletype("2");
+			userFile.setFiletype(2);
 		}else {
-			userFile.setFiletype("3");
+			userFile.setFiletype(3);
 		}
         try {
     		if(threshold <= 0) {

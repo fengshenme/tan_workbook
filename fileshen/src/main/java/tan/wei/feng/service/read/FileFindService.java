@@ -1,7 +1,6 @@
 package tan.wei.feng.service.read;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,20 +24,20 @@ public class FileFindService {
 	 * @param map
 	 * @return
 	 */
-	public PageResult<UserFile> findByfileidPage(String id, String fileType, Map<String, String> map) {
-		int page = Integer.parseInt(map.get("page"));
-		int size = Integer.parseInt(map.get("limit"));
-		 Page<UserFile> findFilePage = fileMapper.findByUseridAndFiletype(Long.parseLong(id),fileType, PageRequest.of(page-1,size));
+	public PageResult<UserFile> findByfileidPage(String id, Integer fileType, Integer page, Integer pagesize) {
+		Page<UserFile> findFilePage = fileMapper.findByUseridAndFiletype(Long.parseLong(id),fileType, PageRequest.of(page-1,pagesize));
 		return new PageResult<>(findFilePage.getTotalElements(),findFilePage.getContent());
 	}
+	
+	
 	
 	/**
 	 * 根据用户id查询名下所有资源
 	 * @param id
 	 */
-	public List<Long> findByfileid(String userid ,String fileType) {
+	public List<Long> findByfileid(String userid ,Integer fileType) {
 		List<Long> selectByIdaa = fileMapper.selectByIdaa(Long.parseLong(userid),fileType);
-		return selectByIdaa ;
+		return selectByIdaa;
 	}
 	
 	

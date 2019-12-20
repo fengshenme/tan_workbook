@@ -46,7 +46,7 @@
 <script>
 import {Toast} from 'mint-ui'
 import swiper from "@/components/subcomponents/swiper.vue"
-import file from '@/api/file'
+import {indexImg} from '@/api/file'
 import {httpUrl} from '@/utils/common'
 export default {
     data() {
@@ -60,7 +60,7 @@ export default {
     methods: {
         // 获取轮播图数据的方法 ，filetype为6
         getlunbotu(){
-            file.fileShowList(6).then(response => {
+            indexImg(6).then(response => {
                 if (parseInt(response.data.code) === 0) {
                     response.data.data.forEach(element => {
                         this.lunbotuList.push(httpUrl.concat("img/file/").concat(element))
