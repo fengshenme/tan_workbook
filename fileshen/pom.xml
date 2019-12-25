@@ -40,11 +40,19 @@
             <scope>test</scope>
         </dependency>
 		
+		<!-- 自动资源管理，自动生成getter，setter，equals，hashCode和toString等 -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.10</version>
+		    <scope>provided</scope>
+		</dependency>
+		
 		<!-- 数据库连接器 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.16</version><!--$NO-MVN-MAN-VER$-->
+			<version>8.0.16</version>
 		</dependency>
 		<!-- 阿里云短信sdk -->
 		<dependency>
