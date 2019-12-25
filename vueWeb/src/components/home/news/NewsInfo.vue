@@ -4,10 +4,9 @@
         <h3 class="title">{{newsinfo.title}}</h3>
         <!-- 子标题 -->
         <p class="subtitle">
-            <span>发表时间:{{newsinfo.add_time}}</span>
-            <span>点击数:{{newsinfo.click}}</span>
+            <span>发表时间:{{newsinfo.createtime | dateFormat}}</span>
+            <span>阅读数:{{newsinfo.visits===null ? 0 : newsinfo.visits}}</span>
         </p>
-
         <hr>
         <!-- 内容区域 -->
         <div class="content" v-html="newsinfo.content"></div>
@@ -18,8 +17,12 @@
 <script>
 import {Toast} from 'mint-ui'
 import comment from '@/components/subcomponents/comment.vue'
-import mobileApi from '@/api/mobileapi'
+import {getNewIn} from '@/api/mobileapi'
 export default {
+    components:{
+        // 用来注册子组件
+        "comment-box": comment
+    },
     data(){
         return{
             // 将url地址中id值挂载到data中,方便以后调用
@@ -33,21 +36,18 @@ export default {
     methods: {
         getNewsInfo(){
             // 获取新闻详情
-            mobileApi.getnew(this.id).then(result => {
-                if(result.data.status === 0){
+            getNewIn(this.id).then(result => {
+                if(result.data.code === 0){
                     // 成功
-                    this.newsinfo = result.data.message[0];
+                    this.newsinfo = result.data.data;
                 }else{
                     // 失败的
                     Toast('获取新闻失败...');
                 }
             });
         }
-    },
-    components:{
-        // 用来注册子组件
-        "comment-box": comment
     }
+    
 }
 </script>
 <style lang="scss" >

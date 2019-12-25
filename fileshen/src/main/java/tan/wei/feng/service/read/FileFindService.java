@@ -29,15 +29,19 @@ public class FileFindService {
 		return new PageResult<>(findFilePage.getTotalElements(),findFilePage.getContent());
 	}
 	
-	
+//	public Map<Integer,List<UserFile>> findByfileidPage(String id, Integer fileType, Integer page, Integer pagesize) {
+//		Page<UserFile> findFilePage = fileMapper.findByUseridAndFiletype(Long.parseLong(id),fileType, PageRequest.of(page-1,pagesize));
+//		Map<Integer,List<UserFile>> map = new HashMap<>();
+//		map.put((int) findFilePage.getTotalElements(),findFilePage.getContent());
+//		return map;
+//	}
 	
 	/**
 	 * 根据用户id查询名下所有资源
 	 * @param id
 	 */
 	public List<Long> findByfileid(String userid ,Integer fileType) {
-		List<Long> selectByIdaa = fileMapper.selectByIdaa(Long.parseLong(userid),fileType);
-		return selectByIdaa;
+		return fileMapper.selectByIdaa(Long.parseLong(userid),fileType);
 	}
 	
 	

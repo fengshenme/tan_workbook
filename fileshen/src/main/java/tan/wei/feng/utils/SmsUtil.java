@@ -26,7 +26,6 @@ public class SmsUtil {
 	
 	@Value("${aliyun.sms.template_code}")
 	private String templateCode;
-	//签名
 	@Value("${aliyun.sms.sign_name}")
 	private String signName;
 	@Value("${aliyun.sms.accessKeyId}")
@@ -38,7 +37,7 @@ public class SmsUtil {
 
     	DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         IAcsClient client = new DefaultAcsClient(profile);
-        //组装请求对象-具体描述见控制台-文档部分内容
+        //组装请求对象
         CommonRequest request = new CommonRequest();
         request.setMethod(MethodType.POST);
         request.setDomain("dysmsapi.aliyuncs.com");
@@ -49,13 +48,9 @@ public class SmsUtil {
         logger.info("手机号：{}",map.get("mobile"));
         logger.info("验证码：{}",map.get("code"));
         
-        //必填:待发送手机号
         request.putQueryParameter("PhoneNumbers", map.get("mobile"));
-        //必填:短信签名-可在短信控制台中找到
         request.putQueryParameter("SignName",signName);
-        //必填:短信模板-可在短信控制台中找到
         request.putQueryParameter("TemplateCode",templateCode);
-        //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
         request.putQueryParameter("TemplateParam", "{\'code\':\'"+ map.get("code") +"\'}");
         
         try {

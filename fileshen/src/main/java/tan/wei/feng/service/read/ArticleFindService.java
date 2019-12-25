@@ -1,6 +1,7 @@
 package tan.wei.feng.service.read;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,14 @@ public class ArticleFindService {
 		
 		return articleMapper.findAll();
 		
+	}
+	
+	/**
+	 * 文章
+	 * @return
+	 */
+	public Optional<Article> findById(Long id) {
+		return articleMapper.findById(id);
 	}
 	
 	/**

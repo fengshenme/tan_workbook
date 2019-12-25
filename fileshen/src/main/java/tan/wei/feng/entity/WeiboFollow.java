@@ -6,9 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "weibofollow")
-public class WeiboFollow {
+public @Data class WeiboFollow {
 	
 	@Id
 	private Long id;
@@ -21,74 +23,6 @@ public class WeiboFollow {
 	private String nickname;
 	private String followfans;
 	private Date addtime;
-	
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getUserid() {
-		return userid;
-	}
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-	public String getFriendid() {
-		return friendid;
-	}
-	public void setFriendid(String friendid) {
-		this.friendid = friendid;
-	}
-	public String getUserurl() {
-		return userurl;
-	}
-	public void setUserurl(String userurl) {
-		this.userurl = userurl;
-	}
-	public String getFriendurl() {
-		return friendurl;
-	}
-	public void setFriendurl(String friendurl) {
-		this.friendurl = friendurl;
-	}
-	public String getFriendinfo() {
-		return friendinfo;
-	}
-	public void setFriendinfo(String friendinfo) {
-		this.friendinfo = friendinfo;
-	}
-	public String getSex() {
-		return sex;
-	}
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public String getFollowfans() {
-		return followfans;
-	}
-	public void setFollowfans(String followfans) {
-		this.followfans = followfans;
-	}
-	public Date getAddtime() {
-		return addtime;
-	}
-	public void setAddtime(Date addtime) {
-		this.addtime = addtime;
-	}
-	@Override
-	public String toString() {
-		return "WeiboFollow [id=" + id + ", userid=" + userid + ", friendid=" + friendid + ", userurl=" + userurl
-				+ ", friendurl=" + friendurl + ", friendinfo=" + friendinfo + ", sex=" + sex + ", nickname=" + nickname
-				+ ", followfans=" + followfans + ", addtime=" + addtime + "]";
-	}
 	
 	/**
 	 * 插入csv用

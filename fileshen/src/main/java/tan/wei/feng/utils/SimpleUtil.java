@@ -10,7 +10,7 @@ import java.util.Random;
 public class SimpleUtil {
 	
 	private SimpleUtil() {
-	    throw new IllegalStateException("生成id失败");
+	    throw new IllegalStateException("调用失败");
 	 }
 
 	private static Random rand = new Random();	
@@ -29,5 +29,16 @@ public class SimpleUtil {
 		String s =  c.toString() + i.toString() + a.toString();
 		return Long.parseLong(s);
 	}
-
+	
+	/**
+	 * 
+	 * @param num
+	 * @return
+	 * 
+	 */
+	public int numTransform(int num) {
+		 return num < 50 && num > 0 ? num : 50;
+		
+	}
+	
 }

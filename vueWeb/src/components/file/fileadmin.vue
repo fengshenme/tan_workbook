@@ -24,7 +24,7 @@ import {FetchList,DelFile} from '@/api/file'
 import {Toast} from 'mint-ui'
 // 分页
 import Pagination from '@/components/subcomponents/Page'
-import {httpUrl} from '@/utils/common'
+import {httpUrl} from '@/utils/request'
 import { MessageBox } from 'element-ui'
 export default {
     data() {

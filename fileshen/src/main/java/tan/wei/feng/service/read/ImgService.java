@@ -43,8 +43,7 @@ public class ImgService {
 	 * @return
 	 */
 	public List<BigInteger> findByfileType(Integer filetype){
-		List<BigInteger> findIdByFiletype =	fileMapper.findByFiletype(filetype);
-		return findIdByFiletype;
+		return fileMapper.findByFiletype(filetype);
 	}
 	
 	/**

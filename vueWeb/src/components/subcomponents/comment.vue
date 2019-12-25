@@ -19,9 +19,11 @@
 </template>
 
 <script>
-import {Toast} from 'mint-ui'
+import {Toast,Button} from 'mint-ui'
 import mobileApi from '@/api/mobileapi'
 export default {
+    components:{'mt-button':Button},
+    props:['id'] ,
     data(){
         return {
             pageIndex: 1, // 默认展示第一页数据
@@ -36,17 +38,15 @@ export default {
     },
     methods:{
         getComments(){ // 获取评论
-            mobileApi.getcomments(this.id, this.pageIndex, this.size).then(result => {
+            mobileApi.getcomments(this.id, this.pageIndex, this.pagesize).then(result => {
                 if(result.data.status===0){
-                   //this.comments = result.body.message;
-                   // 采用拼接,这样就不会把老数据清空
                    this.comments = this.comments.concat(result.data.message);
                 }else{
                     Toast("获取评论失败");
                 }
             });
         },
-        getMore(){ // 获取更多
+        getMore(){ 
             this.pageIndex++;
             this.getComments();
         },
@@ -72,12 +72,10 @@ export default {
                     this.msg = "";
                 }else{
                     Toast('评论失败');
-                    // this.msg = "";
                 }
             });
         }
-    },
-    props:['id']
+    }
 }
 </script>
 

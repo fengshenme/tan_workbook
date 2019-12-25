@@ -5,7 +5,7 @@
 					<div class="mui-scroll">
 						<ul  class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell mui-media">
-								<a v-if="user.name===undefined||user.name===null" class="mui-navigate-right" >
+								<a v-if="$store.getters.ismobile" class="mui-navigate-right" >
 									<div class="mui-media-body">
 										<span class="mui-icon mui-icon-contact" id="head-img" src=""></span> 
                                         <router-link to="/user/login">未登录</router-link>
@@ -45,7 +45,7 @@
 							</li>
 						</ul>
 						<ul  class="mui-table-view">
-                            <li v-if ="user.name===undefined || user.name===null" class="mui-table-view-cell" style="text-align: center;">
+                            <li v-if ="$store.getters.ismobile" class="mui-table-view-cell" style="text-align: center;">
 								<router-link to="/user/login"> 请登录</router-link>
 							</li>
 							<li v-else class="mui-table-view-cell" style="text-align: center;">
@@ -55,11 +55,12 @@
 					</div>
 				</div>
 			</div>
+			
     </div>
 </template>
 
 <script>
-import { getUser,removeUser } from '@/utils/auth'
+import { getUser,removeUser } from '@/utils/common'
 import {Toast} from 'mint-ui'
 import {Logout} from '@/api/user'
 import {LoginStatus} from '@/api/user'
@@ -76,18 +77,20 @@ export default {
    methods: {
 	loginStatus(mobile){
 		LoginStatus(mobile).then(res => {
-			if (res.data.code===1) {
+			if (res.status===205) {
+				this.$store.commit('ismobile',undefined)
 				removeUser();
 				this.user = getUser();
 			}
 		});
     },
     logout(){ 
+		this.$store.commit('ismobile',undefined)
 		removeUser()//清除登陆用户信息
       Logout().then(res => {
-		if(res.data.code===0){
+		if(res.status===205){
 			Toast('退出成功') 
-			location.reload()
+			// location.reload()
 		}
       })
     }	

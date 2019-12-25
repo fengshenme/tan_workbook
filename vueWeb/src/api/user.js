@@ -1,4 +1,8 @@
-import request from '@/utils/request'
+import {request} from '@/utils/request'
+import store from '@/store'
+
+request.defaults.headers.common ['Authorization'] = store.getters.token;
+
 const groupName = 'user'
 const apiName = 'user'
 

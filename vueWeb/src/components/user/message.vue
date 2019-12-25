@@ -34,6 +34,7 @@ export default {
 		},
         handleClick(){
             Message(this.pojo).then(res => {
+				if(res.status === 200){
 				switch(res.data)
 					{
 						case 1:
@@ -67,6 +68,7 @@ export default {
 							//与 case 1 和 case 2 不同时执行的代码
 							this.retit = '其他';
 					}
+				}
 			});
         }
     },

@@ -1,0 +1,21 @@
+.button-len{
+    width: 100%;
+    /**悬浮效果 */
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border: none;
+    Margin: 1px 2px;
+    padding: 2px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+    color: rgb(17, 1, 1);
+    border: 2px solid #A6A6A6; 
+    background-color: white;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.button-len:hover {
+    background-color: #A6A6A6; /* Green */
+    color: white;
+}

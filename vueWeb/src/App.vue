@@ -22,9 +22,7 @@
 				<span class="mui-tab-label">解析</span>
 			</router-link>
 			<router-link class="mui-tab-item-llb" to="/shopcar">
-				<span class="mui-icon mui-icon-extra mui-icon-extra-cart">
-					<span class="mui-badge" id="badge">{{ $store.getters.getAllCount }}</span>
-				</span>
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"></span>
 				<span class="mui-tab-label">购物车</span>
 			</router-link>
 			<router-link class="mui-tab-item-llb" to="/search">
@@ -38,17 +36,7 @@
 </template>
 
 <script>
-
 export default {
-  name: 'App',
-  data() {
-    return {
-      tt:'新闻'
-    }
-  },
-  methods: {
-    
-  },
 }
 </script>
 
@@ -74,7 +62,7 @@ export default {
 
 .v-enter-active,
 .v-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.2s ease;
 }
 
 // 该类名，解决 tabbar 点击无法切换的问题

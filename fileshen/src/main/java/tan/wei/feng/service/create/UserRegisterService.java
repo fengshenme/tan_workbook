@@ -36,9 +36,7 @@ public class UserRegisterService {
 	public boolean saveUser(User user) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		user.setUserid(SimpleUtil.idCreate());
-		Date date = new Date();
-		user.setCreation_time(date);
-		user.setUpdate_time(date);
+		user.setUpdatetime(new Date());
 		// 密码加密
 		String newpassword = encoder.encode(user.getPassword());
 		user.setPassword(newpassword);

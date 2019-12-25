@@ -2,12 +2,10 @@ package tan.wei.feng.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,8 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.jsonwebtoken.Claims;
-import tan.wei.feng.entity.Result;
-import tan.wei.feng.entity.StatusCode;
+import tan.wei.feng.entity.PageResult;
+import tan.wei.feng.entity.UserFile;
 import tan.wei.feng.service.create.FileSaveService;
 import tan.wei.feng.service.delete.FileDeleteService;
 import tan.wei.feng.service.read.FileDownService;
@@ -70,16 +68,16 @@ public class FileController {
 	 * @return
 	 */
 	@GetMapping(value = "/fileList/{fileType}")
-	public Result fileUrlList(@PathVariable Integer fileType){
+	public ResponseEntity<List<Long>> fileUrlList(@PathVariable Integer fileType){
 		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(claims != null && !"".equals(claims.getId().trim())){
 			List<Long> findByfileid = fileFindService.findByfileid(claims.getId(),fileType);
 			if(findByfileid.isEmpty()) {
-				return new Result(StatusCode.OK,"没有文件,请上传");
+				return new ResponseEntity<>(HttpStatus.OK);
 			}
-			return new Result(StatusCode.OK,"查询成功",findByfileid);
+			return new ResponseEntity<>(findByfileid,HttpStatus.OK);
 		}
-		return new Result(StatusCode.ERROR,"请登录在查询");
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		
 	}
 	
@@ -88,13 +86,13 @@ public class FileController {
 	 * @return
 	 */
 	@GetMapping(value = "/filePageList/{fileType}/{page}/{pagesize}")
-	public Result fetchList(@PathVariable Integer fileType , @PathVariable Integer page,@PathVariable Integer pagesize){
+	public ResponseEntity<PageResult<UserFile>> fetchList(@PathVariable Integer fileType , @PathVariable Integer page,@PathVariable Integer pagesize){
 		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(claims != null && !"".equals(claims.getId().trim())){
-			return new Result(StatusCode.OK,"查询成功",
-					fileFindService.findByfileidPage(claims.getId(),fileType,page,pagesize));
+			PageResult<UserFile> findByfileidPage = fileFindService.findByfileidPage(claims.getId(),fileType,page,pagesize);
+			return new ResponseEntity<>(findByfileidPage,HttpStatus.OK);
 		}
-		return new Result(StatusCode.ERROR,"请登录");
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
 	/**
@@ -123,7 +121,7 @@ public class FileController {
 	 * 
 	 */
 	@PostMapping(value = "/uploadFile")
-	public Result fileSave(@RequestParam("file") MultipartFile file){
+	public ResponseEntity<String> fileSave(@RequestParam("file") MultipartFile file){
 		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(!file.isEmpty() && claims != null && !"".equals(claims.getId().trim())) {
 			// 递归次数
@@ -133,7 +131,7 @@ public class FileController {
 	        try {
 	            file.transferTo(new File(filePath));
 	            if(fileSaveService.addFile(filePath,claims.getId())) {
-					return new Result(StatusCode.OK,"上传成功");
+					return new ResponseEntity<>("上传成功",HttpStatus.OK) ;
 				} 
 	        } catch (IOException e) {
 	        	try {
@@ -142,10 +140,10 @@ public class FileController {
 				} catch (IOException e1) {
 					logger.info(e1.getMessage());
 				}
-	            return new Result(StatusCode.ERROR,"上传失败重新上传"+e.getMessage());
+	            return new ResponseEntity<>("上传失败重新上传"+e.getMessage(),HttpStatus.EXPECTATION_FAILED);
 	        }
 		}
-		return new Result(StatusCode.ERROR,"上传失败重新上传");
+		return new ResponseEntity<>("上传失败重新上传",HttpStatus.EXPECTATION_FAILED);
 	}
 		
 	/**
@@ -154,12 +152,12 @@ public class FileController {
 	 * @return
 	 */
 	@DeleteMapping(value = "/delFile/{fileId}")
-	public  Result delFile(@PathVariable String fileId) {
+	public  ResponseEntity<String> delFile(@PathVariable String fileId) {
 		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(claims != null && !"".equals(claims.getId().trim()) && fileDeleteService.delfile(Long.parseLong(fileId))){
-			return new Result(StatusCode.OK,"删除成功");
+			return new ResponseEntity<>("删除成功",HttpStatus.OK);
 		}
-		return new Result(StatusCode.ERROR,"删除失败");
+		return new ResponseEntity<>("删除失败",HttpStatus.NOT_FOUND);
 		
 	}
 

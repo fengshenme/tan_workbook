@@ -16,12 +16,13 @@ public class Testinsert {
 	private Date addtime;
 	
 	
-	public Date getAddtime() {
-		return addtime;
+	
+	
+	@Override
+	public String toString() {
+		return "Testinsert [id=" + id + ", number=" + number + ", addtime=" + addtime + "]";
 	}
-	public void setAddtime(Date addtime) {
-		this.addtime = addtime;
-	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -34,5 +35,13 @@ public class Testinsert {
 	public void setNumber(Long number) {
 		this.number = number;
 	}
+	public Date getAddtime() {
+		return addtime;
+	}
+	public void setAddtime(Date addtime) {
+		this.addtime = addtime;
+	}
+	
+	
 	
 }

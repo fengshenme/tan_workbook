@@ -1,18 +1,22 @@
 package tan.wei.feng.controller;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.StreamingHttpOutputMessage.Body;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tan.wei.feng.entity.Result;
-import tan.wei.feng.entity.StatusCode;
 import tan.wei.feng.service.read.ImgService;
 
 /**
@@ -50,8 +54,8 @@ public class ImgController {
 	 * @return
 	 */
 	@GetMapping(value = "/indeximg/{filetype}")
-	public Result indexImg(@PathVariable Integer filetype) {
-		return new Result(StatusCode.OK, imgService.findByfileType(filetype));
+	public ResponseEntity<List<BigInteger>> indexImg(@PathVariable Integer filetype) {
+		   return new ResponseEntity<>(imgService.findByfileType(filetype), HttpStatus.OK);
 	}
 	
 }

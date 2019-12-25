@@ -1,4 +1,6 @@
-import request from '@/utils/request'
+import {request} from '@/utils/request'
+import store from '@/store'
+request.defaults.headers.common ['Authorization'] = store.getters.token;
 
 export function fetchList(query) {
   return request({
@@ -39,6 +41,7 @@ export function updateArticle(data) {
     data
   })
 }
+
 
 /**
  * 文章分类

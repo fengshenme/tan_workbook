@@ -1,6 +1,23 @@
-import request from '@/utils/request'
+import {request} from '@/utils/request'
+import store from '@/store'
+request.defaults.headers.common ['Authorization'] = store.getters.token;
 
 const grouname = 'api'
+
+//获取新闻详情
+export function getNewIn (id) {
+  return request({
+    url: `/${grouname}/getnew/${id}`,
+    method: 'get'
+  })
+}
+// 获取评论
+export function getcomments (id, page) {
+  return request({
+    url: `/${grouname}/getcomments/${id}/${page}`,
+    method: 'get'
+  })
+}
 
 export default {
   getlunbotuList () {
@@ -16,15 +33,9 @@ export default {
       method: 'get'
     })
   },
-  getnewslist (page,limit) {
+  getnewslist (page) {
     return request({
-      url: `/${grouname}/getnewslist/${page}/${limit}`,
-      method: 'get'
-    })
-  },
-  getnew (id) {
-    return request({
-      url: `/${grouname}/getnew/${id}`,
+      url: `/${grouname}/getnewslist/${page}`,
       method: 'get'
     })
   },
@@ -46,13 +57,6 @@ export default {
   getimageInfo (id) {
     return request({
       url: `/${grouname}/getimageInfo/${id}`,
-      method: 'get'
-    })
-  },
-  // 获取评论
-  getcomments (id, page, size) {
-    return request({
-      url: `/${grouname}/getcomments/${id}/${page}/${size}`,
       method: 'get'
     })
   },

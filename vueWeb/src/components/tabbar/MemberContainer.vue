@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { getUser } from '@/utils/auth'
+import { getUser } from '@/utils/common'
 export default {
     created() {
         this.user= getUser();

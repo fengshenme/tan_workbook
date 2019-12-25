@@ -37,7 +37,7 @@
 <script>
 import {Login} from '@/api/user'
 import {Toast} from 'mint-ui'
-import { setUser } from '@/utils/auth'
+import { setUser } from '@/utils/common'
 export default {
     data(){
         return {
@@ -45,17 +45,18 @@ export default {
             checkto : true
         }
 	},
-	
     methods: {
         login () {    
             Login(this.pojo).then( res =>{
-                if(res.data.code === 0){
+                if(res.status === 200){
 					//保存用户信息 
-					console.log(res.data.data.token)
-					setUser(res.data.data.token, res.data.data.name,this.pojo.mobile)
+					setUser(res.data.token, res.data.name,this.pojo.mobile)
+					//存入vue,公共data
+					this.$store.commit('increment',res.data.token)
+					this.$store.commit('ismobile',this.pojo.mobile)
 					this.pojo = {}
 					location.href='/#/user/userinfo' //主页
-					location.reload()
+					// location.reload()
                 }else{
                     Toast('登录失败')
                 }

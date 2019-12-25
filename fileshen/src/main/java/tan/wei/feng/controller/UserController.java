@@ -1,23 +1,32 @@
 package tan.wei.feng.controller;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.jsonwebtoken.Claims;
-import tan.wei.feng.entity.Result;
-import tan.wei.feng.entity.StatusCode;
+import tan.wei.feng.entity.PageResult;
 import tan.wei.feng.entity.User;
 import tan.wei.feng.service.create.UserRegisterService;
 import tan.wei.feng.service.create.UserService;
@@ -33,6 +42,7 @@ import tan.wei.feng.service.create.UserService;
 @RequestMapping("/user")
 public class UserController {
 	
+	private static final String USERID = "userid_";
 	
 	@Autowired
 	private  UserService userService = null;
@@ -43,6 +53,7 @@ public class UserController {
 	@Autowired
 	private UserRegisterService userRegisterService = null ;
 	
+	
 	/**
 	 * 用户手机号登陆
 	 * @param mobile
@@ -50,12 +61,12 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping(value = "/login")
-	public Result login(@RequestBody Map<String,String> map) {
+	public ResponseEntity<Map<String, String>> login(@RequestBody Map<String,String> map) {
 		Map<String, String> ma = userService.findByMobileAndPassword(map.get("mobile"), map.get("password"));
 		if(ma != null ) {
-			return new  Result(StatusCode.OK,"登录成功",ma);
+			return ResponseEntity.status(HttpStatus.OK).body(ma);
 		} 
-		return new Result(StatusCode.ERROR, "手机号或密码错误");
+		return ResponseEntity.status(HttpStatus.valueOf("buhaoshi")).build();
 	}
 	
 	/**
@@ -65,16 +76,16 @@ public class UserController {
 	 * @return
 	 */
     @PostMapping(value="/register/{code}")
-    public Result register( @RequestBody User usera ,@PathVariable String code){
+    public ResponseEntity<String> register( @RequestBody User user ,@PathVariable String code){
     	//提取缓存中验证码判断验证码是否正确
-		String syscode = redisTemplate.opsForValue().get("smscode_" + usera.getMobile());
+		String syscode = redisTemplate.opsForValue().get("smscode_" + user.getMobile());
 		if(syscode == null || !syscode.equals(code)){
-			return new Result(StatusCode.ERROR,"验证码输入不正确");
+			return new ResponseEntity<>("验证码输入不正确",HttpStatus.NOT_EXTENDED);
 		}
-	    if(userRegisterService.saveUser(usera)) {
-	    	return new Result(StatusCode.OK,"注册成功");
+	    if(userRegisterService.saveUser(user)) {
+	    	return new ResponseEntity<>(HttpStatus.OK);
 	    }
-	    return new Result(StatusCode.ERROR,"注册失败,重新注册");
+	    return new ResponseEntity<>("注册失败,重新注册",HttpStatus.NOT_EXTENDED);
     }
 	
     /**
@@ -82,22 +93,9 @@ public class UserController {
 	* @param mobile
 	*/
 	@GetMapping(value="/sendsms/{mobile}")
-	public Result sendsms(@PathVariable String mobile ){
+	public ResponseEntity<String> sendsms(@PathVariable String mobile ){
 		userService.sendSms(mobile);
-		return new Result(StatusCode.OK,"验证码已发送");
-	}
-	
-	/**
-	 * 登录退出
-	 * @return
-	 */
-	@DeleteMapping(value="/logout")
-	public Result logout() {
-		Claims claims=(Claims) request.getAttribute("user_claims");
-		if(claims !=null && !"".equals(claims.getId().trim())){
-			redisTemplate.delete("userid_".concat(claims.getId()));
-		}
-		return new Result(StatusCode.OK,"退出成功") ;
+		return new ResponseEntity<>("验证码已发送",HttpStatus.OK);
 	}
 	
 	/**
@@ -105,12 +103,12 @@ public class UserController {
 	 * @return
 	 */
 	@GetMapping(value="/findall")
-	public Result findAll() {
+	public ResponseEntity<List<User>> findAll() {
 		Claims claims=(Claims) request.getAttribute("user_claims");
 		if(claims !=null && !"".equals(claims.getId().trim())){
-			return new Result(StatusCode.OK, "查询成功",userService.findAll());
+			return new ResponseEntity<>(userService.findAll(),HttpStatus.OK);
 		}
-		return new Result(StatusCode.ERROR,"请重新登录");
+		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 	
 	/**
@@ -119,11 +117,25 @@ public class UserController {
 	 * @return
 	 */
 	@GetMapping(value="/loginstatus/{mobile}")
-	public Result lodinStatus(@PathVariable String mobile) {
-		if(redisTemplate.opsForValue().get("userid_".concat(mobile)) == null){
-			return new Result(StatusCode.ERROR,"请重新登录");
+	public ResponseEntity<String> lodinStatus(@PathVariable String mobile) {
+		
+		if(redisTemplate.opsForValue().get(USERID.concat(mobile)) == null){
+			return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
 		}
-		return new Result(StatusCode.OK);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+	
+	/**
+	 * 登录退出
+	 * @return
+	 */
+	@DeleteMapping(value="/logout")
+	public ResponseEntity<PageResult<String>> logout() {
+		Claims claims=(Claims) request.getAttribute("user_claims");
+		if(claims !=null && !"".equals(claims.getId().trim())){
+			redisTemplate.delete(USERID.concat(claims.getId()));
+		}
+		return new ResponseEntity<>(HttpStatus.RESET_CONTENT) ;
 	}
 	
 }

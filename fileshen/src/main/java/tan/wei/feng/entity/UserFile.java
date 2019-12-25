@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
 /**
  * 文件路径实体 
  * @author 10159
@@ -14,7 +16,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="userfile")
-public class UserFile implements Serializable{
+public @Data class UserFile implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -24,56 +26,6 @@ public class UserFile implements Serializable{
 	private String fileurl;
 	private Date addtime;
 	private Integer filetype ;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getUserid() {
-		return userid;
-	}
-
-	public void setUserid(Long userid) {
-		this.userid = userid;
-	}
-
-	public String getFileurl() {
-		return fileurl;
-	}
-
-	public void setFileurl(String fileurl) {
-		this.fileurl = fileurl;
-	}
-
-	public Date getAddtime() {
-		return addtime;
-	}
-
-	public void setAddtime(Date addtime) {
-		this.addtime = addtime;
-	}
-
-	public Integer getFiletype() {
-		return filetype;
-	}
-
-	public void setFiletype(Integer filetype) {
-		this.filetype = filetype;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	@Override
-	public String toString() {
-		return "UserFile [id=" + id + ", userid=" + userid + ", fileurl=" + fileurl + ", addtime=" + addtime
-				+ ", filetype=" + filetype + "]";
-	}
 
 	
 }

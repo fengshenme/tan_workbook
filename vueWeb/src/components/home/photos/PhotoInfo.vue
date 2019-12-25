@@ -29,6 +29,9 @@ import {Toast} from 'mint-ui'
 import comment from "@/components/subcomponents/comment.vue"
 import mobileApi from '@/api/mobileapi'
 export default {
+    components:{ //注册子组件
+        'cmt-box':comment,
+    },
     data(){
         return {
             id:this.$route.params.id,// 从路由中获取的图片id
@@ -71,9 +74,7 @@ export default {
         handleClose () {
         }
     },
-    components:{ //注册子组件
-        'cmt-box':comment,
-    }
+    
 }
 </script>
 
