@@ -20,7 +20,7 @@ import comment from '@/components/subcomponents/comment.vue'
 import {getNewIn} from '@/api/mobileapi'
 export default {
     components:{
-        // 用来注册子组件
+        // 用来注册评论子组件
         "comment-box": comment
     },
     data(){
@@ -37,9 +37,9 @@ export default {
         getNewsInfo(){
             // 获取新闻详情
             getNewIn(this.id).then(result => {
-                if(result.data.code === 0){
+                if(result.status === 200){
                     // 成功
-                    this.newsinfo = result.data.data;
+                    this.newsinfo = result.data;
                 }else{
                     // 失败的
                     Toast('获取新闻失败...');

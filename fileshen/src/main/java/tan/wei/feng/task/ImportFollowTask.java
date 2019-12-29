@@ -18,8 +18,8 @@ import tan.wei.feng.service.WeiBoSearchService;
 import tan.wei.feng.utils.SimpleUtil;
 
 /**
- * 
- * @author 10159
+ * 导入微博数据
+ * @author 锋什么
  *
  */
 @Component

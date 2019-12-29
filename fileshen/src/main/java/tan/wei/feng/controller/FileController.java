@@ -36,7 +36,7 @@ import tan.wei.feng.utils.FileDirUtils;
 
 /**
  * 文件控制层
- * @author 10159
+ * @author 锋什么
  *
  */
 @RestController
@@ -60,7 +60,7 @@ public class FileController {
 	
 	@Value("${storessd.filepath}")
 	private String datapath;
-	// 用户权限
+	// 用户角色
 	private static final String USERCLA = "user_claims";  
 	
 	/**
@@ -92,7 +92,7 @@ public class FileController {
 			PageResult<UserFile> findByfileidPage = fileFindService.findByfileidPage(claims.getId(),fileType,page,pagesize);
 			return new ResponseEntity<>(findByfileidPage,HttpStatus.OK);
 		}
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 	
 	/**
@@ -118,9 +118,8 @@ public class FileController {
 	 * @param <file>
 	 * @param file
 	 * @return
-	 * 
 	 */
-	@PostMapping(value = "/uploadFile")
+	@PostMapping(value = "/uploadFile",produces="text/plain;charset=UTF-8")
 	public ResponseEntity<String> fileSave(@RequestParam("file") MultipartFile file){
 		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(!file.isEmpty() && claims != null && !"".equals(claims.getId().trim())) {
@@ -131,7 +130,7 @@ public class FileController {
 	        try {
 	            file.transferTo(new File(filePath));
 	            if(fileSaveService.addFile(filePath,claims.getId())) {
-					return new ResponseEntity<>("上传成功",HttpStatus.OK) ;
+					return new ResponseEntity<>("文件保存成功",HttpStatus.OK) ;
 				} 
 	        } catch (IOException e) {
 	        	try {
@@ -140,10 +139,12 @@ public class FileController {
 				} catch (IOException e1) {
 					logger.info(e1.getMessage());
 				}
-	            return new ResponseEntity<>("上传失败重新上传"+e.getMessage(),HttpStatus.EXPECTATION_FAILED);
+	        	// 文件保存失败500
+	            return new ResponseEntity<>("文件保存失败,请重新上传",HttpStatus.INTERNAL_SERVER_ERROR) ;
 	        }
 		}
-		return new ResponseEntity<>("上传失败重新上传",HttpStatus.EXPECTATION_FAILED);
+		// 身份验证出错401
+		return new ResponseEntity<>("没有权限上传,请登录在上传",HttpStatus.UNAUTHORIZED);
 	}
 		
 	/**
@@ -152,13 +153,13 @@ public class FileController {
 	 * @return
 	 */
 	@DeleteMapping(value = "/delFile/{fileId}")
-	public  ResponseEntity<String> delFile(@PathVariable String fileId) {
+	public ResponseEntity<String> delFile(@PathVariable String fileId) {
 		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(claims != null && !"".equals(claims.getId().trim()) && fileDeleteService.delfile(Long.parseLong(fileId))){
-			return new ResponseEntity<>("删除成功",HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
-		return new ResponseEntity<>("删除失败",HttpStatus.NOT_FOUND);
-		
+		// 服务器成功处理了请求,且没有返回任何内容
+		return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
 	}
 
 }

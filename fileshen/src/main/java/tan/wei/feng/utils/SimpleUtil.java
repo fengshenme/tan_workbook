@@ -4,13 +4,13 @@ import java.util.Random;
 
 /**
  * id
- * @author 10159
+ * @author 锋什么
  *
  */
 public class SimpleUtil {
 	
 	private SimpleUtil() {
-	    throw new IllegalStateException("调用失败");
+	    throw new IllegalStateException("实用类");
 	 }
 
 	private static Random rand = new Random();	

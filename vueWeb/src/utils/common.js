@@ -14,7 +14,7 @@ export function getUrlParam (name) {
 
 
 // 设置用户
-export function setUser (token, nickname,mobile) {
+export function setUser ( nickname,token,mobile) {
   Cookies.set(NameKey, nickname)
   Cookies.set(TokenKey, token)
   Cookies.set(MobileKey, mobile)

@@ -4,13 +4,12 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.StreamingHttpOutputMessage.Body;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +20,7 @@ import tan.wei.feng.service.read.ImgService;
 
 /**
  * 图片控制层
- * @author 10159
+ * @author 锋什么
  *
  */
 @RestController
@@ -30,6 +29,9 @@ import tan.wei.feng.service.read.ImgService;
 public class ImgController {
 	
 	private final ImgService imgService;
+	
+	@Autowired
+	private HttpServletRequest request = null;
 	
 	@Autowired 
 	public ImgController(ImgService imgService) {
@@ -55,7 +57,12 @@ public class ImgController {
 	 */
 	@GetMapping(value = "/indeximg/{filetype}")
 	public ResponseEntity<List<BigInteger>> indexImg(@PathVariable Integer filetype) {
-		   return new ResponseEntity<>(imgService.findByfileType(filetype), HttpStatus.OK);
+		String jwtstatus = request.getAttribute("error") == null 
+							? "" : request.getAttribute("error").toString() ;
+		if(jwtstatus !=null && !"".equals(jwtstatus.trim())) {
+			return new ResponseEntity<>(imgService.findByfileType(filetype), HttpStatus.PARTIAL_CONTENT);
+		}
+		return new ResponseEntity<>(imgService.findByfileType(filetype), HttpStatus.OK);
 	}
 	
 }

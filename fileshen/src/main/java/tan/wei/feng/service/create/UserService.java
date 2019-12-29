@@ -17,6 +17,11 @@ import tan.wei.feng.entity.User;
 import tan.wei.feng.mapper.UserMapper;
 import tan.wei.feng.utils.JwtUtil;
 
+/**
+ * 用户服务
+ * @author 锋什么
+ *
+ */
 @Service
 public class UserService {
 	
@@ -53,7 +58,7 @@ public class UserService {
 		// 2.将验证码放入redis,5分钟过期
 		redisTemplate.opsForValue().set("smscode_"+mobile, code.toString(),5,TimeUnit.MINUTES);
 		// 3.将验证码和手机号用smsutil发送
-		Map<String, String> map = new HashMap<>();
+		Map<String, String> map = new HashMap<String, String>();
 		map.put("mobile", mobile);
 		map.put("code", code.toString());
 		logger.info(map.toString());
@@ -71,19 +76,18 @@ public class UserService {
 	 */
 	public Map<String, String> findByMobileAndPassword(String mobile, String password) {
 		User user = userMapper.findByMobile(mobile); 
+		Map<String, String> map=new HashMap<>();
 		if(user!=null&&encoder.matches(password, user.getPassword())) {
 			// 生成token 
 			String token = jwtUtil.createJWT(user.getUserid().toString(),user.getMobile(), "user");
-			HashMap<String, String> map=new HashMap<>();
 			map.put("token",token);
 			//昵称
 			map.put("name",user.getNickname());
-			// 将用户id放入redis,60分钟过期
-			redisTemplate.opsForValue().set("userid_"+user.getMobile(), user.getUserid().toString(),60,TimeUnit.MINUTES);
 			// 返回token，昵称，头像等信息
 			return map;
 		}else {
-			return null;
+			map.put("message","密码或者账号错误");
+			return map;
 		}
 	}
 	

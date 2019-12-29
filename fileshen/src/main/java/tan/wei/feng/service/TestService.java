@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 import tan.wei.feng.entity.Testinsert;
 import tan.wei.feng.mapper.TestMapper;
 
+/**
+ * 实验服务
+ * @author 锋什么
+ *
+ */
 @Service
 public class TestService {
 	

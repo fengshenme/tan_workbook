@@ -46,7 +46,7 @@
 						</ul>
 						<ul  class="mui-table-view">
                             <li v-if ="$store.getters.ismobile" class="mui-table-view-cell" style="text-align: center;">
-								<router-link to="/user/login"> 请登录</router-link>
+								<router-link to="/user/login"> 登录/注册</router-link>
 							</li>
 							<li v-else class="mui-table-view-cell" style="text-align: center;">
 								<button style=" width:100%;height: 100%;" class="mui-btn-danger mui-btn-outlined" @click="logout()">退出登录</button>
@@ -85,12 +85,11 @@ export default {
 		});
     },
     logout(){ 
-		this.$store.commit('ismobile',undefined)
 		removeUser()//清除登陆用户信息
+		this.$store.commit('ismobile',undefined)
       Logout().then(res => {
 		if(res.status===205){
 			Toast('退出成功') 
-			// location.reload()
 		}
       })
     }	

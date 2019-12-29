@@ -22,8 +22,8 @@ import tan.wei.feng.entity.UserFile;
 import tan.wei.feng.mapper.FileMapper;
 
 /**
- * 图片服务层
- * @author 10159
+ * 图片服务
+ * @author 锋什么
  *
  */
 @Service

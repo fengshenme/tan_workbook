@@ -18,7 +18,7 @@ spring:
    datasource:
       driverClassName: com.mysql.cj.jdbc.Driver #  可省略，SpringBoot自动推断
       # Java 与 MySQL 的 13 个小时时差,serverTimezone=GMT%2B8 或者 serverTimezone=Hongkong
-      url: jdbc:mysql://192.168.0.67:3306/news?characterEncoding=UTF8&serverTimezone=GMT%2B8
+      url: jdbc:mysql://0.0.0.0:3306/news?characterEncoding=UTF8&serverTimezone=GMT%2B8
       username: 
       password: 
       hikari:

@@ -38,8 +38,8 @@ export default {
         // 获取新闻列表
         getNewsList(page){
             mobileApi.getnewslist(page).then(result => {
-                if(result.data.code === 0){
-                    this.newslist = this.newslist.concat(result.data.data)
+                if(result.status === 200){
+                    this.newslist = this.newslist.concat(result.data)
                 }else{
                     // 失败的
                     Toast('获取新闻列表失败...');

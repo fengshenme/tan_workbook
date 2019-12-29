@@ -18,7 +18,7 @@ import tan.wei.feng.service.WeiBoSearchService;
 
 /**
  * 处理搜索结果页面
- * @author 10159
+ * @author 锋什么
  *
  */
 @Component

@@ -7,7 +7,7 @@
         <div class="cmt-list">
             <div class="cmt-item" v-for="(item,i) in comments" :key="item.add_time">
                 <div class="cmt-title">
-                    第{{i+1}}楼&nbsp;&nbsp;用户:{{item.user_name}}&nbsp;&nbsp;发表时间:{{item.add_time | dateFormat}}
+                    第{{i+1}}楼&nbsp;&nbsp;用户:{{item.userName}}&nbsp;&nbsp;发表时间:{{Number(item.id.toString().substring(0,13)) | dateFormat}}
                 </div>
                 <div class="cmt-body">
                     {{item.content==='undefined' ? '此用户很懒,没有说':item.content}}
@@ -20,7 +20,8 @@
 
 <script>
 import {Toast,Button} from 'mint-ui'
-import mobileApi from '@/api/mobileapi'
+import {getcomments,postcomment} from '@/api/mobileapi'
+import { getUser } from '@/utils/common'
 export default {
     components:{'mt-button':Button},
     props:['id'] ,
@@ -30,7 +31,7 @@ export default {
             pagesize:5,
             comments: [], // 所有的评论数据
             msg: "", // 评论输入的内容
-            cmt: {}
+            cmt: {},
         };
     },
     created(){
@@ -38,9 +39,9 @@ export default {
     },
     methods:{
         getComments(){ // 获取评论
-            mobileApi.getcomments(this.id, this.pageIndex, this.pagesize).then(result => {
-                if(result.data.status===0){
-                   this.comments = this.comments.concat(result.data.message);
+            getcomments(this.id, this.pageIndex, this.pagesize).then(result => {
+                if(result.status===200){
+                   this.comments = this.comments.concat(result.data);
                 }else{
                     Toast("获取评论失败");
                 }
@@ -56,20 +57,19 @@ export default {
                 return Toast('评论内容不能为空!');
             }
             // 发表评论
-            // 参数1: 请求的url地址Error in v-on handler: "ReferenceError: cmt is not defined
-            // 参数2: 提交给服务器的数据对象 {content: this.msg }
-            // 参数3: 定义提交时候,表单中数据的格式 {emulateJSON:true},已经全局配置不用再加入
             // 1.拼接出一个评论对象
             const cmt = {
-                        user_name:"匿名用户",// 后期有登录功能时从session中取出用户名
-                        add_time: Date.now() ,
+                        userName:getUser().name,
+                        addTime: Date.now() ,
                         content: this.msg.trim()
-                    };        
-            mobileApi.postcomment(this.$route.params.id, {content: this.msg.trim()}).then(result => {
-                if(result.data.status === 0){
+                    };
+            postcomment(this.$route.params.id, cmt).then(response => {
+                if(response.status === 200){
                     // 评论成功插入对象数组中
                     this.comments.unshift(cmt);
                     this.msg = "";
+                    Toast(response.data)
+                    location.reload();
                 }else{
                     Toast('评论失败');
                 }

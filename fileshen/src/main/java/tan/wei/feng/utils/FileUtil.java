@@ -16,6 +16,10 @@ import java.util.List;
  */ 
 public class FileUtil { 
 	
+	 private FileUtil() {
+	    throw new IllegalStateException("实用类");
+	  }
+	
 	/**
 	 * 将多个文本文件合并为一个文本文件
 	 * @param fileName

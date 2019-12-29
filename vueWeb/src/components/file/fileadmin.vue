@@ -11,21 +11,27 @@
 				</li>
 			</ul>
       <!-- 分页 -->
-      <pagination v-show="total>=0" :total="total" :page.sync="page" 
-          :limit.sync="page.size" @pagination="fetchList" />
-      
+      <el-pagination
+      v-show="total>=0"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="page"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :page-sizes="[10,20,30,40]"
+      :total="total"
+    />
   
 </div>
 
 </template>
 
 <script>
+import 'element-ui/lib/theme-chalk/index.css';
 import {FetchList,DelFile} from '@/api/file'
 import {Toast} from 'mint-ui'
-// 分页
-import Pagination from '@/components/subcomponents/Page'
 import {httpUrl} from '@/utils/request'
-import { MessageBox } from 'element-ui'
+import { MessageBox , Pagination } from 'element-ui'
 export default {
     data() {
       return {
@@ -34,27 +40,34 @@ export default {
         srcList:[],
         total: 0,
         page: 1,
-        pagesize: 10
+        pageSize: 10
       }
     },
-    components: { Pagination },
+    components: {
+    'el-pagination':Pagination
+  },
     created() {
-       this.fetchList(this.page,this.pagesize);
+       this.fetchList(this.page,this.pageSize);
     },
     methods: {
-      fetchList(page, pagesize){
+      handleSizeChange(val) {
+        this.fetchList(this.page,val)
+      },
+      handleCurrentChange(val) {
+        this.fetchList(val,this.pageSize)
+      },
+      fetchList(page,pageSize){
         const filetype = 1;
         this.fileList = [];
         this.srcList = [];
-        FetchList(filetype,page,pagesize).then(response => {
-            Toast(response.data.message)
-          response.data.data.rows.forEach(element => {
+        FetchList(filetype,page,pageSize).then(response => {
+          response.data.rows.forEach(element => {
                   const fileurl = this.baseurl.concat("img/file/").concat(element.id)
                   const filedown = this.baseurl.concat("api/fileDownload/").concat(element.id)
                   this.fileList.push({url:fileurl,fileid:element.id,addtime:element.addtime,filedownurl:filedown})
                   this.srcList.push(fileurl)
                 });
-          this.total = response.data.data.total
+          this.total = response.data.total
         })
      },
       delFile(id){
@@ -65,9 +78,12 @@ export default {
           center: true,
         }).then(() => {
           DelFile(id).then(res => {
-            if(res.data.code === 0){
+            if(res.status === 200 ){
               Toast('删除成功' );
               location.reload();
+            }
+            if(res.status === 205){
+              Toast('删除失败');
             }
           })
         }).catch(() => {

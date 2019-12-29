@@ -8,6 +8,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 import tan.wei.feng.filter.JwtFilter;
 
 
+/**
+ * 拦截
+ * @author 10159
+ *
+ */
 @Configuration
 public class InterceptorConfig extends WebMvcConfigurationSupport {
 	

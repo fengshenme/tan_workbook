@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 
 import tan.wei.feng.entity.UserFile;
 
+/**
+ * 文件数据仓库
+ * @author 锋什么
+ *
+ */
 @Repository
 public interface FileMapper extends JpaRepository<UserFile,Long>{
 	
@@ -19,7 +24,7 @@ public interface FileMapper extends JpaRepository<UserFile,Long>{
 	 * @param id
 	 * @return
 	 */
-	@Query(value = "SELECT id FROM userfile where userid = ?1 and filetype= ?2 ",
+	@Query(value = "SELECT id FROM tb_userfile where userid = ?1 and filetype= ?2 ",
 			nativeQuery = true)
 	List<Long> selectByIdaa(Long userid,Integer filetype);
 	
@@ -38,7 +43,7 @@ public interface FileMapper extends JpaRepository<UserFile,Long>{
 	 */
 	Long countByFiletypeAndUserid(Integer filetype,Long userid);
 	
-	@Query(value = "SELECT u.id FROM userfile u where u.filetype= ?1 ",
+	@Query(value = "SELECT u.id FROM tb_userfile u where u.filetype= ?1 ",
 			nativeQuery = true)
 	List<BigInteger> findByFiletype(Integer filetype);
 	

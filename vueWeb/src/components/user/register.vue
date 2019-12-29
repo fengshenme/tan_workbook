@@ -27,7 +27,6 @@
 				<button id='reg' @click="register" v-bind:disabled='!checkto' class="mui-btn mui-btn-block mui-btn-primary">注册</button>
 			</div>
 			<div class="mui-content-padded">
-				<p>注册真实可用，注册成功后的用户可用于登录，但是示例程序并未和服务端交互，用户相关数据仅存储于本地。</p>
 			</div>
 		</div> 
     </div>
@@ -35,6 +34,7 @@
 <script>
 import {Toast,Button} from 'mint-ui'
 import {Register,Sendsms} from '@/api/user'
+import { setUser } from '@/utils/common'
 export default {
   data () {
     return {
@@ -55,14 +55,19 @@ export default {
   },
   methods: {
     register () {
+      this.pojo.nickname = this.pojo.nickname === "" ? '未设置昵称' : this.pojo.nickname
       if(this.code == null && this.code.trim() == ''){
         Toast('请输入验证码')
       }else if(this.inputCheck(this.pojo.password,this.pojo.mobile,this.password2)){
         Register(this.pojo,this.code).then(res => {
-          if (res.data.code===0) {
+          if (res.status===200) {
             Toast('注册成功')
+            setUser(res.data.name,res.data.token,this.pojo.mobile)
+            //存入vue,公共data
+            this.$store.commit('increment',res.data.token)
+            this.$store.commit('ismobile',this.pojo.mobile)
             this.pojo = {}
-            location.href='/#/user/longin'
+            location.href='/#/user/userinfo'
           }
         })
       }
@@ -85,8 +90,8 @@ export default {
             }, 1000) 
         }
         Sendsms(this.pojo.mobile).then(res => {
-            if(res.data.code === 0){
-                Toast(res.data.message)
+            if(res.status === 200){
+                Toast(res.data)
             }
         })
       }

@@ -10,13 +10,17 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 /**
- * Created by Administrator on 2018/4/11.
+ * token生成和解析
+ * @author 
+ *
  */
 public class JwtUtil {
 	
+	private static final String ROLES = "roles";
+	
 	@Value("${jwt.config.key}")
     private String key ;
-    //一个小时
+    //默认配置为一个小时
 	@Value("${jwt.config.ttl}")
     private long ttl ;
 
@@ -41,12 +45,9 @@ public class JwtUtil {
      *
      * @param id
      * @param subject
-     * @return
+     * @return token
      */
     public String createJWT(String id, String subject, String roles) {
-    	// 当前时间
-        long nowMillis = System.currentTimeMillis();
-        Date now = new Date(nowMillis);
         /**
 		 * setIssuedAt用于设置签发时间
 		 * signWith用于设置签名秘钥
@@ -55,29 +56,24 @@ public class JwtUtil {
 		 */
         JwtBuilder builder = Jwts.builder().setId(id)
                 .setSubject(subject)
-                .setIssuedAt(now)
-                .signWith(SignatureAlgorithm.HS256, key).claim(ROLES, roles);
-        if (ttl > 0) {
-            builder.setExpiration( new Date( nowMillis + ttl));
-        }
+                .setIssuedAt(new Date())
+                .signWith(SignatureAlgorithm.HS256, key).claim(ROLES, roles)
+            	.setExpiration( new Date(System.currentTimeMillis() + ttl));
         return builder.compact();
     }
 
     /**
      * 解析JWT
-     * @param jwtStr
+     * @param token
      * @return
      */
-    public Claims parseJWT(String jwtStr){
+    public Claims parseJWT(String token){
         return  Jwts.parser()
                 .setSigningKey(key)
-                .parseClaimsJws(jwtStr)
+                .parseClaimsJws(token)
                 .getBody();
     }
     
       
-    private static final String ROLES = "roles"; 
-    
-    
     
 }

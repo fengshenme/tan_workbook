@@ -16,14 +16,13 @@ import tan.wei.feng.utils.JwtUtil;
 
 /**
  * 拦截过滤
- * @author 10159
+ * @author 锋什么
  *
  */
 @Component
 public class JwtFilter extends HandlerInterceptorAdapter {
 	
 	private static final Logger logger =  LoggerFactory.getLogger(JwtFilter.class);
-	
 	
 	@Autowired
 	private JwtUtil jwtUtil = null;
@@ -45,7 +44,6 @@ public class JwtFilter extends HandlerInterceptorAdapter {
 		if (authHeader != null && authHeader.startsWith(BEARER)) {
 			//得到token
 			final String token = authHeader.substring(7);
-			logger.info(token);
 			verifyaa(request,token);
 		}
 		// 通过链接直接访问资源
@@ -75,6 +73,7 @@ public class JwtFilter extends HandlerInterceptorAdapter {
 					request.setAttribute("user_claims", claims);
 				}
 			}catch (JwtException e) {
+				request.setAttribute("error", e.getMessage());
 				logger.info(e.getMessage());
 			}
 			

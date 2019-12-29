@@ -11,6 +11,11 @@ import tan.wei.feng.entity.PageResult;
 import tan.wei.feng.entity.UserFile;
 import tan.wei.feng.mapper.FileMapper;
 
+/**
+ * 文件查寻服务
+ * @author 锋什么
+ *
+ */
 @Service
 public class FileFindService {
 	

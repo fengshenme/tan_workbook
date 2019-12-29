@@ -4,9 +4,17 @@ import java.io.File;
 
 import org.apache.commons.math3.random.RandomDataGenerator;
 
+/**
+ * 文件目录生成
+ * @author 锋什么
+ *
+ */
 public class FileDirUtils {
 	
-	
+	 private FileDirUtils() {
+		  throw new IllegalStateException("实用类");
+	 }
+	 
 	/**
 	 * 生成一个八层目录
 	 * @param dataPath 定义存放的数据路径
@@ -20,6 +28,7 @@ public class FileDirUtils {
 		// 产生一个均匀分布随机整数之间 低到高(包括端点)
 		Integer i = randomDataGenerator.nextInt(10000000, 99999999);
 		String name = randomDataGenerator.nextInt(10, 99) + fileName;
+		
 		String hex = Integer.toString(i);
 		StringBuilder bld = new StringBuilder(dataPath);
 		//设置文件的保存路径
@@ -48,38 +57,6 @@ public class FileDirUtils {
 			newDir.mkdirs();
 			return filePathb;
 		}
-	}
-	
-	
-	
-	/**
-	 * 生成唯一目录
-	 * @param dataPath 定义存放的数据路径
-	 * @param fileName 文件名
-	 * @return
-	 */
-	public static String dirFile0(String dataPath,String fileName) {
-		String name = new RandomDataGenerator().nextInt(0, 100) + fileName;
-		int i = name.hashCode();
-		//将hash码转成16进制的字符串
-		String hex = Integer.toHexString(i);
-		System.out.println(hex);
-		int j=hex.length();
-		System.out.println(j);
-		for(int k=0;k<8-j;k++){
-			hex="0"+hex;
-		}
-		System.out.println(hex);
-		//设置文件的保存路径
-		String filePatha = dataPath + "/"+hex.charAt(0)+"/"+hex.charAt(1)+"/"+hex.charAt(2)+"/"+
-							hex.charAt(3)+"/"+hex.charAt(4)+"/"+hex.charAt(5)
-							+"/"+hex.charAt(6)+"/"+hex.charAt(7)+"/";
-		//内存中声明一个目录
-		File newDir=new File(filePatha);
-		if(!newDir.exists()){
-			newDir.mkdirs();
-		}
-		return filePatha +name;
 	}
 	
 }

@@ -15,7 +15,7 @@ import tan.wei.feng.utils.ReadWriterFileUtils;
 
 /**
  * weibo导出csv文件,导出编码为GB18030
- * @author 10159
+ * @author 锋什么
  *
  */
 @Component

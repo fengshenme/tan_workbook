@@ -1,5 +1,6 @@
 package tan.wei.feng.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -8,9 +9,16 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 微博数据模型
+ * @author 锋什么
+ *
+ */
 @Entity
-@Table(name = "weibofollow")
-public @Data class WeiboFollow {
+@Table(name = "tb_weibofollow")
+public @Data class WeiboFollow implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	private Long id;

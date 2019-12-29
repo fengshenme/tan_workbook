@@ -12,7 +12,7 @@ import tan.wei.feng.entity.Article;
 
 /**
  * 文章持久
- * @author 10159
+ * @author 锋什么
  *
  */
 @Repository
@@ -37,5 +37,6 @@ public interface ArticleMapper extends JpaRepository<Article, Long>{
 	    countQuery = "SELECT count(*) FROM tb_article WHERE userid = ?1",
 	    nativeQuery = true)
 	Page<Article> findByUserid(String userid, Pageable pageable);
+	
 	
 }

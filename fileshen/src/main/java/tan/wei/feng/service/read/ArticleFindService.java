@@ -7,16 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tan.wei.feng.entity.Article;
+import tan.wei.feng.entity.Remark;
 import tan.wei.feng.mapper.ArticleMapper;
+import tan.wei.feng.mapper.RemarkMapper;
 
 /**
  * 文章查询服务
+ * @author 锋什么
  */
 @Service
 public class ArticleFindService {
 	
 	@Autowired
 	private ArticleMapper articleMapper = null;
+	
+	@Autowired
+	private RemarkMapper remarkMapper = null;
 	
 	/**
 	 * 查找全部
@@ -37,7 +43,7 @@ public class ArticleFindService {
 	}
 	
 	/**
-	 * 分页查询
+	 * 文章分页查询
 	 * @param page
 	 * @param pagesize
 	 * @return
@@ -46,4 +52,25 @@ public class ArticleFindService {
 		return articleMapper.findByPageNews(page, pagesize);
 	}
 	
+	/**
+	 * 评论分页查询
+	 * @param page
+	 * @param pagesize
+	 * @return
+	 */
+	public List<Remark> findByPageRemark(Long articleid,Integer page){
+		int pagesize = 20;
+		return remarkMapper.findByPageRemark(articleid,page, pagesize);
+	}
+	
+	
 }
+
+
+
+
+
+
+
+
+

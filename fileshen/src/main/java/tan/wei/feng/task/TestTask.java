@@ -7,6 +7,11 @@ import tan.wei.feng.entity.Testinsert;
 import tan.wei.feng.service.TestService;
 import tan.wei.feng.utils.SimpleUtil;
 
+/**
+ * 实验定时任务
+ * @author 锋什么
+ *
+ */
 @Component
 public class TestTask {
 	

@@ -9,8 +9,13 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 微博搜索数据模型
+ * @author 锋什么
+ *
+ */
 @Entity
-@Table(name="weibosearch")
+@Table(name="tb_weibosearch")
 public @Data class WeiBoSearch implements Serializable{
 	
 	/**

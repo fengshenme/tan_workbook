@@ -49,8 +49,8 @@ export default {
         login () {    
             Login(this.pojo).then( res =>{
                 if(res.status === 200){
-					//保存用户信息 
-					setUser(res.data.token, res.data.name,this.pojo.mobile)
+					//保存用户信息
+					setUser(res.data.name,res.data.token,this.pojo.mobile)
 					//存入vue,公共data
 					this.$store.commit('increment',res.data.token)
 					this.$store.commit('ismobile',this.pojo.mobile)
@@ -58,7 +58,7 @@ export default {
 					location.href='/#/user/userinfo' //主页
 					// location.reload()
                 }else{
-                    Toast('登录失败')
+                    Toast(res.data.message)
                 }
             })
         },

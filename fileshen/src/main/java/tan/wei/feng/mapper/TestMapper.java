@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import tan.wei.feng.entity.Testinsert;
 
 /**
- * 测试
- * @author 10159
+ * 实验仓库
+ * @author 锋什么
  *
  */
 @Repository

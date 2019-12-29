@@ -10,7 +10,11 @@ import tan.wei.feng.entity.WeiboFollow;
 import tan.wei.feng.mapper.WeiBoFollowMapper;
 import tan.wei.feng.mapper.WeiBoSearchMapper;
 
-
+/**
+ * 微博搜索数据服务
+ * @author 锋什么
+ *
+ */
 @Component
 public class WeiBoSearchService {
 	

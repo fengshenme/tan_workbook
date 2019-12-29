@@ -9,7 +9,7 @@ import java.io.OutputStreamWriter;
 
 /**
  * 实用类
- * @author 10159
+ * @author 峰什么
  *
  */
 public class ReadWriterFileUtils {
@@ -53,11 +53,12 @@ public class ReadWriterFileUtils {
 	 * @throws IOException
 	 */
 	public static void read(String f) throws IOException{
+		
 		// 构建FileInputStream对象 
         FileInputStream fip = new FileInputStream(f);
         // 构建InputStreamReader对象,编码与写入相同
         InputStreamReader reader = new InputStreamReader(fip, "UTF-8");
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         while (reader.ready()) {
         	// 转成char加到StringBuffer对象中
             sb.append((char) reader.read());
@@ -66,6 +67,7 @@ public class ReadWriterFileUtils {
         reader.close();
         // 关闭输入流,释放系统资源
         fip.close();
+        
 	}
 	
 }

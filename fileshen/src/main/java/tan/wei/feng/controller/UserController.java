@@ -1,7 +1,5 @@
 package tan.wei.feng.controller;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -9,21 +7,18 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.alibaba.fastjson.JSONObject;
 
 import io.jsonwebtoken.Claims;
 import tan.wei.feng.entity.PageResult;
@@ -34,7 +29,7 @@ import tan.wei.feng.service.create.UserService;
 
 /**
  * 注册控制
- * @author 10159
+ * @author 锋什么
  *
  */
 @RestController
@@ -61,12 +56,9 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping(value = "/login")
-	public ResponseEntity<Map<String, String>> login(@RequestBody Map<String,String> map) {
-		Map<String, String> ma = userService.findByMobileAndPassword(map.get("mobile"), map.get("password"));
-		if(ma != null ) {
-			return ResponseEntity.status(HttpStatus.OK).body(ma);
-		} 
-		return ResponseEntity.status(HttpStatus.valueOf("buhaoshi")).build();
+	public ResponseEntity<Map<String, String>> login(@RequestBody JSONObject jsob) {
+		Map<String, String> ma = userService.findByMobileAndPassword(jsob.getString("mobile"), jsob.getString("password"));
+		return new ResponseEntity<>(ma,HttpStatus.OK);
 	}
 	
 	/**
@@ -75,15 +67,15 @@ public class UserController {
 	 * @param code
 	 * @return
 	 */
-    @PostMapping(value="/register/{code}")
-    public ResponseEntity<String> register( @RequestBody User user ,@PathVariable String code){
+    @PostMapping(value="/register/{code}", produces="text/plain;charset=UTF-8")
+    public ResponseEntity<String> register( @RequestBody JSONObject jsob ,@PathVariable String code){
     	//提取缓存中验证码判断验证码是否正确
-		String syscode = redisTemplate.opsForValue().get("smscode_" + user.getMobile());
+		String syscode = redisTemplate.opsForValue().get("smscode_" + jsob.getString("mobile"));
 		if(syscode == null || !syscode.equals(code)){
 			return new ResponseEntity<>("验证码输入不正确",HttpStatus.NOT_EXTENDED);
 		}
-	    if(userRegisterService.saveUser(user)) {
-	    	return new ResponseEntity<>(HttpStatus.OK);
+	    if(userRegisterService.saveUser(jsob)) {
+			return new ResponseEntity<>("注册成功",HttpStatus.OK);
 	    }
 	    return new ResponseEntity<>("注册失败,重新注册",HttpStatus.NOT_EXTENDED);
     }
@@ -92,7 +84,7 @@ public class UserController {
 	* 发送短信验证码
 	* @param mobile
 	*/
-	@GetMapping(value="/sendsms/{mobile}")
+	@GetMapping(value="/sendsms/{mobile}", produces="text/plain;charset=UTF-8")
 	public ResponseEntity<String> sendsms(@PathVariable String mobile ){
 		userService.sendSms(mobile);
 		return new ResponseEntity<>("验证码已发送",HttpStatus.OK);
@@ -119,7 +111,9 @@ public class UserController {
 	@GetMapping(value="/loginstatus/{mobile}")
 	public ResponseEntity<String> lodinStatus(@PathVariable String mobile) {
 		
-		if(redisTemplate.opsForValue().get(USERID.concat(mobile)) == null){
+		String jwtstatus = request.getAttribute("error") == null 
+				? "" : request.getAttribute("error").toString() ;
+		if(jwtstatus != null && !"".equals(jwtstatus.trim())) {
 			return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
 		}
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -129,8 +123,8 @@ public class UserController {
 	 * 登录退出
 	 * @return
 	 */
-	@DeleteMapping(value="/logout")
-	public ResponseEntity<PageResult<String>> logout() {
+	@DeleteMapping(value="/logout", produces="text/plain;charset=UTF-8")
+	public ResponseEntity<String> logout() {
 		Claims claims=(Claims) request.getAttribute("user_claims");
 		if(claims !=null && !"".equals(claims.getId().trim())){
 			redisTemplate.delete(USERID.concat(claims.getId()));

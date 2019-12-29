@@ -44,6 +44,7 @@
     </div>
 </template>
 <script>
+import { removeUser } from '@/utils/common'
 import {Toast} from 'mint-ui'
 import swiper from "@/components/subcomponents/swiper.vue"
 import {indexImg} from '@/api/file'
@@ -61,14 +62,24 @@ export default {
         // 获取轮播图数据的方法 ，filetype为6
         getlunbotu(){
             indexImg(6).then(response => {
-                if(response.status === 200){
-                    response.data.forEach(element => {
+                switch (response.status) {
+                    case 200:
+                        response.data.forEach(element => {
                             this.lunbotuList.push(httpUrl.concat("img/file/").concat(element))
                         });
-                } else {
-                    Toast("获取轮播图失败")
+                        break;
+                    case 206:
+                        response.data.forEach(element => {
+                            this.lunbotuList.push(httpUrl.concat("img/file/").concat(element))
+                        });
+                        removeUser()
+                        this.$store.commit('ismobile',undefined)
+                        break;
+                    default:
+                        Toast("获取轮播图失败")
+                        break;
                 }
-                
+                    
             });
             console.log('object :', this.lunbotuList);
         }

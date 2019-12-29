@@ -10,13 +10,15 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
+
 import tan.wei.feng.entity.User;
 import tan.wei.feng.mapper.UserMapper;
 import tan.wei.feng.utils.SimpleUtil;
 
 /**
- * 
- * @author 10159
+ * 用户注册
+ * @author 锋什么
  *
  */
 @Service
@@ -33,13 +35,15 @@ public class UserRegisterService {
 	 * 保存用户信息,注册  synchronized
 	 * @param user
 	 */
-	public boolean saveUser(User user) {
+	public boolean saveUser(JSONObject jsob) {
+		User user = new User();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		user.setUserid(SimpleUtil.idCreate());
 		user.setUpdatetime(new Date());
+		user.setNickname(jsob.getString("nickname"));
+		user.setMobile(jsob.getString("mobile"));
 		// 密码加密
-		String newpassword = encoder.encode(user.getPassword());
-		user.setPassword(newpassword);
+		user.setPassword(encoder.encode(jsob.getString("password")));
 		// 保存用户
 		try {
 			if(threshold<=0) {

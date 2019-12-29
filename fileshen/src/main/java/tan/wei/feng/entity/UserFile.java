@@ -11,11 +11,11 @@ import lombok.Data;
 
 /**
  * 文件路径实体 
- * @author 10159
+ * @author 锋什么
  *
  */
 @Entity
-@Table(name="userfile")
+@Table(name="tb_userfile")
 public @Data class UserFile implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

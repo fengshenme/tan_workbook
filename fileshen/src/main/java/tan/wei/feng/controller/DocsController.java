@@ -24,6 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * 接收文档(String[])并返回分类结果
+ * @author 锋什么
+ *
+ */
 @RestController
 @CrossOrigin
 @RequestMapping("/doc")
@@ -37,7 +42,7 @@ public class DocsController {
 	 * @return
 	 * @throws JsonProcessingException
 	 */
-	@PostMapping(value = "/smap")
+	@PostMapping(value = "/smap" ,produces="application/json;charset=UTF-8")
     public String send(@RequestBody Map<String,String> map) throws JsonProcessingException {
     	String url = "http://127.0.0.1:9909";
         String body = "";

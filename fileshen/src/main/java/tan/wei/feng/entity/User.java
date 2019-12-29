@@ -10,8 +10,13 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 用户模型
+ * @author 锋什么
+ *
+ */
 @Entity
-@Table(name="user")
+@Table(name="tb_user")
 public @Data class User implements Serializable{
 	
 	/**

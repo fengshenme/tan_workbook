@@ -9,6 +9,11 @@ import org.springframework.stereotype.Service;
 import tan.wei.feng.entity.UserFile;
 import tan.wei.feng.mapper.FileMapper;
 
+/**
+ * 文件删除服务
+ * @author 锋什么
+ *
+ */
 @Service
 public class FileDeleteService {
 	

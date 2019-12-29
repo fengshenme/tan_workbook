@@ -18,6 +18,14 @@ export function getcomments (id, page) {
     method: 'get'
   })
 }
+// 添加评论
+export function postcomment (id, pojo) {
+  return request({
+    url: `/${grouname}/postcomment/${id}`,
+    method: 'post',
+    data: pojo
+  })
+}
 
 export default {
   getlunbotuList () {
@@ -58,14 +66,6 @@ export default {
     return request({
       url: `/${grouname}/getimageInfo/${id}`,
       method: 'get'
-    })
-  },
-  // 添加评论
-  postcomment (id, pojo) {
-    return request({
-      url: `/${grouname}/postcomment/${id}`,
-      method: 'post',
-      data: pojo
     })
   },
   // 获取购物车商品列表

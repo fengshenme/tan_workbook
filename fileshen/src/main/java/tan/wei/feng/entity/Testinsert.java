@@ -6,8 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 实验实体
+ * @author 锋什么
+ *
+ */
 @Entity
-@Table(name = "test_insert")
+@Table(name = "tb_test_insert")
 public class Testinsert {
 	
 	@Id

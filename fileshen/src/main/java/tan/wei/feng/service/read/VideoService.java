@@ -16,8 +16,8 @@ import tan.wei.feng.entity.UserFile;
 import tan.wei.feng.mapper.FileMapper;
 
 /**
- * 视频服务层
- * @author 10159
+ * 视频服务
+ * @author 锋什么
  *
  */
 @Service

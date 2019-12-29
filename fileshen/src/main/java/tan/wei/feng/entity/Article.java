@@ -11,7 +11,7 @@ import lombok.Data;
 
 /**
  * 文章实体类
- * @author Administrator
+ * @author 锋什么
  *
  */
 @Entity
