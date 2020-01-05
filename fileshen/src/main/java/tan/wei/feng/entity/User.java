@@ -19,10 +19,8 @@ import lombok.Data;
 @Table(name="tb_user")
 public @Data class User implements Serializable{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -225093095725197964L;
+
 
 	@Id
 	private Long userid;

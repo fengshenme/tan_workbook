@@ -9,10 +9,6 @@ import java.util.Random;
  */
 public class SimpleUtil {
 	
-	private SimpleUtil() {
-	    throw new IllegalStateException("实用类");
-	 }
-
 	private static Random rand = new Random();	
 	
 	/**
@@ -20,7 +16,7 @@ public class SimpleUtil {
 	 * @param a 一个数据库代号
 	 * @return
 	 */
-	public static Long idCreate() {
+	public Long idCreate() {
 		// 数据库代号
 		Integer a = 1 ;
 		// 产生一个均匀分布随机整数之间 低到高(包括端点)

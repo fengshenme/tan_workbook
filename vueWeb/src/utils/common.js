@@ -1,9 +1,9 @@
 import Cookies from 'js-cookie'
 
 // 定义只读常量
-const TokenKey = 'User-Token'
-const NameKey = 'User-Name'
-const MobileKey = 'User-Mobile'
+const TokenKey = 'UserToken'
+const NameKey = 'UserName'
+const MobileKey = 'UserMobile'
 
 export function getUrlParam (name) {
   var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
@@ -15,8 +15,8 @@ export function getUrlParam (name) {
 
 // 设置用户
 export function setUser ( nickname,token,mobile) {
-  Cookies.set(NameKey, nickname)
   Cookies.set(TokenKey, token)
+  Cookies.set(NameKey, nickname)
   Cookies.set(MobileKey, mobile)
 }
 // 获取用户数据

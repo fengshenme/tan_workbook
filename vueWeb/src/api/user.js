@@ -1,7 +1,4 @@
-import {request} from '@/utils/request'
-import store from '@/store'
-
-request.defaults.headers.common ['Authorization'] = store.getters.token;
+import request from '@/utils/request'
 
 const groupName = 'user'
 const apiName = 'user'
@@ -53,13 +50,4 @@ export function findUserAll () {
     method: 'put'
   })
 }
-/**
- * 登录状态监测
- * @param {*} mobile 
- */
-export function LoginStatus(mobile){
-    return request({
-      url: `/user/loginstatus/${mobile}`,
-      method: 'get'
-    })
-}
+

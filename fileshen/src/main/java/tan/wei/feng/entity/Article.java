@@ -18,8 +18,9 @@ import lombok.Data;
 @Table(name="tb_article")
 public @Data class Article implements Serializable{
 	
-    private static final long serialVersionUID = 1L;
-    //ID
+	private static final long serialVersionUID = 6817580263901341262L;
+	
+	//ID
 	@Id
 	private Long id;
 	//专栏ID 

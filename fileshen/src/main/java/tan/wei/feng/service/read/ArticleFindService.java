@@ -48,8 +48,9 @@ public class ArticleFindService {
 	 * @param pagesize
 	 * @return
 	 */
-	public List<Article> findByPageNews(int page,int pagesize){
-		return articleMapper.findByPageNews(page, pagesize);
+	public List<Article> findByPageNews(Integer page,Integer pagesize){
+		
+		return articleMapper.findByPageNews(page * pagesize, pagesize);
 	}
 	
 	/**
@@ -60,7 +61,7 @@ public class ArticleFindService {
 	 */
 	public List<Remark> findByPageRemark(Long articleid,Integer page){
 		int pagesize = 20;
-		return remarkMapper.findByPageRemark(articleid,page, pagesize);
+		return remarkMapper.findByPageRemark(articleid,page*pagesize, pagesize);
 	}
 	
 	

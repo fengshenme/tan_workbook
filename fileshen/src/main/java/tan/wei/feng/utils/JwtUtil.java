@@ -1,8 +1,11 @@
 package tan.wei.feng.utils;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryUsage;
+import java.nio.charset.Charset;
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
@@ -14,35 +17,18 @@ import io.jsonwebtoken.SignatureAlgorithm;
  * @author 
  *
  */
+@Component
 public class JwtUtil {
+	
 	
 	private static final String ROLES = "roles";
 	
-	@Value("${jwt.config.key}")
-    private String key ;
+    private static String key = "fengshenme" ;
     //默认配置为一个小时
-	@Value("${jwt.config.ttl}")
-    private long ttl ;
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public long getTtl() {
-        return ttl;
-    }
-
-    public void setTtl(long ttl) {
-        this.ttl = ttl;
-    }
+    private static long ttl = 3600000;
 
     /**
      * 生成JWT
-     *
      * @param id
      * @param subject
      * @return token
@@ -57,23 +43,43 @@ public class JwtUtil {
         JwtBuilder builder = Jwts.builder().setId(id)
                 .setSubject(subject)
                 .setIssuedAt(new Date())
-                .signWith(SignatureAlgorithm.HS256, key).claim(ROLES, roles)
+                .signWith(SignatureAlgorithm.HS256, key.getBytes(Charset.forName("utf-8")))
+                .claim(ROLES, roles)
             	.setExpiration( new Date(System.currentTimeMillis() + ttl));
         return builder.compact();
     }
-
+//    private static final Logger logger =  LoggerFactory.getLogger(JwtUtil.class);
+	
     /**
      * 解析JWT
      * @param token
      * @return
      */
-    public Claims parseJWT(String token){
+    public static Claims parseJWT(String token){
         return  Jwts.parser()
-                .setSigningKey(key)
+                .setSigningKey(key.getBytes(Charset.forName("utf-8")))
                 .parseClaimsJws(token)
                 .getBody();
     }
     
       
+    /**
+	 * 虚拟机的内存情况查询
+	 * @return
+	 */
+	public String jvmMemory () {
+		int byteToMb = 1024 * 1024 ;
+		MemoryUsage memoryUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage(); //椎内存使用情况
+		// 初始的总内存
+		long totalMemorySize = memoryUsage.getInit()/byteToMb; 
+		// 最大可用内存
+	    long maxMemorySize = memoryUsage.getMax()/byteToMb; 
+	    // 已使用的内存
+	    long usedMemorySize = memoryUsage.getUsed()/byteToMb; 
+		System.out.println(totalMemorySize + "mb");
+		System.out.println(maxMemorySize + "mb");
+		System.out.println(usedMemorySize + "mb");
+		return null ;
+	}
     
 }

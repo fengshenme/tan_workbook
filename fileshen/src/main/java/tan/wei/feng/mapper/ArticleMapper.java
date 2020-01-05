@@ -25,7 +25,7 @@ public interface ArticleMapper extends JpaRepository<Article, Long>{
 	 * @return
 	 */
 	@Query(value = "SELECT * FROM tb_article LIMIT ?1,?2",nativeQuery = true)
-	List<Article> findByPageNews(Integer page, Integer pagesize);
+	List<Article> findByPageNews(Integer pageindex, Integer pagesize);
 	
 	/**
 	 * 分页查询

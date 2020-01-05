@@ -44,7 +44,6 @@
     </div>
 </template>
 <script>
-import { removeUser } from '@/utils/common'
 import {Toast} from 'mint-ui'
 import swiper from "@/components/subcomponents/swiper.vue"
 import {indexImg} from '@/api/file'
@@ -68,20 +67,11 @@ export default {
                             this.lunbotuList.push(httpUrl.concat("img/file/").concat(element))
                         });
                         break;
-                    case 206:
-                        response.data.forEach(element => {
-                            this.lunbotuList.push(httpUrl.concat("img/file/").concat(element))
-                        });
-                        removeUser()
-                        this.$store.commit('ismobile',undefined)
-                        break;
                     default:
                         Toast("获取轮播图失败")
                         break;
                 }
-                    
             });
-            console.log('object :', this.lunbotuList);
         }
     },
     components: {

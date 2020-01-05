@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
+import com.alibaba.fastjson.JSON;
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
@@ -33,7 +34,12 @@ public class SmsUtil {
 	@Value("${aliyun.sms.accessKeySecret}")
 	private String accessKeySecret;
 	
-	public void sendSms(Map<String,String> map) {
+	/**
+	 * 发短信
+	 * @param map
+	 * @return
+	 */
+	public boolean sendSms(Map<String,String> map) {
 
     	DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         IAcsClient client = new DefaultAcsClient(profile);
@@ -52,15 +58,16 @@ public class SmsUtil {
         request.putQueryParameter("SignName",signName);
         request.putQueryParameter("TemplateCode",templateCode);
         request.putQueryParameter("TemplateParam", "{\'code\':\'"+ map.get("code") +"\'}");
-        
+        boolean ac = true;
         try {
             CommonResponse response = client.getCommonResponse(request);
             logger.info(response.getData());
-        } catch (ServerException e) {
-        	logger.info(e.getMessage());
-        } catch (ClientException f) {
-        	logger.info(f.getMessage());
+            return JSON.parseObject(response.getData()).get("Message").equals("OK") ? ac:!ac;
+        } catch (ServerException se) {
+        	logger.info(se.getMessage());
+        } catch (ClientException ce) {
+        	logger.info(ce.getMessage());
         }
-    	
+        return !ac;
     }
 }

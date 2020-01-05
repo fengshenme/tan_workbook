@@ -67,7 +67,7 @@ public class FileController {
 	 * 获取用户下的文件列表
 	 * @return
 	 */
-	@GetMapping(value = "/fileList/{fileType}")
+	@GetMapping(value = "/fileList/{fileType}",produces="application/json;charset=UTF-8")
 	public ResponseEntity<List<Long>> fileUrlList(@PathVariable Integer fileType){
 		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(claims != null && !"".equals(claims.getId().trim())){
@@ -85,7 +85,7 @@ public class FileController {
 	 * 获取用户下的分页文件列表
 	 * @return
 	 */
-	@GetMapping(value = "/filePageList/{fileType}/{page}/{pagesize}")
+	@GetMapping(value = "/filePageList/{fileType}/{page}/{pagesize}",produces="application/json;charset=UTF-8")
 	public ResponseEntity<PageResult<UserFile>> fetchList(@PathVariable Integer fileType , @PathVariable Integer page,@PathVariable Integer pagesize){
 		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(claims != null && !"".equals(claims.getId().trim())){
@@ -102,7 +102,7 @@ public class FileController {
 	 * @return
 	 * @throws IOException
 	 */
-	@GetMapping(value = "/fileDownload/{filecode}")
+	@GetMapping(value = "/fileDownload/{filecode}",produces = "application/octet-stream")
 	public ResponseEntity<byte[]> fileDownload(@PathVariable String filecode) throws IOException {  
 		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(claims != null && !"".equals(claims.getId().trim())){
@@ -152,7 +152,7 @@ public class FileController {
 	 * @param fileId
 	 * @return
 	 */
-	@DeleteMapping(value = "/delFile/{fileId}")
+	@DeleteMapping(value = "/delFile/{fileId}",produces="text/plain;charset=UTF-8")
 	public ResponseEntity<String> delFile(@PathVariable String fileId) {
 		Claims claims = (Claims) request.getAttribute(USERCLA);
 		if(claims != null && !"".equals(claims.getId().trim()) && fileDeleteService.delfile(Long.parseLong(fileId))){

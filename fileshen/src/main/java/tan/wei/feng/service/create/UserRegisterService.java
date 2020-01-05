@@ -29,7 +29,7 @@ public class UserRegisterService {
 	private UserMapper userMapper = null;
 	
 	private Integer threshold = 30;
-	ArrayList<User> userList = new ArrayList<> ();
+	private static final ArrayList<User> userList = new ArrayList<> ();
 
 	/**
 	 * 保存用户信息,注册  synchronized
@@ -38,7 +38,7 @@ public class UserRegisterService {
 	public boolean saveUser(JSONObject jsob) {
 		User user = new User();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		user.setUserid(SimpleUtil.idCreate());
+		user.setUserid(new SimpleUtil().idCreate());
 		user.setUpdatetime(new Date());
 		user.setNickname(jsob.getString("nickname"));
 		user.setMobile(jsob.getString("mobile"));

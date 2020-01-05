@@ -63,7 +63,6 @@
 import { getUser,removeUser } from '@/utils/common'
 import {Toast} from 'mint-ui'
 import {Logout} from '@/api/user'
-import {LoginStatus} from '@/api/user'
 export default {
     data() {
         return {
@@ -72,21 +71,12 @@ export default {
     },
     created() {
 		this.user= getUser();
-		this.loginStatus(this.user.mobile==undefined ? '1':this.user.mobile);
 	},
    methods: {
-	loginStatus(mobile){
-		LoginStatus(mobile).then(res => {
-			if (res.status===205) {
-				this.$store.commit('ismobile',undefined)
-				removeUser();
-				this.user = getUser();
-			}
-		});
-    },
     logout(){ 
 		removeUser()//清除登陆用户信息
 		this.$store.commit('ismobile',undefined)
+		this.$store.commit('increment',undefined)
       Logout().then(res => {
 		if(res.status===205){
 			Toast('退出成功') 

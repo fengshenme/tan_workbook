@@ -69,11 +69,7 @@ export default {
             }
             formData.append('file', file);
             uploadFile(formData,config).then(res => {
-                    if (res.status === 200) {
-                        Toast(res.data)
-                    } else {
-                      Toast(res.data)
-                    }
+                    Toast(res.data)
             })
             return false;
       }

@@ -40,6 +40,7 @@ export default {
             mobileApi.getnewslist(page).then(result => {
                 if(result.status === 200){
                     this.newslist = this.newslist.concat(result.data)
+                    console.log('object :', this.newslist.length);
                 }else{
                     // 失败的
                     Toast('获取新闻列表失败...');
@@ -47,9 +48,9 @@ export default {
             })
         },
         loadMore() {
-            this.page = this.page + 1
+            this.page ++ 
              // 缓冲
-            this.getNewsList(this.page,this.pagesize)
+            this.getNewsList(this.page)
         }
     }
 }

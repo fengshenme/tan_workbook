@@ -1,24 +1,19 @@
 package tan.wei.feng;
 
-import java.nio.charset.StandardCharsets;
-
 import javax.servlet.MultipartConfigElement;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.unit.DataSize;
 
-import tan.wei.feng.utils.JwtUtil;
+import tan.wei.feng.utils.SmsUtil;
 
 
 /**
- * 文件启动类
+ * 文件启动,开启定时
  * @author 10159
  *
  */
@@ -46,28 +41,14 @@ public class FileAppliction {
     }
     
     /**
-     * 加密解密用
+     * 短信工具
      * @return
      */
     @Bean
-	public BCryptPasswordEncoder bcryptPasswordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
-    
-    @Bean
-    public HttpMessageConverter<String> responseBodyConverter() {
-        return  new StringHttpMessageConverter(StandardCharsets.UTF_8);
+    public SmsUtil smsUtil() {
+    	return new SmsUtil();
     }
-    
-    /**
-     * 过滤
-     * @return
-     */
-    @Bean
-	public JwtUtil jwtUtil(){
-		return new JwtUtil();
-	}
-    
 }
+
 
 

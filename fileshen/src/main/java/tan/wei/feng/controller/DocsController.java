@@ -15,6 +15,8 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,8 +44,8 @@ public class DocsController {
 	 * @return
 	 * @throws JsonProcessingException
 	 */
-	@PostMapping(value = "/smap" ,produces="application/json;charset=UTF-8")
-    public String send(@RequestBody Map<String,String> map) throws JsonProcessingException {
+	@PostMapping(value = "/smap" ,produces="text/plain;charset=UTF-8")
+    public ResponseEntity<String> send(@RequestBody Map<String,String> map) throws JsonProcessingException {
     	String url = "http://127.0.0.1:9909";
         String body = "";
         //创建post方式请求对象
@@ -76,7 +78,7 @@ public class DocsController {
 		} catch (ParseException sa) {
 			logger.info(sa.getMessage());
 		}
-        return body;
+        return new ResponseEntity<> (body,HttpStatus.OK);
     }
 
 }

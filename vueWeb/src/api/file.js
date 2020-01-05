@@ -1,6 +1,4 @@
-import {request} from '@/utils/request'
-import store from '@/store'
-request.defaults.headers.common ['Authorization'] = store.getters.token;
+import request from '@/utils/request'
 
 
 const grouname = 'file'

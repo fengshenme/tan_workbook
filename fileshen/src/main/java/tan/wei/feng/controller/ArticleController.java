@@ -49,8 +49,9 @@ public class ArticleController {
 	 * @param page
 	 * @return
 	 */
-	@GetMapping(value = "/getnewslist/{page}")
+	@GetMapping(value = "/getnewslist/{page}",produces="application/json;charset=UTF-8")
 	public ResponseEntity<List<Article>> getnewslist(@PathVariable Integer page) {
+		
 		if(page  < 1 ) {
 			// "页码错误"
 			return new ResponseEntity<>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);
@@ -69,7 +70,7 @@ public class ArticleController {
 	 * @param id
 	 * @return
 	 */
-	@GetMapping(value = "/getnew/{id}")
+	@GetMapping(value = "/getnew/{id}",produces="application/json;charset=UTF-8")
 	public ResponseEntity<Article> getnew(@PathVariable Long id) {
 		Optional<Article> findById = articleFindService.findById(id);
 		if (findById.isPresent()) {

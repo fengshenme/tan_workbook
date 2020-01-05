@@ -6,12 +6,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.SignatureException;
 import tan.wei.feng.utils.JwtUtil;
 
 /**
@@ -24,17 +24,15 @@ public class JwtFilter extends HandlerInterceptorAdapter {
 	
 	private static final Logger logger =  LoggerFactory.getLogger(JwtFilter.class);
 	
-	@Autowired
-	private JwtUtil jwtUtil = null;
-	
 	private static final String ROLES = "roles";
 	private static final String USERLE = "user";
 	private static final String ADMINLE = "admin";
 	private static final String BEARER = "Bearer ";
 	
-	
 	@Override
 	public boolean preHandle(HttpServletRequest request,HttpServletResponse response, Object handler)  {
+		String remoteAddr = request.getRemoteAddr();
+		logger.info("请求来自于哪个 ip:{}",remoteAddr);
 		
 		/**
 		 * 无论如何都放行,具体能不能操作还是在具体的操作中去判断
@@ -60,23 +58,26 @@ public class JwtFilter extends HandlerInterceptorAdapter {
 	}
 	
 	private void verifyaa(HttpServletRequest request,String token ) {
+		logger.info(token);
 		if (token != null && !"".equals(token.trim())) {
 			try {
 				// 对令牌进行验证
-	    		Claims claims = jwtUtil.parseJWT(token);
-	    		//如果是管理员
-				if(ADMINLE.equals(claims.get(ROLES))){
+	    		Claims claims = JwtUtil.parseJWT(token);
+	    		//如果是管理员 
+				if(ADMINLE.equals(claims.get(ROLES)) ){
 					request.setAttribute("admin_claims", claims);
 				}
 				//如果是用户
 				if(USERLE.equals(claims.get(ROLES))){
 					request.setAttribute("user_claims", claims);
 				}
+				logger.info(token);
+			}catch(SignatureException se){
+				logger.info("71line:"+se.getMessage());
 			}catch (JwtException e) {
 				request.setAttribute("error", e.getMessage());
-				logger.info(e.getMessage());
+				logger.info("74line:"+e.getMessage());
 			}
-			
 		}
 	}
 	

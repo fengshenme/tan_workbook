@@ -24,7 +24,7 @@ public class TestTask {
 	public void testInsert() {
 		for (int i = 0; i < 10; i++) {
 			Testinsert testinsert = new Testinsert();
-			testinsert.setId(SimpleUtil.idCreate());
+			testinsert.setId(new SimpleUtil().idCreate());
 			testinsert.setNumber((long) ia++);
 			testService.testSave(testinsert);
 		}

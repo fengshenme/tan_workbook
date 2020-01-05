@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="login-container">
         <div class="mui-content">
 			<form id='login-form' class="mui-input-group" :model="pojo">
 				<div class="mui-input-row">
@@ -10,16 +10,6 @@
 					<label>密码</label>
 					<input id='password' type="password" v-model="pojo.password" class="mui-input-clear mui-input" placeholder="请输入密码">
 				</div>
-			</form>
-			<form class="mui-input-group">
-				<ul class="mui-table-view mui-table-view-chevron">
-					<li class="mui-table-view-cell">
-						自动登录
-						<div id="autoLogin" class="mui-switch">
-							<div class="mui-switch-handle"></div>
-						</div>
-					</li>
-				</ul>
 			</form>
 			<div class="mui-content-padded">
 				<button id='login' type="button" @click="login" class="mui-btn mui-btn-block mui-btn-primary">登录</button>
@@ -45,18 +35,19 @@ export default {
             checkto : true
         }
 	},
+	created() {
+	},
     methods: {
         login () {    
             Login(this.pojo).then( res =>{
                 if(res.status === 200){
 					//保存用户信息
 					setUser(res.data.name,res.data.token,this.pojo.mobile)
-					//存入vue,公共data
+					//存入vuex,公共data
 					this.$store.commit('increment',res.data.token)
 					this.$store.commit('ismobile',this.pojo.mobile)
 					this.pojo = {}
 					location.href='/#/user/userinfo' //主页
-					// location.reload()
                 }else{
                     Toast(res.data.message)
                 }

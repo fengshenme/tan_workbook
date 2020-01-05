@@ -4,8 +4,8 @@ import {getUser} from '@/utils/common'
 Vue.use(Vuex)
 
 // 每次刚进入网站，肯定会调用 main.js 在刚调用的时候，先从浏览器中，把数据读出来，放到 store 中
-var token = getUser().token
-var mobile = getUser().mobile
+let token = getUser().token
+let mobile = getUser().mobile
 // 根状态对象,每个Vuex实例只是一个状态树
 const state = {
   token: token,
@@ -13,11 +13,11 @@ const state = {
 }
 // 操作state的方法
 const mutations = {
-  increment (state,payload) {
-    state.token = payload
+  increment (state,token) {
+    state.token = token
   },
-  ismobile(state,payload){
-    state.mobile = payload
+  ismobile(state,mobile){
+    state.mobile = mobile
   }
 }
 //提交
@@ -27,7 +27,7 @@ const actions = {
 }
 // 属性计算
 const getters = {
-  token: state => state.mobile !== undefined ? 'Bearer ' + state.token : 1 ,
+  token: state => state.token !== undefined ? true : false ,
   ismobile: state => state.mobile === undefined ? true :  false,
 }
 

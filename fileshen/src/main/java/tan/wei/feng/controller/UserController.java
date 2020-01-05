@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSONObject;
 
 import io.jsonwebtoken.Claims;
-import tan.wei.feng.entity.PageResult;
 import tan.wei.feng.entity.User;
 import tan.wei.feng.service.create.UserRegisterService;
 import tan.wei.feng.service.create.UserService;
@@ -55,7 +54,7 @@ public class UserController {
 	 * @param password
 	 * @return
 	 */
-	@PostMapping(value = "/login")
+	@PostMapping(value = "/login",produces="application/json;charset=UTF-8")
 	public ResponseEntity<Map<String, String>> login(@RequestBody JSONObject jsob) {
 		Map<String, String> ma = userService.findByMobileAndPassword(jsob.getString("mobile"), jsob.getString("password"));
 		return new ResponseEntity<>(ma,HttpStatus.OK);
@@ -86,15 +85,17 @@ public class UserController {
 	*/
 	@GetMapping(value="/sendsms/{mobile}", produces="text/plain;charset=UTF-8")
 	public ResponseEntity<String> sendsms(@PathVariable String mobile ){
-		userService.sendSms(mobile);
-		return new ResponseEntity<>("验证码已发送",HttpStatus.OK);
+		if(userService.sendSms(mobile)) {
+			return new ResponseEntity<>("验证码已发送",HttpStatus.OK);
+		}
+		return new ResponseEntity<>("请重新获取验证码",HttpStatus.PARTIAL_CONTENT);
 	}
 	
 	/**
 	 * 获取全部用户
 	 * @return
 	 */
-	@GetMapping(value="/findall")
+	@GetMapping(value="/findall",produces="application/json;charset=UTF-8")
 	public ResponseEntity<List<User>> findAll() {
 		Claims claims=(Claims) request.getAttribute("user_claims");
 		if(claims !=null && !"".equals(claims.getId().trim())){
@@ -103,21 +104,6 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
 	
-	/**
-	 * 用户状态检测
-	 * @param mobile
-	 * @return
-	 */
-	@GetMapping(value="/loginstatus/{mobile}")
-	public ResponseEntity<String> lodinStatus(@PathVariable String mobile) {
-		
-		String jwtstatus = request.getAttribute("error") == null 
-				? "" : request.getAttribute("error").toString() ;
-		if(jwtstatus != null && !"".equals(jwtstatus.trim())) {
-			return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
-		}
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
 	
 	/**
 	 * 登录退出

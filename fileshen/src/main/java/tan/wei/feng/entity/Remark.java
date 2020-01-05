@@ -16,10 +16,10 @@ import lombok.Data;
 @Entity
 @Table(name="tb_remark")
 public @Data class Remark implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
+	
+	private static final long serialVersionUID = -4676388333967134772L;
+	
 	/**
 	 * id中有评论创建时间
 	 */

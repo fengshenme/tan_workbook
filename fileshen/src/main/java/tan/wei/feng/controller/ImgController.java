@@ -47,7 +47,7 @@ public class ImgController {
 	 */
 	@GetMapping(value = "/file/{fileId}")
 	public ResponseEntity<Resource> fileExport(@PathVariable String fileId) {  
-	        return imgService.findByFileurl(fileId);   
+			return imgService.findByFileurl(fileId);  
     }
 	
 	/**
@@ -55,7 +55,7 @@ public class ImgController {
 	 * @param filetype 文件用途
 	 * @return
 	 */
-	@GetMapping(value = "/indeximg/{filetype}")
+	@GetMapping(value = "/indeximg/{filetype}",produces="application/json;charset=UTF-8")
 	public ResponseEntity<List<BigInteger>> indexImg(@PathVariable Integer filetype) {
 		String jwtstatus = request.getAttribute("error") == null 
 							? "" : request.getAttribute("error").toString() ;

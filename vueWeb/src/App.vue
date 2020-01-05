@@ -41,8 +41,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-
 .app-container {
   padding-top: 0px;
   padding-bottom: 50px;
@@ -80,7 +78,6 @@ export default {
   white-space: nowrap;
   text-overflow: ellipsis;
   color: #929292;
-  
 }
 
 .mui-bar-tab .mui-tab-item-llb .mui-icon {

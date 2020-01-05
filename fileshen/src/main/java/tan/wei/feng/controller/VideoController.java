@@ -37,7 +37,7 @@ public class VideoController {
 	 * @throws IOException
 	 */
 	@GetMapping(value = "/fileVideo/{fileId}")
-	public ResponseEntity<Resource> fileVideoExport(@PathVariable String fileId) throws IOException {  
+	public ResponseEntity<Resource> fileVideoExport(@PathVariable String fileId) {  
 	        return videoService.findByVideourl(fileId);   
     }
 	

@@ -18,7 +18,7 @@ import lombok.Data;
 @Table(name = "tb_weibofollow")
 public @Data class WeiboFollow implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 3108743158478729643L;
 	
 	@Id
 	private Long id;
