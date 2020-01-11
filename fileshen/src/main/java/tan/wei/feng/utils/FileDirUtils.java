@@ -42,7 +42,8 @@ public class FileDirUtils {
 		if(newDir.exists()){
 			File[] files = newDir.listFiles();
 			// 文件夹下可以存放文件的最大数量
-			if(files.length>50) {
+			int len = 50;
+			if(files.length>len) {
 				// 设置递归循环次数
 				ia -- ;
 				if(ia!=0) {

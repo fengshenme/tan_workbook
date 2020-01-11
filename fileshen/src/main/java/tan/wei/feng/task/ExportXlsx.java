@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import tan.wei.feng.entity.Article;
-import tan.wei.feng.service.read.ArticleFindService;
+import tan.wei.feng.model.service.read.ArticleFindService;
 
 /**
  * 导出xlsx
- * @author 锋什么
+ * @author 1015956962@163.com
  *
  */
 @Component
@@ -27,9 +27,9 @@ public class ExportXlsx {
 	
 	/**
 	 * 导出xlsx
+	 * @Scheduled(cron = "30 39 * * * ?")
 	 * @throws IOException
 	 */
-	//@Scheduled(cron = "30 39 * * * ?")
 	public void exportxlsx () throws IOException {
 		List<Article> articles = articleFindService.findAll();
 	    int rownum = 1;

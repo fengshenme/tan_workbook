@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>cn.tan.wei.feng</groupId>
-  <artifactId>fileshen</artifactId>
+  <artifactId>fileshenssm</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   
   <properties>
@@ -28,10 +28,28 @@
 			<version>${boot.version}</version>
 		</dependency>
 		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>${boot.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
 			<version>${boot.version}</version>
 		</dependency>
+        <!-- orm -->
+		<dependency>
+		    <groupId>org.mybatis.spring.boot</groupId>
+		    <artifactId>mybatis-spring-boot-starter</artifactId>
+		    <version>2.1.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>javax.persistence</groupId>
+		    <artifactId>persistence-api</artifactId>
+		    <version>1.0.2</version>
+		</dependency>
+		
 		<!-- 测试 -->
 		<dependency>
             <groupId>org.springframework.boot</groupId>
@@ -66,7 +84,6 @@
 		    <artifactId>fastjson</artifactId>
 		    <version>1.2.62</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
 		    <groupId>commons-io</groupId>
 		    <artifactId>commons-io</artifactId>

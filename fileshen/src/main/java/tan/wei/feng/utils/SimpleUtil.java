@@ -1,33 +1,58 @@
 package tan.wei.feng.utils;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * id
- * @author 锋什么
+ * 简单工具,id生成,...
+ * @author 1015956962@163.com
  *
  */
 public class SimpleUtil {
 	
-	private static Random rand = new Random();	
+	/**
+	 * 这样定义初始化后,作用阈值就跟基本数据类型一样,到最大加一则变为最小
+	 * 就不会有索引溢出的问题
+	 */
+	private static final List<Integer> NUMLIST = new ArrayList<> (800);
+	
+	private static int nu = 0;
 	
 	/**
 	 * 主键id生成
-	 * @param a 一个数据库代号
 	 * @return
 	 */
-	public Long idCreate() {
-		// 数据库代号
-		Integer a = 1 ;
-		// 产生一个均匀分布随机整数之间 低到高(包括端点)
-		Integer i = 10 + rand.nextInt(90);
+	public static Long idCreate() {
 		Long c = System.currentTimeMillis();
-		String s =  c.toString() + i.toString() + a.toString();
-		return Long.parseLong(s);
+		List<Integer> i = genNum(100,900);
+		return Long.parseLong(c +"" + i.get(nu++));
+	}
+	
+	/***
+	 * 生成递增数的列表
+	 * @param beg
+	 * @param end
+	 * @return
+	 */
+	public static List<Integer> genNum(int beg,int end) {
+		for (int i = beg; i < end; i++) {
+			NUMLIST.add(i);
+		}
+		return NUMLIST ;
 	}
 	
 	/**
-	 * 
+	 * 去除拼接后最后一个逗号
+	 * @param cona
+	 * @return
+	 */
+	public static String rmComma(StringBuilder cona) {
+		String str = cona.toString();
+		return str.substring(0, str.lastIndexOf(','));
+	}
+	
+	/**
+	 * 数值检测
 	 * @param num
 	 * @return
 	 * 

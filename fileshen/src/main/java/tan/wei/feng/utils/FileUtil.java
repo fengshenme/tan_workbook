@@ -1,20 +1,27 @@
 package tan.wei.feng.utils;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List; 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory; 
 /**
  *  文件工具类 
  *  @author 10
  */ 
 public class FileUtil { 
+	
+	private static final Logger logger = LoggerFactory.getLogger(FileUtil.class);
 	
 	 private FileUtil() {
 	    throw new IllegalStateException("实用类");
@@ -26,16 +33,16 @@ public class FileUtil {
 	 * @param inFileNames
 	 * @throws IOException
 	 */
-	public static void writerFilemerge(String fileName,Iterable<String> inFileNames) throws IOException {
+	public static void writerFilemerge(String fileName,Iterable<String> inFileNames) {
 		Path path = Paths.get(fileName); 
-	    try (BufferedWriter reader = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
+	    try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
 	    	for(String inFileName :inFileNames ){
 			    	String txt= readToString(inFileName);
-			    	reader.append(txt);
+			    	writer.append(txt);
 		    }
-	    	reader.flush();
-	    }catch (Exception e){ 
-			e.printStackTrace();
+	    	writer.flush();
+	    }catch (IOException e){ 
+			logger.info("文本文件合并出错".concat(e.getMessage()));
 		}
 	 }
 	
@@ -66,15 +73,22 @@ public class FileUtil {
 	 * @param fileName 
 	 * @return 
 	 */ 
-	public static String readToString(String fileName) throws IOException { 
-		String encoding = "UTF-8"; 
+	public static String readToString(String fileName) { 
 		File file = new File(fileName); 
-		Long filelength = file.length(); 
-		byte[] filecontent = new byte[filelength.intValue()]; 
-		FileInputStream in = new FileInputStream(file); 
-		in.read(filecontent); 
-		in.close(); 
-		return new String(filecontent, encoding); 
+		StringBuilder stringBuilder = new StringBuilder();
+		String line = "";
+		// 将filereader链接到bufferedreader以获取更高效率,它只会在缓存区读空时才会回头去磁盘读取
+		try(FileReader fileReader = new FileReader(file);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);) {
+			while((line = bufferedReader.readLine() ) != null) {
+				stringBuilder.append(line + "\n");
+			}
+		} catch (FileNotFoundException e) {
+			logger.info("没有找到这个文件:".concat(e.getMessage()));
+		} catch (IOException ie) {
+			logger.info("读取文本文件异常:".concat(ie.getMessage()));
+		}
+		return stringBuilder.toString();
 	}
 	
 }

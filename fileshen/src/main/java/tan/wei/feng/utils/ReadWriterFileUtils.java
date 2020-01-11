@@ -27,8 +27,8 @@ public class ReadWriterFileUtils {
 		File file = new File(filePath);
 		FileOutputStream fop = null;
 		if(!file.exists()){
-			// 构建FileOutputStream对象,文件不存在会自动新建
-            fop = new FileOutputStream(file);//首次写入获取
+			// 构建FileOutputStream对象,文件不存在会自动新建//首次写入获取
+            fop = new FileOutputStream(file);
         }else{
             //如果文件已存在，那么就在文件末尾追加写入
         	//这里构造方法多了一个参数true,表示在文件末尾追加写入

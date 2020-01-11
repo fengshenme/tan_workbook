@@ -54,4 +54,11 @@ aliyun.sms:
 storessd:
    filepath : "H:/img"
 
-   
+mybatis: 
+#  将带有下划线的表字段映射为驼峰格式的实体类属性
+   configuration: 
+      map-underscore-to-camel-case: true
+   # 别名扫描
+   type-aliases-package: tan.wei.feng.entity
+   # mapper.xml文件位置,如果没有映射文件，请注释掉
+   #mapper-locations: classpath:mapper/*.xml   

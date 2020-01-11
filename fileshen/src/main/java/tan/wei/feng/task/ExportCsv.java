@@ -9,13 +9,13 @@ import org.springframework.stereotype.Component;
 import tan.wei.feng.entity.Article;
 import tan.wei.feng.entity.WeiBoSearch;
 import tan.wei.feng.entity.WeiboFollow;
-import tan.wei.feng.service.WeiBoSearchService;
-import tan.wei.feng.service.read.ArticleFindService;
+import tan.wei.feng.model.service.WeiBoSearchService;
+import tan.wei.feng.model.service.read.ArticleFindService;
 import tan.wei.feng.utils.ReadWriterFileUtils;
 
 /**
  * weibo导出csv文件,导出编码为GB18030
- * @author 锋什么
+ * @author 1015956962@163.com
  *
  */
 @Component
@@ -28,9 +28,9 @@ public class ExportCsv {
 	
 	/**
 	 * 写入内容
+	 * @Scheduled(cron= "30 39 06 * * ?")
 	 * @throws IOException
 	 */
-//	@Scheduled(cron= "30 39 * * * ?")
 	public void saveCsv() throws IOException {
 		List<WeiBoSearch> weibolist= weiBoSearchService.findAll();
 		String csvheader = "userid`content`addtime`nickname`weibourl`labels`employphone";
@@ -46,8 +46,8 @@ public class ExportCsv {
 	/**
 	 * 文件以gb19030编码写入
 	 * @throws IOException
+	 * @Scheduled(cron = "30 47 * * * ?")
 	 */
-	//@Scheduled(cron = "30 47 * * * ?")
 	public void saveFollowCsv() throws IOException {
 		List<WeiboFollow> findFollowAll = weiBoSearchService.findFollowAll();
 		String csvheader = "id`userid`friendid`userurl`friendurl`friendinfo`sex`nickname`followfans`addtime";
@@ -59,8 +59,10 @@ public class ExportCsv {
 	    	ReadWriterFileUtils.writer(weiboFoll.toCsv(),savefile);
 		}
 	}
-	
-//	@Scheduled(cron = "30 50 * * * ?")
+	/**
+	 * @Scheduled(cron = "30 50 * * * ?")
+	 * @throws IOException
+	 */
 	public void exportBlogsCsv() throws IOException {
 		List<Article> articles = articleFindService.findAll();
 		String csvheader = "columnid`content";

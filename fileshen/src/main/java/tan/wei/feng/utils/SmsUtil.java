@@ -1,10 +1,9 @@
 package tan.wei.feng.utils;
 
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 import com.aliyuncs.CommonRequest;
@@ -18,9 +17,10 @@ import com.aliyuncs.profile.DefaultProfile;
 
 /**
  * 阿里云短信工具类
- * @author 10159
+ * @author 1
  *
  */
+@Component
 public class SmsUtil {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SmsUtil.class);
@@ -39,7 +39,7 @@ public class SmsUtil {
 	 * @param map
 	 * @return
 	 */
-	public boolean sendSms(Map<String,String> map) {
+	public boolean sendSms(String mobile,Integer code) {
 
     	DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         IAcsClient client = new DefaultAcsClient(profile);
@@ -51,13 +51,13 @@ public class SmsUtil {
         request.setAction("SendSms");
         request.putQueryParameter("RegionId", "cn-hangzhou");
         
-        logger.info("手机号：{}",map.get("mobile"));
-        logger.info("验证码：{}",map.get("code"));
+        logger.info("手机号：{}",mobile);
+        logger.info("验证码：{}",code);
         
-        request.putQueryParameter("PhoneNumbers", map.get("mobile"));
+        request.putQueryParameter("PhoneNumbers", mobile);
         request.putQueryParameter("SignName",signName);
         request.putQueryParameter("TemplateCode",templateCode);
-        request.putQueryParameter("TemplateParam", "{\'code\':\'"+ map.get("code") +"\'}");
+        request.putQueryParameter("TemplateParam", "{\'code\':\'"+ code +"\'}");
         boolean ac = true;
         try {
             CommonResponse response = client.getCommonResponse(request);

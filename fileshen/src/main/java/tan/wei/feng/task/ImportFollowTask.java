@@ -14,12 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import tan.wei.feng.entity.WeiboFollow;
-import tan.wei.feng.service.WeiBoSearchService;
+import tan.wei.feng.model.service.WeiBoSearchService;
 import tan.wei.feng.utils.SimpleUtil;
 
 /**
  * 导入微博数据
- * @author 锋什么
+ * @author 1015956962@163.com
  *
  */
 @Component
@@ -38,8 +38,8 @@ public class ImportFollowTask {
 	/**
 	 * 导入关注者信息
 	 * @throws IOException
+	 * @Scheduled(cron= "30 50 * * * ?")
 	 */
-	//@Scheduled(cron= "30 50 * * * ?")
 	public void friends() throws IOException {
 	    File file = new File("H:\\文件\\weibo\\friend00\\userid");
 	    File[] tempList = file.listFiles();
@@ -61,7 +61,7 @@ public class ImportFollowTask {
 						String nickname = sele.select("div.info_name.W_fb.W_f14").select("a").text();
 						String followfans = sele.select("div.info_connect").text();
 						WeiboFollow weiboFollow = new WeiboFollow();
-						weiboFollow.setId(new SimpleUtil().idCreate());
+						weiboFollow.setId(SimpleUtil.idCreate());
 						weiboFollow.setUserid(userid);
 						weiboFollow.setFriendid(friendid);
 						weiboFollow.setUserurl(userurl);

@@ -14,11 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import tan.wei.feng.entity.WeiBoSearch;
-import tan.wei.feng.service.WeiBoSearchService;
+import tan.wei.feng.model.service.WeiBoSearchService;
 
 /**
  * 处理搜索结果页面
- * @author 锋什么
+ * @author 1015956962@163.com
  *
  */
 @Component
@@ -31,9 +31,9 @@ public class ImportFile {
 	
 	/**
 	* 处理搜索结果页面
-	 * @throws IOException 
+	 * @throws IOException
+	 * @Scheduled(cron= "30 12 * * * ?") 
 	*/
-	//@Scheduled(cron= "30 12 * * * ?")
 	public void recommendTask() throws IOException{
 		
 	    File file = new File("H:/文件/weibo");

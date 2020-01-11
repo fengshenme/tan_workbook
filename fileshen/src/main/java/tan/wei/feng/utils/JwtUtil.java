@@ -24,7 +24,9 @@ public class JwtUtil {
 	private static final String ROLES = "roles";
 	
     private static String key = "fengshenme" ;
-    //默认配置为一个小时
+    /**
+     * 默认配置为一个小时
+     */
     private static long ttl = 3600000;
 
     /**
@@ -33,7 +35,7 @@ public class JwtUtil {
      * @param subject
      * @return token
      */
-    public String createJWT(String id, String subject, String roles) {
+    public String createJsonWebToken(String id, String subject, String roles) {
         /**
 		 * setIssuedAt用于设置签发时间
 		 * signWith用于设置签名秘钥
@@ -55,7 +57,7 @@ public class JwtUtil {
      * @param token
      * @return
      */
-    public static Claims parseJWT(String token){
+    public static Claims parseJsonWebToken(String token){
         return  Jwts.parser()
                 .setSigningKey(key.getBytes(Charset.forName("utf-8")))
                 .parseClaimsJws(token)
@@ -69,7 +71,8 @@ public class JwtUtil {
 	 */
 	public String jvmMemory () {
 		int byteToMb = 1024 * 1024 ;
-		MemoryUsage memoryUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage(); //椎内存使用情况
+		//椎内存使用情况
+		MemoryUsage memoryUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage(); 
 		// 初始的总内存
 		long totalMemorySize = memoryUsage.getInit()/byteToMb; 
 		// 最大可用内存

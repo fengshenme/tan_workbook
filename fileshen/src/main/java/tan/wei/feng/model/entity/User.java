@@ -1,4 +1,4 @@
-package tan.wei.feng.entity;
+package tan.wei.feng.model.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,7 +12,7 @@ import lombok.Data;
 
 /**
  * 用户模型
- * @author 锋什么
+ * @author 1015956962@163.com
  *
  */
 @Entity
