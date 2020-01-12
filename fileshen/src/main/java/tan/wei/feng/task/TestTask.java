@@ -14,7 +14,7 @@ import tan.wei.feng.entity.Article;
 import tan.wei.feng.entity.Remark;
 import tan.wei.feng.model.mapper.ArticleMapper;
 import tan.wei.feng.model.mapper.RemarkMapper;
-import tan.wei.feng.utils.SimpleUtil;
+import tan.wei.feng.utils.IdUtil;
 
 /**
  * 实验类
@@ -53,7 +53,7 @@ public class TestTask {
 			REMARKLIST.clear();
 			for (int i = 0; i < ac; i++) {
 				Remark remark = new Remark();
-				remark.setId(SimpleUtil.idCreate());
+				remark.setId(IdUtil.getIdUtil().idGenerate());
 				remark.setArticleId(Long.parseLong("1577626242115931"));
 				remark.setContent("Java核心技术·卷 I（原书第10版）内容介绍Java领域最有影响力和价值的著作之一，"
 						+ "由拥有20多年教学与研究经验的资深Java技术专家撰写(获Jolt大奖)，与《Java编程思想》齐名，"

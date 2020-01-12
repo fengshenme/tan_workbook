@@ -1,45 +1,41 @@
 package tan.wei.feng.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 简单工具,id生成,...
- * @author 1015956962@163.com
+ * @author 1015956962
  *
  */
 public class SimpleUtil {
 	
-	/**
-	 * 这样定义初始化后,作用阈值就跟基本数据类型一样,到最大加一则变为最小
-	 * 就不会有索引溢出的问题
-	 */
-	private static final List<Integer> NUMLIST = new ArrayList<> (800);
+	private SimpleUtil (){
+		 throw new IllegalStateException("初始化失败");
+	} 
 	
-	private static int nu = 0;
-	
-	/**
-	 * 主键id生成
-	 * @return
-	 */
-	public static Long idCreate() {
-		Long c = System.currentTimeMillis();
-		List<Integer> i = genNum(100,900);
-		return Long.parseLong(c +"" + i.get(nu++));
-	}
-	
-	/***
-	 * 生成递增数的列表
-	 * @param beg
-	 * @param end
-	 * @return
-	 */
-	public static List<Integer> genNum(int beg,int end) {
-		for (int i = beg; i < end; i++) {
-			NUMLIST.add(i);
+	 private static long ti = 0 ;
+	 private static int beg = 100 ;
+		
+		/**
+		 * 生成Long型的16位数字
+		 * 时间序列拼接单调递增
+		 * @return
+		 */
+		public static Long idGenerate() {
+			Long c = System.currentTimeMillis();
+				if(c != ti) {
+					ti = c;
+					beg = 100;
+				} 
+				if(beg >= 990) {
+					try {
+						Thread.sleep(1);
+					} catch (InterruptedException e) {
+						e.getMessage();
+						Thread.currentThread().interrupt();
+					}
+				}
+			return Long.parseLong(c + "" + beg++);
 		}
-		return NUMLIST ;
-	}
+			
 	
 	/**
 	 * 去除拼接后最后一个逗号

@@ -14,7 +14,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import tan.wei.feng.entity.User;
 import tan.wei.feng.model.mapper.UserMapper;
-import tan.wei.feng.utils.SimpleUtil;
+import tan.wei.feng.utils.IdUtil;
 
 /**
  * 用户注册
@@ -38,7 +38,7 @@ public class UserRegisterService {
 	public boolean saveUser(JSONObject jsob) {
 		User user = new User();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		user.setId(SimpleUtil.idCreate());
+		user.setId(IdUtil.getIdUtil().idGenerate());
 		user.setUpdateTime(new Date());
 		user.setNickname(jsob.getString("nickname"));
 		user.setMobile(jsob.getString("mobile"));

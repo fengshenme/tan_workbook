@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import tan.wei.feng.entity.UserFile;
 import tan.wei.feng.model.mapper.FileMapper;
-import tan.wei.feng.utils.SimpleUtil;
+import tan.wei.feng.utils.IdUtil;
 
 /**
  * 文件保存
@@ -41,7 +41,7 @@ public class FileSaveService {
 	 */
 	public boolean addFile(String filePath,String userId) {
 		UserFile userFile = new UserFile();
-        userFile.setId(SimpleUtil.idCreate());
+        userFile.setId(IdUtil.getIdUtil().idGenerate());
         userFile.setUserid(Long.parseLong(userId));
 		userFile.setFileurl(filePath);
 		userFile.setAddtime(new Date());

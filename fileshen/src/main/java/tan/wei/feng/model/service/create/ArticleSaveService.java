@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 
 import tan.wei.feng.entity.Remark;
 import tan.wei.feng.model.mapper.RemarkMapper;
-import tan.wei.feng.utils.SimpleUtil;
+import tan.wei.feng.utils.IdUtil;
 
 /**
  * 文章保存
@@ -28,7 +28,7 @@ public class ArticleSaveService {
 	 */
 	public void saveRemark(String userid, Long articleId, JSONObject jsob) {
 		Remark remark = new Remark();
-		remark.setId(SimpleUtil.idCreate());
+		remark.setId(IdUtil.getIdUtil().idGenerate());
 		remark.setArticleId(articleId);
 		remark.setContent(jsob.getString("content"));
 		remark.setUserName(jsob.getString("userName"));

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 import tan.wei.feng.entity.WeiboFollow;
 import tan.wei.feng.model.service.WeiBoSearchService;
-import tan.wei.feng.utils.SimpleUtil;
+import tan.wei.feng.utils.IdUtil;
 
 /**
  * 导入微博数据
@@ -61,7 +61,7 @@ public class ImportFollowTask {
 						String nickname = sele.select("div.info_name.W_fb.W_f14").select("a").text();
 						String followfans = sele.select("div.info_connect").text();
 						WeiboFollow weiboFollow = new WeiboFollow();
-						weiboFollow.setId(SimpleUtil.idCreate());
+						weiboFollow.setId(IdUtil.getIdUtil().idGenerate());
 						weiboFollow.setUserid(userid);
 						weiboFollow.setFriendid(friendid);
 						weiboFollow.setUserurl(userurl);
