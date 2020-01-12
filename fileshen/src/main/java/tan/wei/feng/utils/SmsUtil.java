@@ -40,7 +40,7 @@ public class SmsUtil {
 	 * @return
 	 */
 	public boolean sendSms(String mobile,Integer code) {
-
+		logger.info(accessKeySecret);
     	DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         IAcsClient client = new DefaultAcsClient(profile);
         //组装请求对象
@@ -64,10 +64,12 @@ public class SmsUtil {
             logger.info(response.getData());
             return JSON.parseObject(response.getData()).get("Message").equals("OK") ? ac:!ac;
         } catch (ServerException se) {
-        	logger.info(se.getMessage());
+        	logger.info("78:".concat(se.getMessage()));
         } catch (ClientException ce) {
         	logger.info(ce.getMessage());
         }
         return !ac;
     }
+
+
 }

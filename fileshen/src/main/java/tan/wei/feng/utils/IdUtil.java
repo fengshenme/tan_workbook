@@ -11,9 +11,7 @@ package tan.wei.feng.utils;
  */
 public class IdUtil {
 	
-	private IdUtil (){
-		 throw new IllegalStateException("初始化失败");
-	} 
+	private IdUtil (){ } 
 	private static final IdUtil IDUTIL = new IdUtil();
     public static IdUtil getIdUtil() {  
 	    return IDUTIL; 

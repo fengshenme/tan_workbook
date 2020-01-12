@@ -17,7 +17,12 @@ public class ParamConfig {
 	/**
 	 * 设置权限,用户要求
 	 */
-	public static final String USERCLA = "user_claims";
+	public static final String USER_CLAIMS = "user_claims";
+	
+	/**
+	 * 管理员角色
+	 */
+	public static final String ADMIN_CLAIMS = "admin_claims";
 	
 	/**
 	 * 角色

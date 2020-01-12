@@ -88,7 +88,7 @@ public class UserController {
 		if(userService.sendSms(mobile)) {
 			return new ResponseEntity<>("验证码已发送",HttpStatus.OK);
 		}
-		return new ResponseEntity<>("请重新获取验证码",HttpStatus.PARTIAL_CONTENT);
+		return new ResponseEntity<>("请重新获取验证码",HttpStatus.NO_CONTENT);
 	}
 	
 	/**

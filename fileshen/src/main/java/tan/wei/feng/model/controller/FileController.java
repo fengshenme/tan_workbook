@@ -68,7 +68,7 @@ public class FileController {
 	 */
 	@GetMapping(value = "/fileList/{fileType}",produces="application/json;charset=UTF-8")
 	public ResponseEntity<List<Long>> fileUrlList(@PathVariable Integer fileType){
-		Claims claims = (Claims) request.getAttribute(ParamConfig.USERCLA);
+		Claims claims = (Claims) request.getAttribute(ParamConfig.USER_CLAIMS);
 		if(claims != null && !"".equals(claims.getId().trim())){
 			List<Long> findByfileid = fileFindService.findByfileid(claims.getId(),fileType);
 			if(findByfileid.isEmpty()) {
@@ -86,7 +86,7 @@ public class FileController {
 	 */
 	@GetMapping(value = "/filePageList/{fileType}/{page}/{pagesize}",produces="application/json;charset=UTF-8")
 	public ResponseEntity<PageResult<UserFile>> fetchList(@PathVariable Integer fileType , @PathVariable Integer page,@PathVariable Integer pagesize){
-		Claims claims = (Claims) request.getAttribute(ParamConfig.USERCLA);
+		Claims claims = (Claims) request.getAttribute(ParamConfig.USER_CLAIMS);
 		if(claims != null && !"".equals(claims.getId().trim())){
 			PageResult<UserFile> findByfileidPage = fileFindService.findByfileidPage(claims.getId(),fileType,page,pagesize);
 			return new ResponseEntity<>(findByfileidPage,HttpStatus.OK);
@@ -104,7 +104,7 @@ public class FileController {
 	 */
 	@GetMapping(value = "/fileDownload/{filecode}",produces = "application/octet-stream")
 	public ResponseEntity<byte[]> fileDownload(@PathVariable String filecode) throws IOException {  
-		Claims claims = (Claims) request.getAttribute(ParamConfig.USERCLA);
+		Claims claims = (Claims) request.getAttribute(ParamConfig.USER_CLAIMS);
 		if(claims != null && !"".equals(claims.getId().trim())){
 			logger.info(claims.getId());
 	        return fileDownService.fileDownload(filecode);
@@ -121,8 +121,11 @@ public class FileController {
 	 */
 	@PostMapping(value = "/uploadFile",produces="text/plain;charset=UTF-8")
 	public ResponseEntity<String> fileSave(@RequestParam("file") MultipartFile file){
-		Claims claims = (Claims) request.getAttribute(ParamConfig.USERCLA);
+		
+		Claims claims = (Claims) request.getAttribute(ParamConfig.USER_CLAIMS);
+		logger.info("{}",claims);
 		if(!file.isEmpty() && claims != null && !"".equals(claims.getId().trim())) {
+			
 			// 递归次数
 			int ia = 3;
 			String filePath = FileDirUtils.dirFile(datapath,file.getOriginalFilename(),ia) ;
@@ -154,7 +157,7 @@ public class FileController {
 	 */
 	@DeleteMapping(value = "/delFile/{fileId}",produces="text/plain;charset=UTF-8")
 	public ResponseEntity<String> delFile(@PathVariable String fileId) {
-		Claims claims = (Claims) request.getAttribute(ParamConfig.USERCLA);
+		Claims claims = (Claims) request.getAttribute(ParamConfig.USER_CLAIMS);
 		if(claims != null && !"".equals(claims.getId().trim()) && fileDeleteService.delfile(Long.parseLong(fileId))){
 			return new ResponseEntity<>(HttpStatus.OK);
 		}

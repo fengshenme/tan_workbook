@@ -5,25 +5,27 @@ import java.lang.management.MemoryUsage;
 import java.nio.charset.Charset;
 import java.util.Date;
 
-import org.springframework.stereotype.Component;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import tan.wei.feng.model.ParamConfig;
 
 /**
  * token生成和解析
  * @author 
  *
  */
-@Component
 public class JwtUtil {
 	
-	
-	private static final String ROLES = "roles";
+	private JwtUtil (){} 
+	private static final JwtUtil JWT = new JwtUtil();
+    public static JwtUtil getJwt() {  
+	    return JWT; 
+	}
 	
     private static String key = "fengshenme" ;
+    
     /**
      * 默认配置为一个小时
      */
@@ -46,7 +48,7 @@ public class JwtUtil {
                 .setSubject(subject)
                 .setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, key.getBytes(Charset.forName("utf-8")))
-                .claim(ROLES, roles)
+                .claim(ParamConfig.ROLES, roles)
             	.setExpiration( new Date(System.currentTimeMillis() + ttl));
         return builder.compact();
     }
@@ -57,7 +59,7 @@ public class JwtUtil {
      * @param token
      * @return
      */
-    public static Claims parseJsonWebToken(String token){
+    public Claims parseJsonWebToken(String token){
         return  Jwts.parser()
                 .setSigningKey(key.getBytes(Charset.forName("utf-8")))
                 .parseClaimsJws(token)
@@ -67,7 +69,7 @@ public class JwtUtil {
       
     /**
 	 * 虚拟机的内存情况查询
-	 * @return
+	 * @return 最大可用内存
 	 */
 	public String jvmMemory () {
 		int byteToMb = 1024 * 1024 ;
@@ -82,7 +84,7 @@ public class JwtUtil {
 		System.out.println(totalMemorySize + "mb");
 		System.out.println(maxMemorySize + "mb");
 		System.out.println(usedMemorySize + "mb");
-		return null ;
+		return maxMemorySize + "mb" ;
 	}
     
 }

@@ -3,8 +3,6 @@ package tan.wei.feng.task;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +30,7 @@ public class TestTask {
 	private static final  Logger logger = LoggerFactory.getLogger(TestTask.class);
 	private static final ArrayList<Remark> REMARKLIST = new ArrayList<> ();
 	
-	@PostConstruct
+//	@PostConstruct
 	public void findTest() {
 		List<Article> selectAll = articleMapper.selectAll("Article",20,20);
 		Article art = articleMapper.selectByPrimaryKey("Article", Long.parseLong("1577626242040931"));

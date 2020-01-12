@@ -104,7 +104,7 @@ public class ArticleController {
 	 */
 	@PostMapping(value = "/postcomment/{id}", produces="text/plain;charset=UTF-8")
 	public ResponseEntity<String> saveRemark(@PathVariable Long id, @RequestBody JSONObject jsob) {
-		Claims claims = (Claims) request.getAttribute(ParamConfig.USERCLA);
+		Claims claims = (Claims) request.getAttribute(ParamConfig.USER_CLAIMS);
 		if(claims != null && !"".equals( claims.getId().trim() ) ) {
 			String userid = claims.getId();
 			articleSaveService.saveRemark(userid,id,jsob);

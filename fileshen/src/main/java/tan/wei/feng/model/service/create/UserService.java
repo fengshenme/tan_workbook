@@ -50,7 +50,6 @@ public class UserService {
 		logger.info(code.toString());
 		//调用短信工具类
 		return smsUtil.sendSms(mobile,code);
-		
 	}
 	
 	/**
@@ -65,7 +64,7 @@ public class UserService {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		if(user!=null&&encoder.matches(password, user.getPassword())) {
 			// 生成token 
-			String token = new JwtUtil().createJsonWebToken(user.getId().toString(),user.getMobile(), "user");
+			String token = JwtUtil.getJwt().createJsonWebToken(user.getId().toString(),user.getMobile(), "user");
 			map.put("token",token);
 			//昵称
 			map.put("name",user.getNickname());
