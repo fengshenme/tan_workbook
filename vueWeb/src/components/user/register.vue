@@ -90,7 +90,10 @@ export default {
             }, 1000) 
         }
         Sendsms(this.pojo.mobile).then(res => {
+          console.log('object :', res);
             if(res.status === 200){
+                Toast(res.data)
+            }else{
                 Toast(res.data)
             }
         })

@@ -45,7 +45,7 @@ service.interceptors.response.use(
           removeUser()//清除登陆用户信息
           store.commit('ismobile',undefined)
           store.commit('increment',undefined)
-          Toast("请您重新登录")
+          // Toast("请您重新登录")
       }
       return res // Promise.reject(new Error(res.data || 'Error'))
     } else {
@@ -54,12 +54,12 @@ service.interceptors.response.use(
   },
   error => {
     if( error.toString().substr(-3,3) === 401){
-      removeUser()//清除登陆用户信息
-      store.commit('ismobile',undefined)
-      store.commit('increment',undefined)
-      Toast("请您重新登录")
+    //   removeUser()//清除登陆用户信息
+    //   store.commit('ismobile',undefined)
+    //   store.commit('increment',undefined)
+      Toast("请登录")
     }
-    return Promise.reject(error)
+    return location.href='/#/user/login' // Promise.reject(error)
   }
 )
 

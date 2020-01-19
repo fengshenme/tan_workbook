@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 
-import tan.wei.feng.entity.User;
+import tan.wei.feng.model.entity.User;
 import tan.wei.feng.model.mapper.UserMapper;
 import tan.wei.feng.utils.IdUtil;
 
@@ -38,7 +38,7 @@ public class UserRegisterService {
 	public boolean saveUser(JSONObject jsob) {
 		User user = new User();
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		user.setId(IdUtil.getIdUtil().idGenerate());
+		user.setId(IdUtil.getInstance().idGenerate());
 		user.setUpdateTime(new Date());
 		user.setNickname(jsob.getString("nickname"));
 		user.setMobile(jsob.getString("mobile"));
@@ -50,7 +50,7 @@ public class UserRegisterService {
 				USER_SAVE_LIST.add(user);
             	threshold--;
     		} else {
-    			userMapper.insert(user);
+    			userMapper.insert("User",user);
 			}
 			return true ;
 		} catch (Exception e) {
@@ -66,7 +66,7 @@ public class UserRegisterService {
 	@Scheduled(cron= "0/1 * * * * ?")
 	private void saveall() {
 		if(!USER_SAVE_LIST.isEmpty()) {
-			userMapper.insertAll(USER_SAVE_LIST);
+			userMapper.insertAll("User",USER_SAVE_LIST);
 			USER_SAVE_LIST.clear();
 		}
 		threshold = 30;

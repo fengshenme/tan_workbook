@@ -2,7 +2,7 @@ package tan.wei.feng.model.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import tan.wei.feng.entity.WeiboFollow;
+import tan.wei.feng.model.entity.WeiboFollow;
 import tan.wei.feng.model.mapper.base.MyMapper;
 
 /**

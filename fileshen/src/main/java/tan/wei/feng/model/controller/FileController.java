@@ -26,9 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import io.jsonwebtoken.Claims;
-import tan.wei.feng.entity.PageResult;
-import tan.wei.feng.entity.UserFile;
 import tan.wei.feng.model.ParamConfig;
+import tan.wei.feng.model.entity.PageResult;
+import tan.wei.feng.model.entity.UserFile;
 import tan.wei.feng.model.service.create.FileSaveService;
 import tan.wei.feng.model.service.delete.FileDeleteService;
 import tan.wei.feng.model.service.read.FileDownService;
@@ -69,11 +69,11 @@ public class FileController {
 	@GetMapping(value = "/fileList/{fileType}",produces="application/json;charset=UTF-8")
 	public ResponseEntity<List<Long>> fileUrlList(@PathVariable Integer fileType){
 		Claims claims = (Claims) request.getAttribute(ParamConfig.USER_CLAIMS);
+		List<Long> findByfileid = null ;
 		if(claims != null && !"".equals(claims.getId().trim())){
-			List<Long> findByfileid = fileFindService.findByfileid(claims.getId(),fileType);
-			if(findByfileid.isEmpty()) {
-				return new ResponseEntity<>(HttpStatus.OK);
-			}
+			findByfileid = fileFindService.findByfileid(claims.getId(),fileType);
+		}
+		if(findByfileid != null && !findByfileid.isEmpty()) {
 			return new ResponseEntity<>(findByfileid,HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -121,7 +121,6 @@ public class FileController {
 	 */
 	@PostMapping(value = "/uploadFile",produces="text/plain;charset=UTF-8")
 	public ResponseEntity<String> fileSave(@RequestParam("file") MultipartFile file){
-		
 		Claims claims = (Claims) request.getAttribute(ParamConfig.USER_CLAIMS);
 		logger.info("{}",claims);
 		if(!file.isEmpty() && claims != null && !"".equals(claims.getId().trim())) {
@@ -142,8 +141,8 @@ public class FileController {
 				} catch (IOException e1) {
 					logger.info(e1.getMessage());
 				}
-	        	// 文件保存失败500
-	            return new ResponseEntity<>("文件保存失败,请重新上传",HttpStatus.INTERNAL_SERVER_ERROR) ;
+	        	// 文件保存失败501
+	            return new ResponseEntity<>("文件保存失败,请重新上传",HttpStatus.NOT_IMPLEMENTED) ;
 	        }
 		}
 		// 身份验证出错401
@@ -162,7 +161,7 @@ public class FileController {
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		// 服务器成功处理了请求,且没有返回任何内容
-		return new ResponseEntity<>(HttpStatus.RESET_CONTENT);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 }

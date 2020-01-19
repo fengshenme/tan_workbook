@@ -42,4 +42,5 @@ public @Data class Remark implements Serializable{
 	 */
 	private String content;
 	
+	private Integer total;
 }

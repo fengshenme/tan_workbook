@@ -26,6 +26,10 @@ public @Data class UserFile implements Serializable{
 	private String fileurl;
 	private Date addtime;
 	private Integer filetype ;
-
+	
+	/**
+	 * 分页需要,数据库表无此字段,插入过滤了
+	 */
+	private Integer total ;
 	
 }

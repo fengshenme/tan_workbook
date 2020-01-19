@@ -5,6 +5,8 @@
 				<br>
 				<h5 style="margin: 2px 5px;">分类为：{{retit}}</h5>
 				<br>
+				发表时间:  {{1578496693497 | dateFormat }}
+				<br>
 				<div class="mui-input-row" style="margin: 1px 5px;">
 					<textarea v-model="pojo.content" id="textarea" rows="20" placeholder="多行文本框"></textarea>
 				</div>
@@ -27,6 +29,7 @@ export default {
         }
     },
     created() {
+		this.pojo.content = ''
     },
     methods: {
 		clearInput(){
@@ -68,6 +71,7 @@ export default {
 							//与 case 1 和 case 2 不同时执行的代码
 							this.retit = '其他';
 					}
+				this.pojo.content = ''
 				}
 			});
         }

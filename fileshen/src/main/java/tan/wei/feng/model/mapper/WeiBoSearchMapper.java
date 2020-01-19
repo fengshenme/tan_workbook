@@ -2,7 +2,7 @@ package tan.wei.feng.model.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import tan.wei.feng.entity.WeiBoSearch;
+import tan.wei.feng.model.entity.WeiBoSearch;
 import tan.wei.feng.model.mapper.base.MyMapper;
 
 /**

@@ -28,7 +28,6 @@ export default {
     data(){
         return {
             pageIndex: 1, // 默认展示第一页数据
-            pagesize:5,
             comments: [], // 所有的评论数据
             msg: "", // 评论输入的内容
             cmt: {},
@@ -39,11 +38,11 @@ export default {
     },
     methods:{
         getComments(){ // 获取评论
-            getcomments(this.id, this.pageIndex, this.pagesize).then(result => {
+            getcomments(this.id, this.pageIndex).then(result => {
                 if(result.status===200){
                    this.comments = this.comments.concat(result.data);
                 }else{
-                    Toast("获取评论失败");
+                    Toast("还没有评论");
                 }
             });
         },
@@ -61,7 +60,8 @@ export default {
             const cmt = {
                         userName:getUser().name,
                         addTime: Date.now() ,
-                        content: this.msg.trim()
+                        content: this.msg.trim(),
+                        id:this.id,
                     };
             postcomment(this.$route.params.id, cmt).then(response => {
                 if(response.status === 200){
@@ -70,9 +70,11 @@ export default {
                     this.msg = "";
                     Toast(response.data)
                     location.reload();
-                }else{
-                    Toast('评论失败');
+                }  
+                if(response.status === 206){
+                    Toast(response.data);
                 }
+                
             });
         }
     }

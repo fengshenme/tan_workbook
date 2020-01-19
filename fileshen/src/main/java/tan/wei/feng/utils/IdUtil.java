@@ -13,7 +13,7 @@ public class IdUtil {
 	
 	private IdUtil (){ } 
 	private static final IdUtil IDUTIL = new IdUtil();
-    public static IdUtil getIdUtil() {  
+    public static IdUtil getInstance() {  
 	    return IDUTIL; 
 	}
 	    
@@ -31,7 +31,7 @@ public class IdUtil {
 				ti = c;
 				beg = 100;
 			} 
-			if(beg >= 990) {
+			if(beg >= 900) {
 				try {
 					Thread.sleep(1);
 				} catch (InterruptedException e) {

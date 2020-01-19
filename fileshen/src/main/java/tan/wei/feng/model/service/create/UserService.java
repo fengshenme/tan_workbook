@@ -13,7 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import tan.wei.feng.entity.User;
+import tan.wei.feng.model.entity.User;
 import tan.wei.feng.model.mapper.UserMapper;
 import tan.wei.feng.utils.JwtUtil;
 import tan.wei.feng.utils.SmsUtil;

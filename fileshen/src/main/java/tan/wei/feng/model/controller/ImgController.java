@@ -20,7 +20,7 @@ import tan.wei.feng.model.service.read.ImgService;
 
 /**
  * 图片控制层
- * @author 1015956962@163.com
+ * @author 1015956962
  *
  */
 @RestController
@@ -57,8 +57,7 @@ public class ImgController {
 	 */
 	@GetMapping(value = "/indeximg/{filetype}",produces="application/json;charset=UTF-8")
 	public ResponseEntity<List<BigInteger>> indexImg(@PathVariable Integer filetype) {
-		String jwtstatus = request.getAttribute("error") == null 
-							? "" : request.getAttribute("error").toString() ;
+		String jwtstatus = request.getAttribute("error") == null ? "" : request.getAttribute("error").toString() ;
 		if(jwtstatus !=null && !"".equals(jwtstatus.trim())) {
 			return new ResponseEntity<>(imgService.findByfileType(filetype), HttpStatus.PARTIAL_CONTENT);
 		}

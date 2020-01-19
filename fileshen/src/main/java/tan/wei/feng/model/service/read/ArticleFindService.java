@@ -1,12 +1,16 @@
 package tan.wei.feng.model.service.read;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import tan.wei.feng.entity.Article;
-import tan.wei.feng.entity.Remark;
+import tan.wei.feng.model.entity.Article;
+import tan.wei.feng.model.entity.PageResult;
+import tan.wei.feng.model.entity.Remark;
 import tan.wei.feng.model.mapper.ArticleMapper;
 import tan.wei.feng.model.mapper.RemarkMapper;
 
@@ -22,12 +26,15 @@ public class ArticleFindService {
 	
 	private final RemarkMapper remarkMapper ;
 	
+    private final RedisTemplate<String, String> redisTemplate;
+	
 	/**
 	 * @param articleMapper
 	 * @param remarkMapper
 	 */
 	@Autowired
-	public ArticleFindService(ArticleMapper articleMapper, RemarkMapper remarkMapper) {
+	public ArticleFindService(ArticleMapper articleMapper, RemarkMapper remarkMapper,RedisTemplate<String, String> redisTemplate) {
+		this.redisTemplate = redisTemplate ;
 		this.articleMapper = articleMapper;
 		this.remarkMapper = remarkMapper;
 	}
@@ -65,9 +72,28 @@ public class ArticleFindService {
 	 * @param pagesize
 	 * @return
 	 */
-	public List<Remark> findByPageRemark(Long articleid,Integer page){
-		int pagesize = 20;
-		return remarkMapper.findByPageRemark(articleid,page*pagesize, pagesize);
+	public PageResult<Remark> findByPageRemark(Long articleid,Integer page){
+		Integer pagesize = 20;
+		List<Remark> selectByPageTotal = null;
+		String total = redisTemplate.opsForValue().get("findByPageRemark_total");
+		ArrayList<String> arrayList = new ArrayList<>();
+		
+		Integer pageIndex = page*pagesize ;
+		arrayList.add(pageIndex.toString());
+		arrayList.add(pagesize.toString());
+		arrayList.add(articleid.toString());
+		
+		if(total == null || "".equals(total)) {
+			selectByPageTotal = remarkMapper.selectByPageTotal("Remark,article_id", arrayList);
+			total = selectByPageTotal.get(0).getTotal().toString();
+			redisTemplate.opsForValue().set("findByPageRemark_total", total , 5,TimeUnit.MINUTES);
+		} else {
+			selectByPageTotal = remarkMapper.selectByPage("Remark,article_id", arrayList);
+		}
+		PageResult<Remark> pageResult = new PageResult<>();
+		pageResult.setTotal(Integer.parseInt(total));
+		pageResult.setRows(selectByPageTotal);
+		return pageResult ;
 	}
 	
 	

@@ -3,7 +3,7 @@ package tan.wei.feng.model.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import tan.wei.feng.entity.User;
+import tan.wei.feng.model.entity.User;
 import tan.wei.feng.model.mapper.base.MyMapper;
 
 /**

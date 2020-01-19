@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 
-import tan.wei.feng.entity.Remark;
+import tan.wei.feng.model.entity.Remark;
 import tan.wei.feng.model.mapper.RemarkMapper;
 import tan.wei.feng.utils.IdUtil;
 
@@ -28,12 +28,12 @@ public class ArticleSaveService {
 	 */
 	public void saveRemark(String userid, Long articleId, JSONObject jsob) {
 		Remark remark = new Remark();
-		remark.setId(IdUtil.getIdUtil().idGenerate());
+		remark.setId(IdUtil.getInstance().idGenerate());
 		remark.setArticleId(articleId);
 		remark.setContent(jsob.getString("content"));
 		remark.setUserName(jsob.getString("userName"));
 		remark.setUserId(Long.parseLong(userid));
-		remarkMapper.insert(remark);
+		remarkMapper.insert("Remark",remark);
 	}
 	
 }

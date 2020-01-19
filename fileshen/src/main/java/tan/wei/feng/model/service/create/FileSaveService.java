@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import tan.wei.feng.entity.UserFile;
+import tan.wei.feng.model.entity.UserFile;
 import tan.wei.feng.model.mapper.FileMapper;
 import tan.wei.feng.utils.IdUtil;
 
@@ -41,7 +41,7 @@ public class FileSaveService {
 	 */
 	public boolean addFile(String filePath,String userId) {
 		UserFile userFile = new UserFile();
-        userFile.setId(IdUtil.getIdUtil().idGenerate());
+        userFile.setId(IdUtil.getInstance().idGenerate());
         userFile.setUserid(Long.parseLong(userId));
 		userFile.setFileurl(filePath);
 		userFile.setAddtime(new Date());
@@ -59,7 +59,7 @@ public class FileSaveService {
     			FILE_SAVE_LIST.add(userFile);
             	threshold--;
     		} else {
-    			fileMapper.insert(userFile);
+    			fileMapper.insert("UserFile",userFile);
     		}
             return true ;
         } catch (Exception e) {
@@ -75,7 +75,7 @@ public class FileSaveService {
 	@Scheduled(cron= "0/1 * * * * ?")
 	private void saveall() {
 		if(!FILE_SAVE_LIST.isEmpty()) {
-			fileMapper.insertAll(FILE_SAVE_LIST);
+			fileMapper.insertAll("UserFile",FILE_SAVE_LIST);
 			FILE_SAVE_LIST.clear();
 		}
 		threshold = 30;

@@ -50,12 +50,4 @@ public class ParamConfig {
 	public static final String POJOPACK = "tan.wei.feng.model.entity." ;
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
 }

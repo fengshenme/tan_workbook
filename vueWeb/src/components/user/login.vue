@@ -27,7 +27,7 @@
 <script>
 import {Login} from '@/api/user'
 import {Toast} from 'mint-ui'
-import { setUser } from '@/utils/common'
+import { setUser ,removeUser} from '@/utils/common'
 export default {
     data(){
         return {
@@ -40,6 +40,7 @@ export default {
     methods: {
         login () {    
             Login(this.pojo).then( res =>{
+				removeUser()
                 if(res.status === 200){
 					//保存用户信息
 					setUser(res.data.name,res.data.token,this.pojo.mobile)

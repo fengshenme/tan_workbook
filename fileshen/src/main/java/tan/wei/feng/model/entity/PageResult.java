@@ -13,18 +13,16 @@ import lombok.Data;
  */
 public @Data class PageResult<T> implements Serializable{
 	
-	
-	private static final long serialVersionUID = 1L;
-	
-	private Long total;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6199370704789064332L;
+
+	private Integer total;
 	
 	private List<T> rows;
 	
-	public PageResult(Long total, List<T> rows) {
-		super();
-		this.total = total;
-		this.rows = rows;
-	}
+	
 	
 	
 }

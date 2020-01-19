@@ -5,7 +5,7 @@ import java.io.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tan.wei.feng.entity.UserFile;
+import tan.wei.feng.model.entity.UserFile;
 import tan.wei.feng.model.mapper.FileMapper;
 
 /**

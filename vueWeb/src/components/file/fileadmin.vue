@@ -61,14 +61,18 @@ export default {
         this.fileList = [];
         this.srcList = [];
         FetchList(filetype,page,pageSize).then(response => {
-          response.data.rows.forEach(element => {
+          console.log('object :', response.toString().substr(-3,3));
+
+          if(response.status === 200){
+              response.data.rows.forEach(element => {
                   const fileurl = this.baseurl.concat("img/file/").concat(element.id)
                   const filedown = this.baseurl.concat("api/fileDownload/").concat(element.id)
                   this.fileList.push({url:fileurl,fileid:element.id,addtime:element.addtime,filedownurl:filedown})
                   this.srcList.push(fileurl)
                 });
           this.total = response.data.total
-        })
+          }
+        })  
      },
       delFile(id){
         MessageBox.confirm('此操作将永久删除该文件, 是否继续?', '提示', {

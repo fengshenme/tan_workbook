@@ -5,10 +5,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
-import tan.wei.feng.entity.UserFile;
+import tan.wei.feng.model.entity.UserFile;
 import tan.wei.feng.model.mapper.base.MyMapper;
 
 /**
@@ -37,8 +35,9 @@ public interface FileMapper extends MyMapper<UserFile>{
 	 * @param pageable
 	 * @return
 	 */
-	@Select(value = {"SELECT * FROM tb_article WHERE userid = #{userid} ;","SELECT count(*) FROM tb_article WHERE userid = #{userid}"})
-	Page<UserFile> findByUseridAndFiletype(Long userid , Integer filetype, Pageable pageable);
+	@Select(value = {"SELECT id,(SELECT count(*) FROM tb_userfile WHERE userid = #{userid} and filetype=#{filetype}) as total "
+			+ "FROM tb_userfile WHERE userid = #{userid} and filetype=#{filetype} LIMIT #{index},#{pageSize}"})
+	List<UserFile> findByUseridAndFiletype(Long userid , Integer filetype, Integer index, Integer pageSize);
 	
 	
 	/**
@@ -47,9 +46,7 @@ public interface FileMapper extends MyMapper<UserFile>{
 	 * @param userid
 	 * @return
 	 */
-	@Select(value = {"<script>",
-			"select * from tb_userfile where filetype = #{filetype}",
-			"select * from tb_userfile ","</script>"})
+	@Select(value = {"SELECT count(*) FROM tb_userfile WHERE userid = #{userid} and filetype = #{filetype}"})
 	Object countByFiletypeAndUserid(Integer filetype,Long userid);
 	
 	/**

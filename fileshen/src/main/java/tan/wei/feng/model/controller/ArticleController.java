@@ -18,9 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSONObject;
 
 import io.jsonwebtoken.Claims;
-import tan.wei.feng.entity.Article;
-import tan.wei.feng.entity.Remark;
 import tan.wei.feng.model.ParamConfig;
+import tan.wei.feng.model.entity.Article;
+import tan.wei.feng.model.entity.PageResult;
+import tan.wei.feng.model.entity.Remark;
 import tan.wei.feng.model.service.create.ArticleSaveService;
 import tan.wei.feng.model.service.read.ArticleFindService;
 
@@ -49,10 +50,6 @@ public class ArticleController {
 	@GetMapping(value = "/getnewslist/{page}",produces="application/json;charset=UTF-8")
 	public ResponseEntity<List<Article>> getnewslist(@PathVariable Integer page) {
 		
-		if(page  < 1 ) {
-			// "页码错误"
-			return new ResponseEntity<>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);
-		}
 		int pagesize = 20;
 		List<Article> findpage = articleFindService.findByPageNews(page-1,pagesize);
 		if(findpage.isEmpty()) {
@@ -82,14 +79,10 @@ public class ArticleController {
 	 * @param page
 	 * @return
 	 */
-	@GetMapping(value = "/getcomments/{id}/{page}", produces="application/json;charset=UTF-8")
-	public ResponseEntity<List<Remark>> getRemarks(@PathVariable Long id,@PathVariable Integer page) {
-		if(page  < 1 ) {
-			// "页码错误"
-			return new ResponseEntity<>(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE);
-		}
-		List<Remark> findpage = articleFindService.findByPageRemark(id,page-1);
-		if(findpage.isEmpty()) {
+	@GetMapping(value = "/getcomments/{articleid}/{page}", produces="application/json;charset=UTF-8")
+	public ResponseEntity<PageResult<Remark>> getRemarks(@PathVariable Long articleid,@PathVariable Integer page) {
+		PageResult<Remark> findpage = articleFindService.findByPageRemark(articleid,page-1);
+		if(findpage.getTotal() <= 0) {
 			// "没有评论"
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -99,7 +92,7 @@ public class ArticleController {
 	/**
 	 * 添加评论
 	 * @param id
-	 * @param jsob
+	 * @param j-sob
 	 * @return
 	 */
 	@PostMapping(value = "/postcomment/{id}", produces="text/plain;charset=UTF-8")
@@ -110,13 +103,12 @@ public class ArticleController {
 			articleSaveService.saveRemark(userid,id,jsob);
 			return new ResponseEntity<>("发表评论成功",HttpStatus.OK);
 		}
-		String jwtstatus = request.getAttribute("error") == null 
-				? "" : request.getAttribute("error").toString() ;
+		String jwtstatus = request.getAttribute("error") == null ? "" : request.getAttribute("error").toString() ;
 		if(jwtstatus !=null && !"".equals(jwtstatus.trim())) {
 			return new ResponseEntity<>(HttpStatus.PARTIAL_CONTENT);
 		}
-		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-		
+		return new ResponseEntity<>("请登录在评论", HttpStatus.PARTIAL_CONTENT);
 	}
+	
 	
 }

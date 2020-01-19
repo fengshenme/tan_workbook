@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import tan.wei.feng.entity.WeiboFollow;
+import tan.wei.feng.model.entity.WeiboFollow;
 import tan.wei.feng.model.service.WeiBoSearchService;
 import tan.wei.feng.utils.IdUtil;
 
@@ -61,7 +61,7 @@ public class ImportFollowTask {
 						String nickname = sele.select("div.info_name.W_fb.W_f14").select("a").text();
 						String followfans = sele.select("div.info_connect").text();
 						WeiboFollow weiboFollow = new WeiboFollow();
-						weiboFollow.setId(IdUtil.getIdUtil().idGenerate());
+						weiboFollow.setId(IdUtil.getInstance().idGenerate());
 						weiboFollow.setUserid(userid);
 						weiboFollow.setFriendid(friendid);
 						weiboFollow.setUserurl(userurl);

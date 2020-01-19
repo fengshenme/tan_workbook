@@ -21,10 +21,6 @@ public class SimpleUtil {
 		 */
 		public static Long idGenerate() {
 			Long c = System.currentTimeMillis();
-				if(c != ti) {
-					ti = c;
-					beg = 100;
-				} 
 				if(beg >= 990) {
 					try {
 						Thread.sleep(1);
@@ -32,6 +28,10 @@ public class SimpleUtil {
 						e.getMessage();
 						Thread.currentThread().interrupt();
 					}
+				}
+				if(c > ti) {
+					ti = c;
+					beg = 100;
 				}
 			return Long.parseLong(c + "" + beg++);
 		}

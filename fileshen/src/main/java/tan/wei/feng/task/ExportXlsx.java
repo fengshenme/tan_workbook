@@ -11,7 +11,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import tan.wei.feng.entity.Article;
+import tan.wei.feng.model.entity.Article;
 import tan.wei.feng.model.service.read.ArticleFindService;
 
 /**

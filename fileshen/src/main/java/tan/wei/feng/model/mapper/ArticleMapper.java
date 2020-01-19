@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import tan.wei.feng.entity.Article;
+import tan.wei.feng.model.entity.Article;
 import tan.wei.feng.model.mapper.base.MyMapper;
 
 /**

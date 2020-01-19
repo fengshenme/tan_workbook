@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSONObject;
 
 import io.jsonwebtoken.Claims;
-import tan.wei.feng.entity.User;
+import tan.wei.feng.model.entity.User;
 import tan.wei.feng.model.service.create.UserRegisterService;
 import tan.wei.feng.model.service.create.UserService;
 

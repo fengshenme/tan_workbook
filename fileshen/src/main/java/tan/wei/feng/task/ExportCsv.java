@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import tan.wei.feng.entity.Article;
-import tan.wei.feng.entity.WeiBoSearch;
-import tan.wei.feng.entity.WeiboFollow;
+import tan.wei.feng.model.entity.Article;
+import tan.wei.feng.model.entity.WeiBoSearch;
+import tan.wei.feng.model.entity.WeiboFollow;
 import tan.wei.feng.model.service.WeiBoSearchService;
 import tan.wei.feng.model.service.read.ArticleFindService;
 import tan.wei.feng.utils.ReadWriterFileUtils;

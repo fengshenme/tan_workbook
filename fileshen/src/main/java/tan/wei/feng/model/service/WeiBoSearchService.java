@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import tan.wei.feng.entity.WeiBoSearch;
-import tan.wei.feng.entity.WeiboFollow;
+import tan.wei.feng.model.entity.WeiBoSearch;
+import tan.wei.feng.model.entity.WeiboFollow;
 import tan.wei.feng.model.mapper.WeiBoFollowMapper;
 import tan.wei.feng.model.mapper.WeiBoSearchMapper;
 
@@ -34,7 +34,7 @@ public class WeiBoSearchService {
 	 * @param weibo
 	 */
 	public void save(WeiBoSearch weibo) {
-		weiBoSearchMapper.insert(weibo);
+		weiBoSearchMapper.insert("WeiBoSearch",weibo);
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class WeiBoSearchService {
 	 * @param weiboFollow
 	 */
 	public void saveFollow(WeiboFollow weiboFollow) {
-		 weiBoFollowMapper.insert(weiboFollow);
+		 weiBoFollowMapper.insert("WeiboFollow",weiboFollow);
 	}
 	
 	/**

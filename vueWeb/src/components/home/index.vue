@@ -67,6 +67,12 @@ export default {
                             this.lunbotuList.push(httpUrl.concat("img/file/").concat(element))
                         });
                         break;
+                    case 206:
+                        response.data.forEach(element => {
+                            this.lunbotuList.push(httpUrl.concat("img/file/").concat(element))
+                        });
+                        break;
+                    
                     default:
                         Toast("获取轮播图失败")
                         break;

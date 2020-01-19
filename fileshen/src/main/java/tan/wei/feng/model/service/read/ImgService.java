@@ -17,7 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import tan.wei.feng.entity.UserFile;
+import tan.wei.feng.model.entity.UserFile;
 import tan.wei.feng.model.mapper.FileMapper;
 
 /**
