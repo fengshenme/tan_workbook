@@ -5,8 +5,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +30,6 @@ public class TestInesrt {
 	private static final  Logger logger = LoggerFactory.getLogger(TestInesrt.class);
 	
 	private static final List<User> USER = new ArrayList<> ();
-	
 	
 	public void remarkInesrt() {
 		ArrayList<Long> arrayList = new ArrayList<> (10000);	

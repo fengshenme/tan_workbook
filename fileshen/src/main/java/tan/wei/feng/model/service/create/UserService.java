@@ -20,7 +20,7 @@ import tan.wei.feng.utils.SmsUtil;
 
 /**
  * 用户服务
- * @author 1015956962@163.com
+ * @author 1015956962
  *
  */
 @Service
@@ -34,6 +34,9 @@ public class UserService {
 	private RedisTemplate<String,String> redisTemplate = null;
 	@Autowired
 	private SmsUtil smsUtil = null;
+	@Autowired
+	private BCryptPasswordEncoder encoder = null;
+	
 	
 	private static final Random RAND = new Random();
 	
@@ -61,8 +64,7 @@ public class UserService {
 	public Map<String, String> findByMobileAndPassword(String mobile, String password) {
 		User user = userMapper.findByMobile(mobile); 
 		Map<String, String> map=new HashMap<>(3);
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		if(user!=null&&encoder.matches(password, user.getPassword())) {
+		if( user!=null && encoder.matches(password, user.getPassword()) ) {
 			// 生成token 
 			String token = JwtUtil.getJwt().createJsonWebToken(user.getId().toString(),user.getMobile(), "user");
 			map.put("token",token);

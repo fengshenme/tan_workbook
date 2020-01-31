@@ -12,7 +12,7 @@ import tan.wei.feng.model.mapper.WeiBoSearchMapper;
 
 /**
  * 微博搜索数据
- * @author 1015956962@163.com
+ * @author 1015956962
  *
  */
 @Component

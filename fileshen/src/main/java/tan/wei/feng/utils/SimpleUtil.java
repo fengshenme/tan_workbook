@@ -8,7 +8,7 @@ package tan.wei.feng.utils;
 public class SimpleUtil {
 	
 	private SimpleUtil (){
-		 throw new IllegalStateException("初始化失败");
+		 throw new IllegalStateException("不要new，不要继承");
 	} 
 	
 	 private static long ti = 0 ;

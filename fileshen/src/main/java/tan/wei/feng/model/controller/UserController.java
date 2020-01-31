@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,11 +25,12 @@ import io.jsonwebtoken.Claims;
 import tan.wei.feng.model.entity.User;
 import tan.wei.feng.model.service.create.UserRegisterService;
 import tan.wei.feng.model.service.create.UserService;
+import tan.wei.feng.model.service.update.UserUpdateService;
 
 
 /**
  * 注册控制
- * @author 1015956962@163.com
+ * @author 1015956962
  *
  */
 @RestController
@@ -46,6 +48,8 @@ public class UserController {
 	private  RedisTemplate<String,String> redisTemplate = null ;
 	@Autowired
 	private UserRegisterService userRegisterService = null ;
+	@Autowired
+	private UserUpdateService userUpdateService = null ;
 	
 	
 	/**
@@ -117,5 +121,18 @@ public class UserController {
 		}
 		return new ResponseEntity<>(HttpStatus.RESET_CONTENT) ;
 	}
+	
+	/**
+	 * 修改用户密码
+	 * @param password
+	 * @return
+	 */
+	@PutMapping(value = "/userPasswordUpdate/{password}",produces="text/plain;charset=UTF-8")
+	public ResponseEntity<String> userPasswordUpdate(@PathVariable String password){
+		Long userid = 1578906017776100L;
+		boolean userPasswordUpdate = userUpdateService.userPasswordUpdate(userid, password);
+		return new ResponseEntity<>("修改成功"+userPasswordUpdate,HttpStatus.OK) ;
+	}
+	
 	
 }

@@ -7,10 +7,12 @@ import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.UpdateProvider;
 
 import tan.wei.feng.model.mapper.sql.DeleteSql;
 import tan.wei.feng.model.mapper.sql.InsertSql;
 import tan.wei.feng.model.mapper.sql.SelectSql;
+import tan.wei.feng.model.mapper.sql.UpdateSql;
 
 /**
  * 公共的mapper,一些经常用到的方法
@@ -105,5 +107,13 @@ public interface MyMapper<T> {
 	@DeleteProvider(type = DeleteSql.class, method = "deleteByPrimaryKey")
 	int deleteByPrimaryKey(@Param(value="entityName") String entityName,@Param(value="id") Long id);
 	
+	/**
+	 * 更新数据
+	 * @param entityName
+	 * @param filed
+	 * @return
+	 */
+	@UpdateProvider(type = UpdateSql.class, method = "updateByPrimaryKey")
+	boolean updateByPrimaryKey(@Param(value="entityName") String entityName,@Param(value="filed") List<String> filed);
 	
 }

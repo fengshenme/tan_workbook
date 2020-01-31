@@ -11,7 +11,7 @@ public class ParamConfig {
 	 * 实用工具类不应该有公共构造函数
 	 */
 	private ParamConfig() {
-	    throw new IllegalStateException("ParamConfig类加载失败");
+	    throw new IllegalStateException("不能初始化,这是个静态");
 	  }
 	
 	/**

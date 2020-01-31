@@ -81,7 +81,7 @@ public class ArticleController {
 	 */
 	@GetMapping(value = "/getcomments/{articleid}/{page}", produces="application/json;charset=UTF-8")
 	public ResponseEntity<PageResult<Remark>> getRemarks(@PathVariable Long articleid,@PathVariable Integer page) {
-		PageResult<Remark> findpage = articleFindService.findByPageRemark(articleid,page-1);
+		PageResult<Remark> findpage = articleFindService.findByPageRemark(articleid,page);
 		if(findpage.getTotal() <= 0) {
 			// "没有评论"
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

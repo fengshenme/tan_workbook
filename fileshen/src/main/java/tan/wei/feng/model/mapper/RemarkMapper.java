@@ -41,4 +41,14 @@ public interface RemarkMapper extends MyMapper<Remark>{
 			"</script>"})
 	void insertallaa(@Param(value="remarkLists") List<Remark> remarkLists);
 	
+	/**
+	 * 一次查询200条，构建一个逻辑分页
+	 * @param userName
+	 * @param pageIndex
+	 * @return
+	 */
+	@Select(value = {"SELECT *,(SELECT COUNT(id)  FROM tb_remark where article_id=#{articleId}) AS total "
+			+ "FROM tb_remark where article_id=#{articleId} LIMIT #{pageIndex}, 200;"})
+	List<Remark> selectByPagecache(@Param(value = "articleId") Long articleId, Integer pageIndex);
+	
 }

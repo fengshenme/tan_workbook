@@ -19,7 +19,7 @@ import tan.wei.feng.model.ParamConfig;
 public class InsertSql  {
 
 	private static final  Logger logger = LoggerFactory.getLogger(InsertSql.class);
-	
+
 	/**
 	 * 插入语句
 	 * @param isAll
@@ -39,7 +39,6 @@ public class InsertSql  {
 			sql.append("INSERT INTO ");
 			 // 获取表名
 	        sql.append(tablename);
-	        
 	        StringBuilder sfv = new StringBuilder();
 	        sql.append("<trim prefix='(' suffix=')' suffixOverrides=','>");
 	        for (Field fie : field) {

@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.unit.DataSize;
 
 
@@ -38,6 +39,15 @@ public class FileAppliction {
         /// 总上传数据大小最大500mb
         factory.setMaxRequestSize(DataSize.ofMegabytes(500));
         return factory.createMultipartConfig();
+    }
+    
+    /**
+     * 密码加密的
+     * @return
+     */
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    	return new BCryptPasswordEncoder();
     }
     
 }

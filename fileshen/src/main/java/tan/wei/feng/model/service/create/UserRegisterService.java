@@ -18,7 +18,7 @@ import tan.wei.feng.utils.IdUtil;
 
 /**
  * 用户注册
- * @author 1015956962@163.com
+ * @author 1015956962
  *
  */
 @Service
@@ -27,6 +27,8 @@ public class UserRegisterService {
 	private static final Logger logger = LoggerFactory.getLogger(UserRegisterService.class);
 	@Autowired
 	private UserMapper userMapper = null;
+	@Autowired
+	private BCryptPasswordEncoder encoder = null;
 	
 	private Integer threshold = 30;
 	private static final ArrayList<User> USER_SAVE_LIST = new ArrayList<> ();
@@ -37,7 +39,6 @@ public class UserRegisterService {
 	 */
 	public boolean saveUser(JSONObject jsob) {
 		User user = new User();
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		user.setId(IdUtil.getInstance().idGenerate());
 		user.setUpdateTime(new Date());
 		user.setNickname(jsob.getString("nickname"));

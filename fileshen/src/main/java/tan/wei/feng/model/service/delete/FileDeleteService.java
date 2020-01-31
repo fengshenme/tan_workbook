@@ -10,7 +10,7 @@ import tan.wei.feng.model.mapper.FileMapper;
 
 /**
  * 文件删除服务
- * @author 1015956962@163.com
+ * @author 1015956962
  *
  */
 @Service
