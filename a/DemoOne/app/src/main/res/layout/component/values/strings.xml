@@ -1,0 +1,7 @@
+<resources>
+
+    <item name="Tag_APP" type="id"></item>
+    <item name="Tag_Book" type="id"></item>
+
+    <string name="spin_title">分段选择</string>
+</resources>

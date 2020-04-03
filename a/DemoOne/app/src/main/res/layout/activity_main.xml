@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+<ScrollView
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true">
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <TableRow>
+            <Button
+                android:id="@+id/button104"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="DirectionSensor"
+                android:text="方向传感器" />
+            <Button
+                android:id="@+id/button103"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="SensorDemo"
+                android:text="传感器" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button102"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="LayoutInflater"
+                android:text="布局服务" />
+            <Button
+                android:id="@+id/button101"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="WindowManager"
+                android:text="窗口管理服务" />
+            <Button
+                android:id="@+id/button100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="AlarmManager"
+                android:text="闹钟服务" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button99"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="VibratorDemo"
+                android:text="振动器" />
+            <Button
+                android:id="@+id/button98"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="AudioManager"
+                android:text="音频管理器" />
+            <Button
+                android:id="@+id/button97"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="TelephonyManager"
+                android:text="电话管理器" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button96"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="MediaRecord"
+                android:text="录音" />
+
+            <Button
+                android:id="@+id/button95"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="CameraDemo"
+                android:text="拍照" />
+            <Button
+                android:id="@+id/button94"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="MediaPlayer"
+                android:text="视频播放" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button93"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="SoundPool"
+                android:text="音乐播放" />
+            <Button
+                android:id="@+id/button92"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="FloatEvaluator"
+                android:text="属性动画2" />
+            <Button
+                android:id="@+id/button91"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="PropertyAnimation"
+                android:text="属性动画" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button90"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="LoginRegister"
+                android:text="补间动画" />
+            <Button
+                android:id="@+id/button89"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="AlphaAnimation"
+                android:text="AlphaAnim" />
+            <Button
+                android:id="@+id/button88"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="AnimationDrawable"
+                android:text="AnimationDr" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button85"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="Drawable0"
+                android:text="Drawable0" />
+            <Button
+                android:id="@+id/button86"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="Drawing"
+                android:text="Drawing" />
+            <Button
+                android:id="@+id/button87"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="MaskFilter"
+                android:text="MaskFilter" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button82"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="WebViewError"
+                android:text="WebViewError" />
+            <Button
+                android:id="@+id/button83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="SocketClient"
+                android:text="SocketClient" />
+            <Button
+                android:id="@+id/button84"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="FileUpload"
+                android:text="FileUpload" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button79"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="WebView3"
+                android:text="webview" />
+            <Button
+                android:id="@+id/button80"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="WebView4"
+                android:text="webview" />
+            <Button
+                android:id="@+id/button81"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="WebViewCache"
+                android:text="WebViewCache" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button76"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="XmlParse"
+                android:text="xml数据解析" />
+            <Button
+                android:id="@+id/button77"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="WebView"
+                android:text="web视图1" />
+            <Button
+                android:id="@+id/button78"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="WebView2"
+                android:text="web视图2" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button73"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="HttpGet"
+                android:text="http-get" />
+            <Button
+                android:id="@+id/button74"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="TestPost"
+                android:text="TestPost" />
+            <Button
+                android:id="@+id/button75"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="HttpClientGet"
+                android:text="HttpClientGet" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="sendMessage"
+                android:text="send"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="sendMessage2"
+                android:text="linear2" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="send3"
+                android:text="Relative" />
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="send4"
+                android:text="Rela2" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="send5"
+                android:text="Rela3" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="sendTable"
+                android:text="TableSkip" />
+
+        </TableRow>
+
+        <TableRow android:layout_width="442dp">
+
+
+
+            <Button
+                android:id="@+id/button7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="sendTable2"
+                android:text="stret" />
+
+            <Button
+                android:id="@+id/button8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="sendTable3"
+                android:text="Shrink" />
+
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="sendTable4"
+                android:text="登录" />
+
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="sendFrame"
+                android:text="Frame" />
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="sendFrame2"
+                android:text="Frame2" />
+            <Button
+                android:id="@+id/button12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="sendFrame3"
+                android:text="Frame3" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="sendGrid"
+                android:text="Grid" />
+            <Button
+                android:id="@+id/button14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="skipText"
+                android:text="TextView" />
+            <Button
+                android:id="@+id/button15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="skipText2"
+                android:text="TextInfo" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="skipText3"
+                android:text="skipText3" />
+            <Button
+                android:id="@+id/button17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="skipButton"
+                android:text="skipButton" />
+            <Button
+                android:id="@+id/button18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="skipButton2"
+                android:text="skipButton2" />
+
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="skipImage"
+                android:text="skipImage" />
+
+            <Button
+                android:id="@+id/button20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="skipRadio"
+                android:text="单选-复选按钮" />
+
+            <Button
+                android:id="@+id/button21"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="skipToggleButton"
+                android:text="开关按钮" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="ProgressBar"
+                android:text="进度条" />
+            <Button
+                android:id="@+id/button23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="skipSeekBar"
+                android:text="拖动条" />
+            <Button
+                android:id="@+id/button24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="RatingBar"
+                android:text="星级评分条" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="ScrollView"
+                android:text="滚动条" />
+
+            <Button
+                android:id="@+id/button26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="TextClock"
+                android:text="文本时钟" />
+
+            <Button
+                android:id="@+id/button27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="DatePicker"
+                android:text="日期选择器" />
+
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="TimePicker"
+                android:text="时间选择器" />
+            <Button
+                android:id="@+id/button29"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="ArrayAdapter"
+                android:text="ArrayAdapter" />
+            <Button
+                android:id="@+id/button30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="ListView"
+                android:text="ListView" />
+
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="ListViewData"
+                android:text="ListViewData" />
+            <Button
+                android:id="@+id/button32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="ListViewItem"
+                android:text="ListViewItem" />
+            <Button
+                android:id="@+id/button33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="GridView"
+                android:text="GridView" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="Spinner"
+                android:text="Spinner" />
+            <Button
+                android:id="@+id/button35"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="AutoCompleteTextView"
+                android:text="AutoComplete" />
+            <Button
+                android:id="@+id/button36"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="ExpandableListView"
+                android:text="ExpandableLi" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="ViewFlipper"
+                android:text="轮播图" />
+            <Button
+                android:id="@+id/button38"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="ViewFlipper2"
+                android:text="轮播图动态" />
+            <Button
+                android:id="@+id/button39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="Toasta"
+                android:text="Toast" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="Notification"
+                android:text="转态通知" />
+            <Button
+                android:id="@+id/button41"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="AlertDialog"
+                android:text="对话框" />
+            <Button
+                android:id="@+id/button42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="progressDialog"
+                android:text="进度条对话框" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button43"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="datePickerDialog"
+                android:text="日期选择对话框" />
+
+            <Button
+                android:id="@+id/button44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="PopupWindow"
+                android:text="悬浮框" />
+            <Button
+                android:id="@+id/button45"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="OptionMenu"
+                android:text="选项菜单" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button46"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="ViewPager"
+                android:text="视图滑动切换" />
+            <Button
+                android:id="@+id/button47"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="DrawerLayout"
+                android:text="官方侧滑菜单" />
+            <Button
+                android:id="@+id/button48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="DrawerLayout2"
+                android:text="左右侧滑菜单" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button49"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="HandlingEvents"
+                android:text="监听事件处理" />
+            <Button
+                android:id="@+id/button50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="CallbackEvent"
+                android:text="回调事件处理" />
+            <Button
+                android:id="@+id/button51"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="HandlerMessage"
+                android:text="Handler消息" />
+
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button52"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="Handler0"
+                android:text="Handler子线程" />
+            <Button
+                android:id="@+id/button53"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="TouchListener"
+                android:text="TouchListener" />
+            <Button
+                android:id="@+id/button54"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="TouchEvent"
+                android:text="TouchEvent" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="MotionEvent"
+                android:text="多点触碰" />
+            <Button
+                android:id="@+id/button56"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="EditText"
+                android:text="监听EditText" />
+            <Button
+                android:id="@+id/button57"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="EditText2"
+                android:text="密码是否可见" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button58"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="Configuration"
+                android:text="查询配置" />
+            <Button
+                android:id="@+id/button59"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="AsyncTask"
+                android:text="异步操作" />
+            <Button
+                android:id="@+id/button60"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="Message0"
+                android:text="消息传递" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button61"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="Message3"
+                android:text="消息回馈" />
+            <Button
+                android:id="@+id/button62"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="StartSer"
+                android:text="验证服务调用" />
+            <Button
+                android:id="@+id/button63"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="DynaRegister"
+                android:text="动态广播" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button64"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="Fragment1"
+                android:text="底部导航栏" />
+            <Button
+                android:id="@+id/button65"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="Fragment2"
+                android:text="底部导航2" />
+            <Button
+                android:id="@+id/button66"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="Fragment3"
+                android:text="底部导航2" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button67"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="Fragment4"
+                android:text="底部导航栏" />
+            <Button
+                android:id="@+id/button68"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="File2"
+                android:text="文件2" />
+            <Button
+                android:id="@+id/button69"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="File3"
+                android:text="文件3" />
+
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/button70"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="SharedPreferences"
+                android:text="数据保存" />
+            <Button
+                android:id="@+id/button71"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="SharedPreferences2"
+                android:text="数据加密保存" />
+            <Button
+                android:id="@+id/button72"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="SQLiteDemo"
+                android:text="SQLiteDemo" />
+
+        </TableRow>
+
+    </TableLayout>
+
+</ScrollView>
+
+</RelativeLayout>

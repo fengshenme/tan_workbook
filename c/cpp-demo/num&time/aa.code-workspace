@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "H:\\git-repo\\java"
+		},
+		{
+			"path": "H:\\pakage\\cpp\\vcpkg-2020.01"
+		},
+		{
+			"path": "H:\\vue-project\\cpp-demo"
+		},
+		{
+			"path": "H:\\vue-project\\c-test"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"cstdlib": "c",
+			"ctime": "cpp"
+		}
+	}
+}

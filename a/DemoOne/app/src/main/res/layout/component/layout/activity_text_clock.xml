@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".component.TextClockActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextClock
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timeZone="@string/local_time"
+            android:format12Hour="MM/dd/yy h:mmaa"/>
+        <TextClock
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timeZone="@string/local_time"
+            android:format12Hour="MMM dd, yyyy h:mmaa"/>
+        <TextClock
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timeZone="@string/local_time"
+            android:format12Hour="MMMM dd, yyyy h:mmaa"/>
+        <TextClock
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timeZone="@string/local_time"
+            android:format12Hour="E, MMMM dd, yyyy h:mmaa"/>
+        <TextClock
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timeZone="@string/local_time"
+            android:format12Hour="EEEE, MMMM dd, yyyy h:mmaa"/>
+        <TextClock
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:timeZone="@string/local_time"
+            android:format12Hour="Noteworthy day: 'M/d/yy"/>
+
+        <AnalogClock
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <AnalogClock
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:dial="@drawable/clock_dial_roman_old_black"
+            android:hand_hour="@drawable/clock_hour_hand_roman_white"
+            android:hand_minute="@drawable/clock_minute_hand_roman_white"
+            />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

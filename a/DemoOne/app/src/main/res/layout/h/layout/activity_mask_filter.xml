@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".h.MaskFilterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+<!--        <com.example.demoone.h.view.BlurMaskFilterView-->
+<!--            android:layout_height="160dp"-->
+<!--            android:layout_width="wrap_content">-->
+<!--        </com.example.demoone.h.view.BlurMaskFilterView>-->
+<!--        <com.example.demoone.h.view.EmbossMaskFilterView-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_width="wrap_content">-->
+<!--        </com.example.demoone.h.view.EmbossMaskFilterView>-->
+<!--        <com.example.demoone.h.view.PathEffectView-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_width="wrap_content">-->
+<!--        </com.example.demoone.h.view.PathEffectView>-->
+<!--        <com.example.demoone.h.view.BitmapShaderView-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_width="wrap_content">-->
+<!--        </com.example.demoone.h.view.BitmapShaderView>-->
+        <com.example.demoone.h.view.MyView
+            android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+            />
+
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

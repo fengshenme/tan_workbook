@@ -1,28 +1,31 @@
-## 这是个DEMO
-
-**月更新，季度更新或年更新**
-
+# 笔记
+----
 文件服务器,图片显示,视频播放,
 ssm框架,代码经过p3c检测无报告,sonarLint的报告看心情在优化
 
 增加cnn,文本模型训练
 
 打包
-```mvn install```
-
+```
+mvn install
+```
 Spring boot 启动运行命令
 第一种：
-```java -jar xxxx.jar > error.log 2>&1 &```
-
+```
+java -jar xxxx.jar > error.log 2>&1 &
+```
 第二种：
-```nohup java -jar xxxx.jar > error.log 2>&1 &```
-
+```
+nohup java -jar xxxx.jar > error.log 2>&1 &
+```
 第三种：
-```java -jar xxxx.jar &```
-
+```
+java -jar xxxx.jar &
+```
 第四种
-```setsid java -jar xxxx.jar```
-
+```
+setsid java -jar xxxx.jar
+```
 第五种：
 1、首先先用vim创建文件start.sh
 vim start.sh

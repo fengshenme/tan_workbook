@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".i.SoundPoolActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@mipmap/bg_duang"/>
+
+        <Button
+            android:id="@+id/btn_play1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="播放声音1" />
+
+
+        <Button
+            android:id="@+id/btn_play2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="播放声音2" />
+
+        <Button
+            android:id="@+id/btn_play3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="播放声音3" />
+
+        <Button
+            android:id="@+id/btn_play4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="播放声音4" />
+
+        <Button
+            android:id="@+id/btn_play5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="播放声音5" />
+
+        <Button
+            android:id="@+id/btn_release"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="释放SoundPool" />
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
