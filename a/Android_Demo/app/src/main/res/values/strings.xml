@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Android_Demo</string>
+
+
+
+    <!--    设置时区-->
+    <string name="local_time">"Asia/Shanghai"</string>
+
+    <string name="tab_menu_alert">提醒</string>
+    <string name="tab_menu_profile">信息</string>
+    <string name="tab_menu_pay">我的</string>
+    <string name="tab_menu_setting">设置</string>
+
+    <string name="edithint">请输入要写入的内容~</string>
+    <string name="btnwrite">写入</string>
+    <string name="btnclean">清空</string>
+    <string name="nametitle">请输入文件名</string>
+    <string name="detailtitle">请输入文件内容</string>
+    <string name="btnread">读取文件内容</string>
+
+    <string name="long_press">长按我，加载菜单</string>
+    <string name="load_pic">请求图片</string>
+    <string name="load_html">请求HTML代码</string>
+    <string name="load_html_into">将HTML代码加载到WebView</string>
+
+</resources>

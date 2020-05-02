@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".h.MaskFilterActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.example.android_demo.h.view.BlurMaskFilterView
+            android:layout_height="160dp"
+            android:layout_width="wrap_content">
+        </com.example.android_demo.h.view.BlurMaskFilterView>
+        <com.example.android_demo.h.view.EmbossMaskFilterView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
+        </com.example.android_demo.h.view.EmbossMaskFilterView>
+        <com.example.android_demo.h.view.PathEffectView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
+        </com.example.android_demo.h.view.PathEffectView>
+        <com.example.android_demo.h.view.BitmapShaderView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"/>
+        <com.example.android_demo.h.view.MyView
+            android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+            />
+
+    </LinearLayout>

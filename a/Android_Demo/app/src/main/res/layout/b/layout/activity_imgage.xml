@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".b.ImgageActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/img1" />
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/img1" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img1" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img1" />
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:src="@drawable/img1" />
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img2"
+                android:background="#6699FF" />
+            <!-- 正常的图片 -->
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5px"
+                android:src="@drawable/img3" />
+            <!-- 限制了最大宽度与高度,并且设置了调整边界来保持所显示图像的长宽比-->
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5px"
+                android:adjustViewBounds="true"
+                android:maxHeight="200px"
+                android:maxWidth="200px"
+                android:src="@drawable/img4" />
+
+            <!-- 保持图片的横纵比缩放,知道该图片能够显示在ImageView组件上,并将缩放好的图片显示在imageView的右下角 -->
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="300px"
+                android:layout_height="300px"
+                android:layout_margin="5px"
+                android:scaleType="fitEnd"
+                android:src="@drawable/img5" />
+        </LinearLayout>
+
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+<!--
+centerCrop:按横纵比缩放,直接完全覆盖整个ImageView
+centerInside:按横纵比缩放,使得ImageView能够完全显示这个图片
+-->
+    <ImageView
+        android:layout_width="300px"
+        android:layout_height="300px"
+        android:layout_margin="5px"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/s_1" />
+
+    <ImageView
+        android:layout_width="300px"
+        android:layout_height="300px"
+        android:layout_margin="5px"
+        android:scaleType="centerInside"
+        android:src="@mipmap/s_1" />
+<!--    不按比例缩放图片，目标是把图片塞满整个View-->
+    <ImageView
+        android:layout_width="300px"
+        android:layout_height="300px"
+        android:layout_margin="5px"
+        android:scaleType="fitXY"
+        android:src="@mipmap/s_1" />
+</LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+<!--    从ImageView的左上角开始绘制原图，原图超过ImageView的部分作裁剪处理-->
+    <ImageView
+        android:layout_width="300px"
+        android:layout_height="300px"
+        android:layout_margin="5px"
+        android:scaleType="matrix"
+        android:src="@mipmap/s_2" />
+<!-- 保持原图的大小，显示在ImageView的中心。当原图的size大于ImageView的size，超过部分裁剪处理。-->
+    <ImageView
+        android:layout_width="300px"
+        android:layout_height="300px"
+        android:layout_margin="5px"
+        android:scaleType="center"
+        android:src="@mipmap/s_2" />
+    <com.example.android_demo.b.RoundImageView
+        android:id="@+id/img_round"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_margin="5px"/>
+
+</LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="100dp"
+    android:id="@+id/li_image_text_k"
+    android:layout_height="100dp">
+
+    <ImageView
+        android:id="@+id/top_image_k"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:adjustViewBounds="false"
+        android:src="@drawable/tw">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/bottom_text_k"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:text="汤唯"
+        >
+
+    </TextView>
+
+</LinearLayout>

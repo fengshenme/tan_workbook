@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/LinearLayout1"
+    android:orientation="vertical"
+    tools:context=".e.HandlingEventsActivity">
+
+        <Button
+            android:id="@+id/btnshow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="匿名内部类"
+            />
+        <Button
+            android:id="@+id/btnshow0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使用内部类"
+            />
+        <Button
+            android:id="@+id/btnshow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使用外部类"
+            />
+        <TextView
+            android:id="@+id/textshow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="使用外部类创建一个处理事件的Java"
+            ></TextView>
+
+        <Button
+            android:id="@+id/btnshow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activity作为事件监听器"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="直接绑定到标签:"
+            android:onClick="myclick"/>
+
+
+    </LinearLayout>

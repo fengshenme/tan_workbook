@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.android_demo">
+    <!-- 权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> <!-- 读取收件箱的权限： -->
+    <uses-permission android:name="android.permission.READ_SMS" /> <!-- 简单的读取手机联系人 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 在SDCard中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- 振动器权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- //打电话 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- //读取联系人 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" /> <!-- 添加访问手机位置的权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 添加访问手机状态的权限 授予该应用读取通话状态的权限 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".k.ZiDingYiViewActivity"></activity>
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <service
+            android:name=".f.service.TestService3"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.test.intentservice" />
+            </intent-filter>
+        </service>
+        <service android:name=".f.service.TestService2">
+            <intent-filter>
+                <action android:name="com.example.android_demo.f.service.TEST_SERVICE2" />
+            </intent-filter>
+        </service> <!-- 配置Service组件,同时配置一个action -->
+        <service android:name=".f.service.TestService1">
+            <intent-filter>
+                <action android:name="com.example.android_demo.f.service.TEST_SERVICE3" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".a.TableActivity" />
+        <activity android:name=".a.StretchColumnsActivity" />
+        <activity android:name=".a.ShrinkColumnsActivity" />
+        <activity android:name=".a.Relati3Activity" />
+        <activity android:name=".a.Relative2Activity" />
+        <activity android:name=".a.RelativeActivity" />
+        <activity android:name=".a.LoginTabActivity" />
+        <activity android:name=".a.LinearLayout2Activity" />
+        <activity android:name=".a.LinearLayoutActivity" />
+        <activity android:name=".a.GridActivity" />
+        <activity android:name=".a.Frame3Activity" />
+        <activity android:name=".a.Frame2Activity" />
+        <activity android:name=".a.FrameActivity" />
+        <activity android:name=".a.AdActivity" />
+        <activity android:name=".b.ToggleButtonActivity" />
+        <activity android:name=".b.TextinfoActivity" />
+        <activity android:name=".b.Text2Activity" />
+        <activity android:name=".b.TextActivity" />
+        <activity android:name=".b.ScrollViewActivity" />
+        <activity android:name=".b.SeekBarActivity" />
+        <activity android:name=".b.RatingBarActivity" />
+        <activity android:name=".b.RadioButtonActivity" />
+        <activity android:name=".b.ProgressBarActivity" />
+        <activity android:name=".b.ImgageActivity" />
+        <activity android:name=".b.Button2Activity" />
+        <activity android:name=".b.ButtonActivity" />
+        <activity android:name=".c.ViewFlipperActivity" />
+        <activity android:name=".c.ViewFlipper2Activity" />
+        <activity android:name=".c.ToastActivity" />
+        <activity android:name=".c.TimePickerActivity" />
+        <activity android:name=".c.TextClockActivity" />
+        <activity android:name=".c.SpinnerActivity" />
+        <activity android:name=".c.ProgressDialogActivity" />
+        <activity android:name=".c.PopupWindowActivity" />
+        <activity android:name=".c.OtherActivity" />
+        <activity android:name=".c.OptionMenuActivity" />
+        <activity android:name=".c.NotificationActivity" />
+        <activity android:name=".c.ListViewItemActivity" />
+        <activity android:name=".c.ListViewDataActivity" />
+        <activity android:name=".c.ListViewActivity" />
+        <activity android:name=".c.GridViewActivity" />
+        <activity android:name=".c.ExpandableListViewActivity" />
+        <activity android:name=".c.DatePickerDialogActivity" />
+        <activity android:name=".c.DatePickerActivity" />
+        <activity android:name=".c.DateActivity" />
+        <activity android:name=".c.AutoCompleteTextViewActivity" />
+        <activity android:name=".c.ArrayAdapterActivity" />
+        <activity android:name=".c.AlertDialogActivity" />
+        <activity android:name=".d.DrawerLayout2Activity" />
+        <activity android:name=".d.DrawerLayoutActivity" />
+        <activity android:name=".d.FourActivity" />
+        <activity android:name=".d.OneActivity" />
+        <activity android:name=".d.Other2Activity" />
+        <activity android:name=".d.ThreeActivity" />
+        <activity android:name=".d.TwoActivity" />
+        <activity android:name=".d.ViewPagerActivity" />
+        <activity android:name=".e.AsyncTaskActivity" />
+        <activity android:name=".e.CallbackEventActivity" />
+        <activity android:name=".e.ConfigurationActivity" />
+        <activity android:name=".e.EditText2Activity" />
+        <activity android:name=".e.EditTextActivity" />
+        <activity android:name=".e.HandlerActivity" />
+        <activity android:name=".e.HandlerMessageActivity" />
+        <activity android:name=".e.HandlingEventsActivity" />
+        <activity android:name=".e.MotionEventActivity" />
+        <activity android:name=".e.TouchEventActivity" />
+        <activity android:name=".e.TouchListenerActivity" />
+        <activity android:name=".f.DynaRegisterActivity" />
+        <activity android:name=".f.Fragment1Activity" />
+        <activity android:name=".f.Fragment2Activity" />
+        <activity android:name=".f.Fragment3Activity" />
+        <activity android:name=".f.Fragment4Activity" />
+        <activity android:name=".f.Message2Activity" />
+        <activity android:name=".f.Message3Activity" />
+        <activity android:name=".f.Message4Activity" />
+        <activity android:name=".f.MessageActivity" />
+        <activity android:name=".f.StartSerActivity" />
+        <activity android:name=".g.File2Activity" />
+        <activity android:name=".g.File3Activity" />
+        <activity android:name=".g.HttpClientGetActivity" />
+        <activity android:name=".g.HttpGetActivity" />
+        <activity android:name=".g.SharedPreferences2Activity" />
+        <activity android:name=".g.SharedPreferencesActivity" />
+        <activity android:name=".g.SocketClientActivity" />
+        <activity android:name=".g.SQLiteActivity" />
+        <activity android:name=".g.TestPostActivity" />
+        <activity android:name=".g.WebView2Activity" />
+        <activity android:name=".g.WebViewCacheActivity" />
+        <activity android:name=".g.WebViewErrorActivity" />
+        <activity android:name=".g.XmlParseActivity" />
+        <activity android:name=".h.AlphaAnimationActivity" />
+        <activity android:name=".h.AnimationDrawableActivity" />
+        <activity android:name=".h.CaClothes" />
+        <activity android:name=".h.Drawable0Activity" />
+        <activity android:name=".h.DrawingActivity" />
+        <activity android:name=".h.FileUploadActivity" />
+        <activity android:name=".h.FloatEvaluatorActivity" />
+        <activity android:name=".h.LoginRegisterActivity" />
+        <activity android:name=".h.MaskFilterActivity" />
+        <activity android:name=".h.PropertyAnimationActivity" />
+        <activity android:name=".i.MediaPlayerActivity" />
+        <activity android:name=".i.MediaRecordActivity" />
+        <activity android:name=".i.PreviewActivity" />
+        <activity android:name=".i.SensorDemoActivity" />
+        <activity android:name=".i.SoundPoolActivity" />
+        <activity android:name=".i.TelephonyManagerActivity" />
+        <activity android:name=".i.VibratorDemoActivity" />
+        <activity android:name=".i.AlarmManagerActivity" />
+        <activity android:name=".i.AudioManagerActivity" />
+        <activity android:name=".i.WindowManagerActivity" />
+        <activity android:name=".i.CameraDemoActivity" />
+        <activity android:name=".i.DirectionSensorActivity" />
+        <activity android:name=".i.ClockActivity" />
+        <activity android:name=".i.LayoutInflaterActivity" />
+        <activity android:name=".j.JniActivity" />
+        <activity android:name=".j.netlunbotu.LunBoTuActivity" />
+        <activity android:name=".j.netlunbotu.ViewPagerActivity" />
+    </application>
+
+</manifest>

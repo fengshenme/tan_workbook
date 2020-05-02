@@ -1,0 +1,9 @@
+<resources>
+    <string name="font_blue">蓝色</string>
+    <string name="font_green">绿色</string>
+    <string name="font_red">红色</string>
+    <item name="Tag_APP" type="id"></item>
+    <item name="Tag_Book" type="id"></item>
+
+    <string name="spin_title">分段选择</string>
+</resources>
