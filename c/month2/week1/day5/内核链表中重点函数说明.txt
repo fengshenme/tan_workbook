@@ -1,0 +1,115 @@
+内核链表其实类似于一个双向循环链表；
+
+1,内核链表的结构体：
+	struct list_head {
+	struct list_head *next, *prev;
+};
+	这个结构体是用来嵌套到大个数据结构体当中的，专门用来记载链表中的上下具体位置
+
+2，初始化头节点：
+	#define INIT_LIST_HEAD(ptr) do { \
+
+	(ptr)->next = (ptr); (ptr)->prev = (ptr); \
+	
+} while (0)
+	
+	宏函数功能：初始化头结点，让头结点的next及prev全部指向自己
+		ptr：传入头结点中的 struct list_head 的地址
+			比如我们在调用的 &head->list
+
+3，
+	static inline void list_add(struct list_head *new, struct list_head *head)
+	
+	函数功能：将new这个节点添加到head这个节点之后的位置
+
+4，
+	static inline void list_add_tail(struct list_head *new, struct list_head *head)
+	函数功能：将new这个节点，添加到head这个节点之前的位置
+
+
+5，
+	static inline void list_del(struct list_head *entry)
+	函数功能：在entry所在的链表中移除entry节点
+		
+		ps：调用这个函数会将entry的登记链表位置的next，prev清零
+
+6，
+	static inline void list_move(struct list_head *list,
+				struct list_head *head)
+
+	函数功能：移动list这个节点到head这个节点之后（不在同一个链表当中也可以）
+		
+
+7，
+	static inline void list_move_tail(struct list_head *list,
+					struct list_head *head)
+	函数功能：移动list这个节点到head这个节点之前（不在同一个链表当中也可以）
+
+
+8，
+	static inline int list_empty(struct list_head *head)
+	
+	函数功能：
+		判断链表是不是空的
+
+
+9，
+	static inline void list_splice(struct list_head *list, struct list_head *head)
+
+	函数功能：
+		合并两条链表，将list这条链表的元素添加到head里，list头结点不会添加进去head
+
+10，
+	static inline void list_splice_init(struct list_head *list,
+struct list_head *head)
+
+	函数功能：
+		与上面函数一样，但是list这个链表会被清空
+
+11，
+	#define list_entry(ptr, type, member)
+
+	函数功能：
+		由小结构地址（struct list_head *）获取到对应的大结构体的地址（包含了这个struct list_head的大结构体）
+
+	ptr：小个结构体的地址（struct list_head *）
+	type：大个结构体的类型，大个结构体的定义的类型的名字
+	member：小个结构体在大个结构体当中的名字
+
+	返回值：返回大个结构体的内存地址
+
+12，
+	#define list_for_each(pos, head) \
+for (pos = (head)->next; pos != (head); \
+pos = pos->next)
+
+	函数功能：
+		遍历链表（不安全模式，更改pos值就会异常），其实这个宏函数就是个for循环，当成for循环来用
+
+		pos：用来记录遍历的哪个节点的地址的，类型为 (struct list_head *)这个pos从head->next开始
+			ps：此时一定不能更改pos的值，如果更改了pos的值，这条链表就异常了
+
+			head：链表的头结点的地址,类型为 (struct list_head *)
+
+
+13，
+	#define list_for_each_safe(pos, n, head) \
+for (pos = (head)->next, n = pos->next; pos != (head); \
+pos = n, n = pos->next)
+
+	函数功能：
+		遍历链表（安全模式，可以更改pos的值，但是不能更改n的值），其实这个宏函数就是个for循环，当成for循环来用
+
+		pos：用来记录遍历的哪个节点的地址的，类型为 (struct list_head *)这个pos从head->next开始
+			ps：此时可以更改pos的值
+
+		head：链表的头结点的地址,类型为 (struct list_head *)
+
+		n：缓冲变量，类型为(struct list_head *)，专门用来记录pos的下一个位置，这样使用pos就不会有异常了
+
+
+	
+
+
+
+		

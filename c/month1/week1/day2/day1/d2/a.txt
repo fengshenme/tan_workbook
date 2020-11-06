@@ -1,0 +1,4 @@
+总用量 8
+-rw-rw-r-- 1 gec gec    0 Sep 10 03:51 a.txt
+drwxrwxr-x 3 gec gec 4096 Sep 10 03:49 d1
+-rwxr-xr-x 1 gec gec  224 Sep 10 03:47 first_script.sh

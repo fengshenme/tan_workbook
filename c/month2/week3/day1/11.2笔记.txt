@@ -1,0 +1,375 @@
+一、系统编程学习大纲。
+1、进程的概念、进程的诞生与死亡，进程函数接口，进程意义。
+2、进程之间的通信方式：无名管道、有名管道、信号、消息队列、共享内存(信号量)
+3、linux信号集概念，信号集函数接口，信号集作用，如何给信号设置阻塞状态？
+4、线程的概念，线程与进程的区别？线程诞生与死亡，线程函数接口。
+5、线程的同步互斥方式：有名信号量(进程)、无名信号量(线程)、互斥锁、读写锁、条件变量。
+6、线程池 -> 同时处理多个任务。
+
+二、进程的概念？
+1、什么是程序？什么是进程？
+1）程序。
+例如：
+xxxx.c  -> C语言程序
+xxxx    -> 可执行程序
+程序其实就是一堆待执行的代码，是被储存到硬件中，主机关闭后，会仍然存在。   -> 静态的文本数据(剧本)
+
+2）进程。
+当启动一个软件(QQ影音)时，系统就会开启一个对应的进程(QQ影音的进程)
+进程就是当程序被CPU加载时，根据程序每一行代码做出相应动作，形成一个动态的过程，那么这个过程就是进程。  -> 动态的运行过程(电视剧)
+进程运行时，所申请的空间，都是在运行内存上，关机之后，进程消失了。
+
+2、在linux下，如何开启一个进程？
+直接在linux下，执行一个程序，就会开启相应的进程。
+例如： ./project    -> 开启一个名字为project的进程。
+
+3、当进程开启之后，系统会为进程分配什么资源？
+1）会分配内存空间。
+int x   -> 运行程序之后，系统就会在栈区分配4个字节的空间。
+
+2）当进程开启之后，系统会分配一个任务结构体给进程，这个任务结构体就是用于描述这个进程的。
+struct task_struct{};
+
+该结构体时被定义在一个头文件中：
+/usr/src/linux-headers-4.15.0-122/include/linux/sched.h
+
+三、关于查看进程的几个命令？
+1、查看整个系统中所有进程的ID号。   ->  ps -ef  (数据是静态)
+
+ubuntu@ubuntu:~$ ps -ef
+用户名    进程的ID     父进程的ID号        进程的名称
+UID         PID        PPID               CMD
+ubuntu     3265        1955               /usr/lib/gnome-terminal/gnome-terminal-server
+ubuntu     3270        3265               bash                                            --> 命令行：ubuntu@ubuntu:~$
+ubuntu    43688        3270               ps -ef                                          --> 命令：  ps -ef
+
+2、查看进程CPU使用率。   -> top (数据每隔3S就会更新一次)   -> 按'q'返回终端。
+1）查看任务状态
+Tasks: 222 total,   1 running, 157 sleeping,   0 stopped,   0 zombie
+		    运行态     睡眠态          暂停态        僵尸态
+
+2）查看CPU使用率。
+CPU使用率   内存使用率  进程的名字
+  %CPU       %MEM       COMMAND
+
+3、查看整个系统中所有进程之间的关系。   -> pstree
+ubuntu@ubuntu:~$ pstree
+
+祖先进程(孤儿院院长)
+systemd─┬─ManagementAgent───6*[{ManagementAgent}]
+         ├─NetworkManager─┬─dhclient
+         │                ├─dnsmasq
+         │                ├─{gdbus}
+         │                └─{gmain}
+         .....
+	 ├─gnome-terminal-─┬─bash───pstree
+	       终端              命令行     命令
+
+四、进程的诞生与死亡。
+1、进程从诞生到死亡会经历什么状态？
+
+就绪态： 不占用CPU资源，不运行代码，task_struct{}在
+运行态： 占用CPU资源，运行代码，task_struct{}在
+暂停态： 占用CPU资源，不运行代码，task_struct{}在
+睡眠态： 占用CPU资源，运行代码，task_struct{}在
+僵尸态： 占用CPU资源，不运行代码，task_struct{}在
+死亡态： 不占用CPU资源，不运行代码，task_struct{}不在
+
+2、总结。
+1）进程在暂停态时，收到继续信号，是切换到就绪态，不是运行态。
+2）程序的main函数执行return 0就会导致进程退出，一定变成僵尸态。
+3）进程不可以没有父进程，也不能同时拥有两个父进程。
+4）孤儿进程特征： 就是失去父进程时，会马上寻找继父，而不是等到孤儿进程变成僵尸态再找。
+5）祖先进程一定会帮其他的进程回收资源。
+
+五、进程的函数接口。
+单进程程序   --->  只能一行行代码地去执行。
+多进程程序   --->  同时执行两行代码： 在一个进程的内部创建一个子进程，帮自己去处理另外一个事情。
+
+1、如何在一个正在运行的进程中产生一个子进程呢？  -> fork()   -> man 2 fork
+功能：fork - create a child process
+	//创建一个子进程
+
+使用格式：
+	#include <unistd.h>
+
+        pid_t fork(void);
+
+参数：无
+返回值：
+	成功：  会产生一个新的子进程
+		父进程： 返回子进程的ID号。(x>0)
+		子进程： 0
+
+	失败：  不会产生一个新的子进程
+		父进程： -1
+
+
+  案例1：  在进程内部创建一个新的子进程，看看会不会同时执行两件事情。
+
+//创建一个新子进程
+//看看会不会做两件事情
+#include <stdio.h>
+#include <unistd.h>
+
+int main(int argc,char *argv[])
+{
+	//1. 现在还是一个单进程
+	printf("helloworld!\n");
+
+	//2. 在进程内部创建一个子进程
+	fork();
+	//现在就有2个进程，一个是父进程，一个子进程
+
+	printf("after fork!\n");
+	
+	return 0;
+}
+
+
+结果：
+ubuntu@ubuntu:/mnt/hgfs/GZ2067期/06 系统编程/code$ ./create_ps
+helloworld!
+after fork!
+ubuntu@ubuntu:/mnt/hgfs/GZ2067期/06 系统编程/code$ after fork!
+
+  
+  案例2  ---  有没有办法让子进程100%先运行呢？
+有，就是在fork()之后，让子进程正常运行，让父进程先睡眠一会，睡醒了之后再正常运行。
+通过分析： 父子进程做的事情是不一样的，所以要通过返回值来判断父子做的事情。
+
+#include <stdio.h>
+#include <unistd.h>
+
+int main(int argc,char *argv[])
+{
+	//1. 现在还是一个单进程
+	printf("helloworld!\n");
+
+	//2. 在进程内部创建一个子进程
+	pid_t x;
+	x = fork();
+	//现在就有2个进程，一个是父进程(x>0)，一个子进程(x=0)
+	if(x > 0)
+	{
+		//父进程做的事情：
+		usleep(10000);
+		printf("parent after fork!\n");
+	}
+
+	if(x == 0)
+	{
+		//子进程做的事情：
+		printf("child after fork!\n");
+	}
+
+	return 0;
+}
+
+结论：
+1）父子进程执行顺序是随机的。
+2）fork()之后的代码，两个进程都会执行。
+
+ 
+    练习1：  写一个程序，使得子进程每隔1s就打印一次apple，共10次。父进程每隔2s打印一次hello，共5次。
+
+#include <unistd.h>
+#include <stdio.h>
+
+int main()
+{
+	int i;
+	pid_t x;
+	x = fork(); //创建一个新的子进程
+	if(x > 0)  //父进程
+	{
+		for(i=0;i<5;i++)
+		{
+			printf("hello!\n");
+			sleep(2);
+		}
+	}
+
+	if(x == 0)  //子进程
+	{
+		for(i=0;i<10;i++)
+		{
+			printf("apple!\n");
+			sleep(1);
+		}
+	}
+
+	return 0;
+}
+
+
+2、在一个进程中查看自己的PID号以及父进程的PID号。
+查看自己的PID号： getpid()    ---  man 2 getpid
+查看父亲的PID号： getppid()   ---  man 2 getppid
+
+功能： getpid, getppid - get process identification
+			//获取进程的id号
+
+使用格式:
+	#include <sys/types.h>
+        #include <unistd.h>
+
+       pid_t getpid(void);
+       pid_t getppid(void);
+
+参数：无
+返回值：ID号
+	
+   案例3：  在子进程中打印自己与父进程的ID号，在父进程中打印自己与孩子的ID号。
+	    执行代码后，再打开一个终端，输入ps -ef查看程序中输出ID号是不是与ps -ef的一致。
+
+
+#include <unistd.h>
+#include <stdio.h>
+
+int main(int argc,char *argv[])
+{
+	//1. 创建子进程
+	pid_t x;
+	x = fork();
+
+	//2. 只要父子进程工作的内容不一致，那么就必须进行返回值判断
+	if(x > 0)
+	{
+		//父进程： 打印自己的和孩子的ID号
+		printf("parent id = %d\n",getpid());
+		printf("child id = %d\n",x);
+		sleep(10);
+	}
+
+	if(x == 0)
+	{
+		//子进程： 打印自己的和父亲的ID号
+		printf("child id = %d\n",getpid());
+		printf("parent id = %d\n",getppid());
+		sleep(10);
+	}
+
+	return 0;
+}
+
+     练习2：  验证孤儿进程是在失去父亲时马上寻找继父，而不是等到自己变成僵尸之后再找。
+
+
+#include <unistd.h>
+#include <sys/types.h>
+#include <stdio.h>
+int main()
+{
+	//1. 创建一个新的子进程
+	pid_t x;
+	x = fork();
+
+	//2. 通过返回值判断父进程还是子进程
+	if(x > 0)
+	{
+		printf("parent pid = %d\n",getpid());
+		sleep(3);
+		printf("parent exit!\n");
+	}
+
+	if(x == 0)
+	{
+		sleep(2);
+		printf("my parent:%d\n",getppid());  //应该还是原来的那个父亲
+		sleep(2);
+		printf("my parent:%d\n",getppid());  //应该是继父的ID号
+		sleep(3);
+		printf("my parent:%d\n",getppid());  //应该是继父的ID号
+		printf("child exit!\n");
+	}
+
+
+	return 0;
+}
+
+
+3、 父进程如何主动回收子进程的资源？   --> wait()   --> man 2 wait
+功能： wait for process to change state
+	//等待一个进程改变状态。(其实就是等一个进程从运行态变成僵尸态)
+
+使用格式：
+       #include <sys/types.h>
+       #include <sys/wait.h>
+
+       pid_t wait(int *status);
+
+参数：
+	status： 用于储存子进程的退出值
+		 填NULL：  
+			wait(NULL);  -> 代表父进程只回收资源，但是不关心子进程的退出值。
+	       不填NULL：
+			int state;
+			wait(&state);  -> 代表父进程除了回收资源之外，还会保存子进程的退出值。
+
+返回值：
+	成功： 退出的那个子进程的ID号
+	失败： -1
+
+
+注意： 
+1）如果在父进程中没有调用wait()函数，默认就是不回收资源。
+2）当父进程主动调用wait()函数时，才会回收资源。
+3）如果在父进程调用wait()函数时，子进程还在运行态，那么wait()函数就会阻塞。
+4）如果在父进程调用wait()函数时，子进程已经是僵尸态，那么wait()函数就会返回。
+
+
+    案例4： 验证父进程主动回收资源，父进程先wait()，子进程后退出。
+
+
+#include <unistd.h>
+#include <sys/types.h>
+#include <stdio.h>
+#include <sys/wait.h>
+
+int main()
+{
+	//1. 创建一个子进程
+	pid_t x;
+	x = fork();
+
+	//2. 父子进程做的事情不一样，所以通过返回值来判断
+	if(x > 0)
+	{
+		sleep(3);
+		printf("parent waiting......\n");
+		wait(NULL);  //父进程回收孩子的资源
+		printf("parent exit!\n");
+	}
+
+	if(x == 0)
+	{
+		sleep(5);
+		printf("child exit!\n");
+	}
+
+	return 0;
+}
+
+
+    练习3： 验证父进程主动回收资源，父进程后wait()，子进程先退出。
+    练习4： 验证父进程如果不主动回收，但是父进程又不退出，子进程就是一个僵尸。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
