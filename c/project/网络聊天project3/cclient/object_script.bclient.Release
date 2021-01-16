@@ -1,0 +1,15 @@
+release/chatdialog.o
+release/chatthread.o
+release/login.o
+release/main.o
+release/mainwindow.o
+release/regwin.o
+release/repasswin.o
+release/softkeyboard.o
+release/qrc_pic.o
+release/moc_chatdialog.o
+release/moc_login.o
+release/moc_mainwindow.o
+release/moc_regwin.o
+release/moc_repasswin.o
+release/moc_softkeyboard.o

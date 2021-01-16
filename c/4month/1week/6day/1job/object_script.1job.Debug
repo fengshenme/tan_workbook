@@ -1,0 +1,12 @@
+INPUT(
+./debug\airwin.o
+./debug\conlamp.o
+./debug\main.o
+./debug\loginwin.o
+./debug\mainwin.o
+./debug\qrc_pic.o
+./debug\moc_airwin.o
+./debug\moc_conlamp.o
+./debug\moc_loginwin.o
+./debug\moc_mainwin.o
+);

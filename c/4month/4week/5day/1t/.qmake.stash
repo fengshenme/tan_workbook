@@ -1,0 +1,14 @@
+QMAKE_DEFAULT_INCDIRS = \
+    /usr/arm-linux-gnueabi/include/c++/9 \
+    /usr/arm-linux-gnueabi/include/c++/9/arm-linux-gnueabi \
+    /usr/arm-linux-gnueabi/include/c++/9/backward \
+    /usr/lib/gcc-cross/arm-linux-gnueabi/9/include \
+    /usr/arm-linux-gnueabi/include \
+    /usr/include
+QMAKE_DEFAULT_LIBDIRS = \
+    /usr/lib/gcc-cross/arm-linux-gnueabi/9 \
+    /usr/arm-linux-gnueabi/lib \
+    /lib/arm-linux-gnueabi \
+    /lib \
+    /usr/lib/arm-linux-gnueabi \
+    /usr/lib

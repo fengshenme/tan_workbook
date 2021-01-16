@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>img/next.jpg</file>
+        <file>img/prev.jpg</file>
+        <file>img/softkeyboard.jpg</file>
+        <file>img/28.jpg</file>
+        <file>img/27.jpg</file>
+        <file>img/26.jpg</file>
+        <file>img/25.jpg</file>
+        <file>img/24.jpg</file>
+        <file>img/23.jpg</file>
+        <file>img/16.jpg</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,2 @@
+--host-cc=  // 指定gcc版本
+--prefix=PREFIX         // install in PREFIX [$prefix_default]

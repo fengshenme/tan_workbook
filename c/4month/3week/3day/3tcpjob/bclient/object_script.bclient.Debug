@@ -1,0 +1,13 @@
+debug/chatdialog.o
+debug/chatthread.o
+debug/login.o
+debug/main.o
+debug/mainwindow.o
+debug/regwin.o
+debug/repasswin.o
+debug/qrc_pic.o
+debug/moc_chatdialog.o
+debug/moc_login.o
+debug/moc_mainwindow.o
+debug/moc_regwin.o
+debug/moc_repasswin.o

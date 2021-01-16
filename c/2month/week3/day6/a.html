@@ -1,0 +1,74 @@
+<p>/* Copyright (C) 1995-2020 Free Software Foundation, Inc.
+  This file is part of the GNU C Library.</p>
+
+<p>   The GNU C Library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.</p>
+
+<p>   The GNU C Library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Lesser General Public License for more details.</p>
+
+<p>   You should have received a copy of the GNU Lesser General Public
+  License along with the GNU C Library; if not, see
+  <a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>.  */</p>
+
+<h1>ifndef <em>SYS</em>SEM_H</h1>
+
+<h1>define <em>SYS</em>SEM_H	1</h1>
+
+<h1>include &lt;features.h&gt;</h1>
+
+<h1>define __need<em>size</em>t</h1>
+
+<h1>include &lt;stddef.h&gt;</h1>
+
+<p>/<em> Get common definition of System V style IPC.  </em>/</p>
+
+<h1>include &lt;sys/ipc.h&gt;</h1>
+
+<p>/<em> Get system dependent definition of `struct semid_ds&#39; and more.  </em>/</p>
+
+<h1>include &lt;bits/sem.h&gt;</h1>
+
+<h1>ifdef __USE_GNU</h1>
+
+<h1>include &lt;bits/types/struct_timespec.h&gt;</h1>
+
+<h1>endif</h1>
+
+<p>/<em> The following System V style IPC functions implement a semaphore
+  handling.  The definition is found in XPG2.  </em>/</p>
+
+<p>/<em> Structure used for argument to `semop&#39; to describe operations.  </em>/
+struct sembuf
+{
+ unsigned short int sem_num;	/<em> semaphore number </em>/
+ short int sem_op;		/<em> semaphore operation </em>/
+ short int sem_flg;		/<em> operation flag </em>/
+};</p>
+
+<p>__BEGIN_DECLS</p>
+
+<p>/<em> Semaphore control operation.  </em>/
+extern int semctl (int <strong>semid, int </strong>semnum, int <strong>cmd, ...) </strong>THROW;</p>
+
+<p>/<em> Get semaphore.  </em>/
+extern int semget (key_t <strong>key, int </strong>nsems, int <strong>semflg) </strong>THROW;</p>
+
+<p>/<em> Operate on semaphore.  </em>/
+extern int semop (int <strong>semid, struct sembuf *</strong>sops, size_t <strong>nsops) </strong>THROW;</p>
+
+<h1>ifdef __USE_GNU</h1>
+
+<p>/<em> Operate on semaphore with timeout.  </em>/
+extern int semtimedop (int <strong>semid, struct sembuf *</strong>sops, size_t <strong>nsops,
+          const struct timespec *</strong>timeout) __THROW;</p>
+
+<h1>endif</h1>
+
+<p>__END_DECLS</p>
+
+<h1>endif /<em> sys/sem.h </em>/</h1>

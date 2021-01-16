@@ -1,0 +1,129 @@
+1.数据库的作用
+=====================
+  站在巨人的肩膀   void *  malloc() --》为什么void *可以通用，底层原理(源代码怎么写)
+                  能借用别人的代码，库--》直接用(学习的时候，花费时间深入理解原理)
+                  先搞懂大概
+  以前：C语言--》定义数组
+                定义指针(分配堆空间)
+                定义结构体数组
+       数据结构 --》链表
+       C++/QT --》容器  
+       总结：以上这些存储方式最终计算机分配内存空间来存放
+  作用：用来存放海量数据(大数据)
+        数据库最大的区别：用数据库文件来存放海量数据(最终数据是存放在硬盘文件中)
+        好处：直接调用SQL语句对数据进行基本的增删改查操作,简单方便
+
+2.市面上主流的数据库软件
+======================
+  甲骨文oracle  
+  微软           SQL server
+                 MySQL
+  嵌入式数据库    sqlite3(开源免费的数据库软件)
+
+3.sqlite3的移植和使用
+=========================
+  (1)sqlite3的移植
+     移植：把别人发布到网上的源码，通过特定的编译工具，编译成我自己目标平台上需要使用的软件工具，库文件，头文件
+     特定的编译工具：
+            比如：你想把源码编译成X86平台软件工具 --》gcc   g++   ar(静态库)  
+                  你想把源码编译成ARM平台软件工具 --》arm-linux-gcc   arm-linux-g++   arm-linux-ar(静态库)
+     移植步骤：
+         第一步：在ubuntu安装libreadline-dev这个插件(可以在sqlite3中使用方向键，如果不安装，sqlite3可以使用，但是方向键无法使用)
+                root@ubuntu:~# ping  www.baidu.com
+                PING www.a.shifen.com (14.215.177.39) 56(84) bytes of data.
+                64 bytes from 14.215.177.39 (14.215.177.39): icmp_seq=1 ttl=64 time=0.380 ms
+                64 bytes from 14.215.177.39 (14.215.177.39): icmp_seq=2 ttl=64 time=1.09 ms
+                64 bytes from 14.215.177.39 (14.215.177.39): icmp_seq=3 ttl=64 time=2.29 ms
+                在线安装libreadline-dev这个插件
+                       root@ubuntu64:~# apt-get install libreadline-dev    //在线下载
+                在线安装可能会出现的问题
+                       root@ubuntu64:~# apt-get install libreadline-dev
+                       E: 无法获得锁 /var/lib/dpkg/lock-frontend - open (11: 资源暂时不可用)
+                       E: 无法获取 dpkg 前端锁 (/var/lib/dpkg/lock-frontend)，是否有其他进程正占用它？
+
+                       解决方法：删除命令把这个文件/var/lib/dpkg/lock-frontend直接删除
+
+                       apt-get update                                     //更新软件下载源
+                       apt-get remove   软件的名字                        //卸载
+
+         第二步：把你下载的源码包拷贝到纯粹的linux环境(不可以在linux和window共享中解压,源码包中可能会包含软链接文件，window不支持软链接)中解压
+                root@ubuntu:~# tar  -zxf  sqlite-autoconf-3340000.tar.gz 
+                root@ubuntu:~# ls
+                       sqlite-autoconf-3340000   //解压之后目录
+
+         第三步：执行configure脚本文件，为了得到Makefile
+                root@ubuntu:~/sqlite-autoconf-3340000# ./configure  
+
+         第四步：执行make命令，自动编译sqlite3的源码，编译完毕会得到一个sqlite3的可执行程序
+                把刚才编译得到的X86平台的sqlite3拷贝一份到ubuntu的/bin(方便直接使用)
+                    
+     总结移植的基本套路：
+         大致分为三步(不同的源码包，细节可能会有所不同，但是总体的步骤是一致的)
+             第一步：下载源码包，解压之后执行configure生成Makefile
+             第二步：make自动编译程序
+             第三步：make install把生成的库文件，头文件安装保存到你指定的目录下
+  (2)使用sqlite3
+        1. 进入sqlite3的命令行
+              root@ubuntu:~/sqlite-autoconf-3340000# ./sqlite3 
+              SQLite version 3.34.0 2020-12-01 16:14:00                  //sqlite3的版本号，发布时间
+              Enter ".help" for usage hints.                             //输入.help获取sqlite3的使用帮助
+              Connected to a transient in-memory database.
+              Use ".open FILENAME" to reopen on a persistent database.  //输入.open 文件名  打开一个数据库文件
+              sqlite>                                                   //sqlite3的命令提示符
+
+        2. sqlite3的内置命令(sqlite3这个软件内容已经存在的命令，这些命令只能在sqlite3中使用)
+              注意：万一命令敲错了，直接输入; 回车即可恢复正常
+              比如：.exit ?CODE?       //退出sqlite3
+                    .quit             //退出sqlite3  
+                    .tables           //查看当前数据库文件中所有的表格名字
+
+
+        3. sqlite3支持的数据类型
+             bit       //二进制  0  1
+             tinyint  //8位的整数
+             smallint //16位的整数
+             int      //32位的整数
+             float    //小数
+             real     //小数，类似于double
+             char[]   //字符串char[10]
+             varchar[] //字符串
+             text      //文本类型，往往也是来表示字符串
+        4. 使用SQL语句实现数据库表格的新建，增删改查基本操作
+             (1)SQL语句(结构查询语句)：所有数据库软件通用的一种操作语言 
+                root@ubuntu64:~/sqlite-autoconf-3340000# ./sqlite3  1.db    //新建一个数据库文件，叫做1.db
+             (2)新建数据库表格 
+                create table 表的名字 (字段名1  修饰词,字段名2 修饰词 ......);
+                例如：create table studenttable (name text,age int,score float);  //新建一个学生表格，里面有三个字段，分别是name，age，score
+             (3)往表格中插入数据
+                insert into 表的名字 values (字段1的值,字段2的值.....);
+                例如：insert into studenttable values ("张三",18,86);
+             (4)查询表格中的数据
+                select  *  from 表的名字;        //查询表格中所有的信息
+                例如：sqlite> select  * from studenttable;
+                              张三|18|86.0
+                              李四|19|86.0
+                select 某个/某几个字段名 from 表的名字;  //查询表格中某个，某几个字段的信息
+                例如：sqlite> select name from studenttable;
+                             张三
+                             李四
+                例如：sqlite> select name,score from studenttable;
+                             张三|86.0
+                             李四|86.0
+                select  * from 表的名字  where 条件;   //带条件的查询
+                例如：sqlite> select * from studenttable  where name like "张%"; //like子句，模糊匹配字符串
+                            张三|18|86.0
+                            张大大|15|58.0
+                            张小二|19|68.0
+                     sqlite> select * from studenttable  where name like "%建%";  //名字中间有个建字
+                     sqlite> select * from studenttable  where name like "%国"; 
+                select  * from 表的名字  where 多个条件;   //多个条件需要用到逻辑与(并且)，逻辑或(或者)
+                例如：sqlite> select * from studenttable  where age>=16 and age<=18;   //逻辑与
+                            张三|18|86.0
+
+
+
+
+
+
+
+

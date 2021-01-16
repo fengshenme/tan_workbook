@@ -1,0 +1,4 @@
+H:/sharecode/qt/1day/3t/CMakeFiles/3t.dir
+H:/sharecode/qt/1day/3t/CMakeFiles/edit_cache.dir
+H:/sharecode/qt/1day/3t/CMakeFiles/rebuild_cache.dir
+H:/sharecode/qt/1day/3t/CMakeFiles/3t_autogen.dir

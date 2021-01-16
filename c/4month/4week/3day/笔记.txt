@@ -1,0 +1,128 @@
+内容概览
+===================
+   1. Linux中的摄像头编程代码实现
+          讲解实现V4L2架构摄像头代码
+   2. QT中摄像头代码实现
+   3. jpeg图片编解码显示
+   4. ALSA库的移植，在开发板上用ALSA库实现录音和播放录音
+
+
+开发应用
+=======================
+   温馨提醒：音视频水很深，但是我们上课水不深
+   要求：除了嵌入式的基础知识
+         音视频算法设计  --》算法功底很好，音视频有很多复杂编码，解码算法
+         熟悉rtsp，rtp，sip等协议(流媒体协议)，熟悉live555，FFmpeg等音视频开源库
+
+   学习目标：初步了解摄像头编程
+            知道ALSA库是干什么，基本使用
+
+
+Linux中的摄像头编程代码实现 --》培养学生广阔的视野
+===============
+  (1)摄像头的工作原理
+         1.镜头采集画面 --》常见的画面格式有两种
+                  jpg格式：jpg格式用算法压缩过的，占用的字节数(存储空间很小)
+                  YUV格式：Y”表示明亮度（Luminance或Luma），也就是灰阶值，“U”和“V”表示的则是色度
+                          YUV跟RGB一样，只是颜色的一种编码方式
+                  粤嵌发给大家的摄像头：YUV格式
+         2.采集的画面存放摄像头的缓存芯片中
+         3.从缓存芯片中取出数据在开发板液晶屏上显示
+     linux中的V4L2架构
+         V4L2： video  for linux two(linux中视频架构版本2)
+         作用： linux给程序员提供了开发音视频产品应用程序，驱动需要用到的接口和变量--》称之为V4L2架构
+         理解V4L2：
+                 A厂家：生产视频播放器(mp4)
+                       A厂家的工程师在开发驱动的时候：定义变量，定义结构体存放音频，视频的属性信息
+                            struct videofmt
+                            {
+                                videotype;  //视频格式 mp4  avi
+                                width; //视频宽
+                                height; //高
+                                format; //编码格式
+                            }
+                 B厂家：生产视频播放器(mp4)
+                            struct myfmt
+                            {
+                                mytype;  //视频格式 mp4  avi
+                                mywidth; //视频宽
+                                myheight; //高
+                                myformat; //编码格式
+                            }
+                 linux统一江湖：音视频开发，用到的参数，变量类型统一命名，方便不同厂家，不同开发者统一代码
+         linux中跟V4L2有关的头文件
+                 /usr/include/linux/videodev2.h  //把开发中需要用到变量类型全部定义好了  
+   
+  (2)摄像头的编程思路代码实现
+              #include <sys/ioctl.h>
+              int ioctl(int fd, unsigned long request, ...);
+                  作用：应用程序跟底层硬件驱动进行数据交互(应用程序传输数据给驱动，驱动传输数据给应用程序)的一个接口函数
+                  返回值：成功 0  失败  -1
+                    参数：fd --》硬件设备的文件描述符
+                          request --》应用程序给驱动发送的数据(指令) 
+
+        第一步：打开摄像头的驱动 (/dev/video7),插拔一下摄像头，去开发板的/dev目录查看
+              int camerafd=open("/dev/video7",O_RDWR);
+
+        第二步：设置摄像头采集画面的格式(画面宽，高，画面的格式等等)
+              由于粤嵌发给大家的摄像头支持linux系统(摄像头是用linux中V4L2架构开发)
+              /*
+              *	I O C T L   C O D E S   F O R   V I D E O   D E V I C E S
+              *
+              */
+               #define VIDIOC_S_FMT		_IOWR('V',  5, struct v4l2_format)   //设置摄像头采集格式
+               ioctl(camerafd,VIDIOC_S_FMT,)//给摄像头的驱动发送指令，控制摄像头的驱动
+               对应的变量类型struct v4l2_format
+                            struct v4l2_format {
+	                       __u32	 type;        //开关标志，type设置成对应的枚举，表示选择不同的结构体
+	                       union {
+		                   struct v4l2_pix_format pix; //如果你把type设置成V4L2_BUF_TYPE_VIDEO_CAPTURE，表示你想用这个结构体
+	                       }fmt;
+                            };
+                            struct v4l2_pix_format
+                            {
+                                width;      //画面宽
+                                height;     //画面高
+                                pixelformat;  //像素点格式
+                                             V4L2_PIX_FMT_YUYV  //YUV格式
+                                             V4L2_PIX_FMT_JPEG  //jpeg格式
+                                field;        //V4L2_FIELD_NONE
+                            }
+               例如：
+                     struct v4l2_format myfmt;
+	             bzero(&myfmt,sizeof(myfmt));
+	             myfmt.type=V4L2_BUF_TYPE_VIDEO_CAPTURE;
+	             myfmt.fmt.pix.width=W;
+	             myfmt.fmt.pix.height=H;
+	             myfmt.fmt.pix.pixelformat=V4L2_PIX_FMT_YUYV;  //YUV格式
+	             myfmt.fmt.pix.field=V4L2_FIELD_NONE;
+	             //设置摄像头的采集格式
+	             ioctl(camerafd,VIDIOC_S_FMT,&myfmt);
+
+         第三步：跟摄像头的驱动申请缓冲块(用来存放等一会才采集的画面数据)
+               发送的指令：#define VIDIOC_REQBUFS		_IOWR('V',  8, struct v4l2_requestbuffers)
+               用到的数据类型：struct v4l2_requestbuffers
+                             {
+                                 count;  //你要申请多少个缓冲块,每个缓冲块只能存放一帧画面数据,一般申请4--8个左右即可
+                                 type;   //V4L2_BUF_TYPE_VIDEO_CAPTURE
+                                 memory; //V4L2_MEMORY_MMAP
+                             }
+
+         第四步：分配刚才你申请的缓冲块
+               发送的指令：#define VIDIOC_QUERYBUF		_IOWR('V',  9, struct v4l2_buffer)
+               用到的数据类型：struct v4l2_buffer
+                              {
+                                 index;  //你刚才申请的缓冲块索引号，从0开始
+                                 type;   //V4L2_BUF_TYPE_VIDEO_CAPTURE 
+                                 memory; //V4L2_MEMORY_MMAP
+                                 union{
+		                     offset;  //？？重点说
+	                         }m;
+                                 length;      //？？重点说
+                              }
+练习：
+   
+   
+
+
+

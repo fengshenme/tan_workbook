@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PayRank</class>
+ <widget class="QMainWindow" name="PayRank">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="SoftKeyBoard" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>240</y>
+      <width>600</width>
+      <height>230</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>600</width>
+      <height>230</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>600</width>
+      <height>230</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="prevBt">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>390</y>
+      <width>71</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-image: url(:/new/prefix1/img/prev.jpg);</string>
+    </property>
+    <property name="text">
+     <string>返回</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="delUse">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>89</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>删除该用户</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>0</y>
+      <width>722</width>
+      <height>231</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="minimumSize">
+          <size>
+           <width>72</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>72</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>充值卡号:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="cardNum">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>卡丢了不用点击读卡</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="readCardBt">
+         <property name="minimumSize">
+          <size>
+           <width>72</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>72</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>读卡</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_5">
+         <property name="minimumSize">
+          <size>
+           <width>72</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>72</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>车牌号:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="insigniaFindLe">
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="placeholderText">
+          <string>输入车牌号</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="insigniaFindBt">
+         <property name="minimumSize">
+          <size>
+           <width>72</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>72</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>查找</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="1" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="minimumSize">
+          <size>
+           <width>90</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>90</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>车牌号:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="insigniaLba">
+         <property name="minimumSize">
+          <size>
+           <width>220</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>220</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>现在车牌号</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="new_insignia_le">
+         <property name="minimumSize">
+          <size>
+           <width>220</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>220</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="placeholderText">
+          <string>请输入新车牌号</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="update_insigniaBt">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>修改车牌号</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="minimumSize">
+          <size>
+           <width>90</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>90</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>手机号:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="oldPhoneLb">
+         <property name="minimumSize">
+          <size>
+           <width>220</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>220</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>无</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="new_phone_le">
+         <property name="minimumSize">
+          <size>
+           <width>220</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>220</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="placeholderText">
+          <string>请输入新手机号</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="update_phoneBt">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>修改手机号</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="3" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QLabel" name="label_8">
+         <property name="minimumSize">
+          <size>
+           <width>90</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>90</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>余额:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="balance_lab">
+         <property name="minimumSize">
+          <size>
+           <width>220</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>220</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>无</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="money_count">
+         <property name="minimumSize">
+          <size>
+           <width>220</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>220</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="placeholderText">
+          <string>请输入充值金额</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="rechargeBt">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>充值</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="4" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QLabel" name="label_11">
+         <property name="minimumSize">
+          <size>
+           <width>90</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>90</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>充值记录:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="pay_log_la">
+         <property name="minimumSize">
+          <size>
+           <width>350</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>350</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>无</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="minimumSize">
+          <size>
+           <width>191</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>191</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>补卡前请读入新卡不:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="reissue_cardBt">
+         <property name="minimumSize">
+          <size>
+           <width>65</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>60</width>
+           <height>39</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>补卡</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SoftKeyBoard</class>
+   <extends>QWidget</extends>
+   <header>softkeyboard.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

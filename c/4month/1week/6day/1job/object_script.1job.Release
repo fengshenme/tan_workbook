@@ -1,0 +1,12 @@
+INPUT(
+./release\airwin.o
+./release\conlamp.o
+./release\main.o
+./release\loginwin.o
+./release\mainwin.o
+./release\qrc_pic.o
+./release\moc_airwin.o
+./release\moc_conlamp.o
+./release\moc_loginwin.o
+./release\moc_mainwin.o
+);

@@ -1,0 +1,36 @@
+QMAKE_CXX.QT_COMPILER_STDCXX = 201402L
+QMAKE_CXX.QMAKE_GCC_MAJOR_VERSION = 7
+QMAKE_CXX.QMAKE_GCC_MINOR_VERSION = 3
+QMAKE_CXX.QMAKE_GCC_PATCH_VERSION = 0
+QMAKE_CXX.COMPILER_MACROS = \
+    QT_COMPILER_STDCXX \
+    QMAKE_GCC_MAJOR_VERSION \
+    QMAKE_GCC_MINOR_VERSION \
+    QMAKE_GCC_PATCH_VERSION
+QMAKE_CXX.INCDIRS = \
+    C:/Qt/Qt5.12.10/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ \
+    C:/Qt/Qt5.12.10/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 \
+    C:/Qt/Qt5.12.10/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward \
+    C:/Qt/Qt5.12.10/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include \
+    C:/Qt/Qt5.12.10/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed \
+    C:/Qt/Qt5.12.10/Tools/mingw730_64/x86_64-w64-mingw32/include
+QMAKE_CXX.LIBDIRS = \
+    C:/Qt/Qt5.12.10/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0 \
+    C:/Qt/Qt5.12.10/Tools/mingw730_64/lib/gcc \
+    C:/SysGCC/mingw64/lib \
+    C:/Qt/Qt5.12.10/Tools/mingw730_64/x86_64-w64-mingw32/lib \
+    C:/Qt/Qt5.12.10/Tools/mingw730_64/lib
+QMAKE_DEFAULT_INCDIRS = \
+    /home/gec/arm/5.4.0/usr/arm-none-linux-gnueabi/include/c++/5.4.0 \
+    /home/gec/arm/5.4.0/usr/arm-none-linux-gnueabi/include/c++/5.4.0/arm-none-linux-gnueabi \
+    /home/gec/arm/5.4.0/usr/arm-none-linux-gnueabi/include/c++/5.4.0/backward \
+    /home/gec/arm/5.4.0/usr/lib/gcc/arm-none-linux-gnueabi/5.4.0/include \
+    /home/gec/arm/5.4.0/usr/lib/gcc/arm-none-linux-gnueabi/5.4.0/include-fixed \
+    /home/gec/arm/5.4.0/usr/arm-none-linux-gnueabi/include \
+    /home/gec/arm/5.4.0/usr/arm-none-linux-gnueabi/sysroot/usr/include
+QMAKE_DEFAULT_LIBDIRS = \
+    /home/gec/arm/5.4.0/usr/lib/gcc/arm-none-linux-gnueabi/5.4.0 \
+    /home/gec/arm/5.4.0/usr/lib/gcc \
+    /home/gec/arm/5.4.0/usr/arm-none-linux-gnueabi/lib \
+    /home/gec/arm/5.4.0/usr/arm-none-linux-gnueabi/sysroot/lib \
+    /home/gec/arm/5.4.0/usr/arm-none-linux-gnueabi/sysroot/usr/lib

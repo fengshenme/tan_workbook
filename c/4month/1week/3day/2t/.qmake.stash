@@ -1,0 +1,12 @@
+QMAKE_DEFAULT_INCDIRS = \
+    C:/SysGCC/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ \
+    C:/SysGCC/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 \
+    C:/SysGCC/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward \
+    C:/SysGCC/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include \
+    C:/SysGCC/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed \
+    C:/SysGCC/mingw64/x86_64-w64-mingw32/include
+QMAKE_DEFAULT_LIBDIRS = \
+    C:/SysGCC/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0 \
+    C:/SysGCC/mingw64/lib/gcc \
+    C:/SysGCC/mingw64/lib \
+    C:/SysGCC/mingw64/x86_64-w64-mingw32/lib

@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>img/16.jpg</file>
+        <file>img/23.jpg</file>
+        <file>img/24.jpg</file>
+        <file>img/25.jpg</file>
+        <file>img/26.jpg</file>
+        <file>img/27.jpg</file>
+        <file>img/28.jpg</file>
+    </qresource>
+    <qresource prefix="/new">
+        <file>data/use.txt</file>
+    </qresource>
+</RCC>

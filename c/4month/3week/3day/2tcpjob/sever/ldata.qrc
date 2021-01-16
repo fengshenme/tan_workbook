@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/new">
+        <file>db/use.txt</file>
+    </qresource>
+</RCC>

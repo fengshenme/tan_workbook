@@ -1,0 +1,137 @@
+一、友元。
+在生活中，你的家有客厅(public),有你的卧室(private)
+客厅所有来的客人都可以进去，但是你的卧室是私有的，也就是说只有你才能进去，但是呢，你也可以允许你的好闺蜜好基友进去。
+
+在程序中，有些私有的属性也想让类外特殊的一些函数或者类进行访问，就需要用到友元的技术。
+友元的目的就是让一个函数或者类访问另外一个类中的私有成员。
+友元的关键字为：friend
+
+友元的三种实现：
+1）全局函数做友元。
+2）类做友元。
+3）成员函数做友元。
+
+二、全局函数做友元。
+#include <iostream>
+using namespace std;
+
+//全局函数做友元
+
+//建筑物类
+class Building{
+	friend void goodGay(Building &b);
+
+public:
+	Building()
+	{
+		m_SittingRoom = "客厅";
+		m_BedRoom = "卧室";
+	}
+
+public:
+	string m_SittingRoom;  //客厅
+
+private:
+	string m_BedRoom; //卧室
+};
+
+void goodGay(Building &b)
+{
+	//公共权限的客厅可以访问。
+	cout << "好基友全局函数正在访问:" << b.m_SittingRoom << endl;
+
+	//私有权限的卧室不可以访问。
+	cout << "好基友全局函数正在访问:" << b.m_BedRoom << endl;
+
+	//如果想让好基友能够访问卧室，那么就必须提前告诉类，这个goodGay是你的好朋友。
+	//如何设置?
+	//将goodGay函数头拷贝到类中，并在函数前面添加上一个friend。
+}
+
+int main()
+{
+	Building b;  //实例化你的房子叫b
+	goodGay(b);
+
+	return 0;
+}
+
+
+三、类做友元。
+#include <iostream>
+using namespace std;
+
+//类做友元。
+class Building{
+	//告诉这个Building类，GoodGay这个类是自己的好朋友
+	friend class GoodGay;
+
+public:
+	Building()
+	{
+		m_SittingRoom = "客厅";
+		m_BedRoom = "卧室";
+	}
+
+public:
+	string m_SittingRoom;  //客厅
+
+private:
+	string m_BedRoom;  //卧室
+};
+
+class GoodGay{
+public:
+	void visit()  //参观函数中尝试访问Building中的东西
+	{
+		cout << "好基友类正在访问:" << b.m_SittingRoom << endl;
+		cout << "好基友类正在访问:" << b.m_BedRoom << endl;  //访问失败
+	}
+
+	//建筑物类对象
+	Building b;
+};
+
+int main()
+{
+	GoodGay g;
+	g.visit();
+
+	return 0;
+}
+
+四、成员函数做友元。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
