@@ -1,3 +1,0 @@
-D:/app/Android_Demo/app/.cxx/cmake/release/arm64-v8a/CMakeFiles/native-lib.dir
-D:/app/Android_Demo/app/.cxx/cmake/release/arm64-v8a/CMakeFiles/edit_cache.dir
-D:/app/Android_Demo/app/.cxx/cmake/release/arm64-v8a/CMakeFiles/rebuild_cache.dir
