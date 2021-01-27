@@ -1,11 +1,11 @@
-# 整理个人相关
+# 整理
 
-- a目录下是Android相关
+- Android相关
 
-- c目录下是c与c++相关
+- c与c++,linux c
 
-- j目录下是java相关
+- java spring springboot springmvc resultapi风格web接口, 在云上运行两年了很稳定
 
-- p目录下是Python相关
+- Python 数据处理,机器学习模型训练的小项目
 
-- 都是我学习,练手,践行的相关项目
+- 都是我学习,练手,工具,探索,求知等
