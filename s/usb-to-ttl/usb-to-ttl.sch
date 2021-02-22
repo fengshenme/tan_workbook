@@ -1,0 +1,260 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title "USB-TTL"
+Date "2020-2-20"
+Rev "v1.1"
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:C C2
+U 1 1 6030B10E
+P 3850 3800
+F 0 "C2" H 3965 3846 50  0000 L CNN
+F 1 "104" H 3965 3755 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 3888 3650 50  0001 C CNN
+F 3 "~" H 3850 3800 50  0001 C CNN
+	1    3850 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C1
+U 1 1 6030BABB
+P 3400 3800
+F 0 "C1" H 3515 3846 50  0000 L CNN
+F 1 "104" H 3515 3755 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 3438 3650 50  0001 C CNN
+F 3 "~" H 3400 3800 50  0001 C CNN
+	1    3400 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x05 J2
+U 1 1 6030F9A9
+P 6300 3150
+F 0 "J2" H 6218 2725 50  0000 C CNN
+F 1 "Conn_01x05" H 6218 2816 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Horizontal" H 6300 3150 50  0001 C CNN
+F 3 "~" H 6300 3150 50  0001 C CNN
+	1    6300 3150
+	1    0    0    1   
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 60312436
+P 5650 2350
+F 0 "R2" H 5720 2396 50  0000 L CNN
+F 1 "4.7k" V 5650 2250 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 5580 2350 50  0001 C CNN
+F 3 "~" H 5650 2350 50  0001 C CNN
+	1    5650 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 60312B57
+P 5150 2300
+F 0 "R1" H 5220 2346 50  0000 L CNN
+F 1 "4.7k" V 5150 2200 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 5080 2300 50  0001 C CNN
+F 3 "~" H 5150 2300 50  0001 C CNN
+	1    5150 2300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:LED D1
+U 1 1 60313D5B
+P 5150 2700
+F 0 "D1" V 5189 2582 50  0000 R CNN
+F 1 "LED" V 5098 2582 50  0000 R CNN
+F 2 "LED_SMD:LED_0603_1608Metric" H 5150 2700 50  0001 C CNN
+F 3 "~" H 5150 2700 50  0001 C CNN
+	1    5150 2700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:LED D2
+U 1 1 60314F16
+P 5650 2750
+F 0 "D2" V 5689 2632 50  0000 R CNN
+F 1 "LED" V 5598 2632 50  0000 R CNN
+F 2 "LED_SMD:LED_0603_1608Metric" H 5650 2750 50  0001 C CNN
+F 3 "~" H 5650 2750 50  0001 C CNN
+	1    5650 2750
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5150 2450 5150 2550
+Wire Wire Line
+	5650 2500 5650 2600
+Wire Wire Line
+	3100 2000 3400 2000
+Wire Wire Line
+	6100 2000 6100 2950
+Wire Wire Line
+	5150 2150 5150 2000
+Connection ~ 5150 2000
+Wire Wire Line
+	5150 2000 5650 2000
+Wire Wire Line
+	5650 2200 5650 2000
+Connection ~ 5650 2000
+Wire Wire Line
+	5650 2000 6100 2000
+Wire Wire Line
+	4800 3050 5150 3050
+Wire Wire Line
+	4800 3150 5650 3150
+Wire Wire Line
+	4800 3350 6100 3350
+Wire Wire Line
+	3100 3050 3100 2000
+$Comp
+L Connector:USB_A J1
+U 1 1 603092AE
+P 2800 3250
+F 0 "J1" H 2857 3717 50  0000 C CNN
+F 1 "USB_A" H 2857 3626 50  0000 C CNN
+F 2 "Connector_USB:USB_A_CNCTech_1001-011-01101_Horizontal" H 2950 3200 50  0001 C CNN
+F 3 " ~" H 2950 3200 50  0001 C CNN
+	1    2800 3250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3100 3250 4000 3250
+Wire Wire Line
+	3100 3350 4000 3350
+Wire Wire Line
+	3400 3650 3400 2000
+Connection ~ 3400 2000
+Wire Wire Line
+	3400 2000 3800 2000
+Wire Wire Line
+	3850 3650 3850 3050
+Wire Wire Line
+	4400 2850 4400 2000
+Connection ~ 4400 2000
+Wire Wire Line
+	4400 2000 5150 2000
+Wire Wire Line
+	5150 2850 5150 3050
+Connection ~ 5150 3050
+Wire Wire Line
+	5150 3050 6100 3050
+Wire Wire Line
+	5650 2900 5650 3150
+Connection ~ 5650 3150
+Wire Wire Line
+	5650 3150 6100 3150
+Wire Wire Line
+	2800 3650 2800 4000
+Wire Wire Line
+	2800 4000 3400 4000
+Wire Wire Line
+	5800 4000 5800 3250
+Wire Wire Line
+	5800 3250 6100 3250
+Wire Wire Line
+	3400 3950 3400 4000
+Connection ~ 3400 4000
+Wire Wire Line
+	3850 3950 3850 4000
+Wire Wire Line
+	2700 3650 2700 4000
+Wire Wire Line
+	2700 4000 2800 4000
+Connection ~ 2800 4000
+Wire Wire Line
+	4400 3550 4400 4000
+Connection ~ 4400 4000
+Wire Wire Line
+	4400 4000 5800 4000
+$Comp
+L power:GND #PWR01
+U 1 1 60322A5E
+P 2800 4000
+F 0 "#PWR01" H 2800 3750 50  0001 C CNN
+F 1 "GND" H 2805 3827 50  0000 C CNN
+F 2 "" H 2800 4000 50  0001 C CNN
+F 3 "" H 2800 4000 50  0001 C CNN
+	1    2800 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:PWR_FLAG #FLG01
+U 1 1 6032338F
+P 3400 4100
+F 0 "#FLG01" H 3400 4175 50  0001 C CNN
+F 1 "PWR_FLAG" H 3400 4273 50  0000 C CNN
+F 2 "" H 3400 4100 50  0001 C CNN
+F 3 "~" H 3400 4100 50  0001 C CNN
+	1    3400 4100
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3400 4100 3400 4000
+$Comp
+L power:+5V #PWR02
+U 1 1 60325080
+P 3400 1850
+F 0 "#PWR02" H 3400 1700 50  0001 C CNN
+F 1 "+5V" H 3415 2023 50  0000 C CNN
+F 2 "" H 3400 1850 50  0001 C CNN
+F 3 "" H 3400 1850 50  0001 C CNN
+	1    3400 1850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3400 1850 3400 2000
+$Comp
+L power:PWR_FLAG #FLG02
+U 1 1 60325F7A
+P 3800 1800
+F 0 "#FLG02" H 3800 1875 50  0001 C CNN
+F 1 "PWR_FLAG" H 3800 1973 50  0000 C CNN
+F 2 "" H 3800 1800 50  0001 C CNN
+F 3 "~" H 3800 1800 50  0001 C CNN
+	1    3800 1800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3800 1800 3800 2000
+Connection ~ 3800 2000
+Wire Wire Line
+	3800 2000 4400 2000
+Text Notes 3100 3250 0    50   ~ 0
+D+\n
+Text Notes 3100 3350 0    50   ~ 0
+D-
+Text Notes 4850 3050 0    50   ~ 0
+TXD
+Text Notes 4850 3150 0    50   ~ 0
+RXD
+Text Notes 4850 3350 0    50   ~ 0
+RTS
+Wire Wire Line
+	3850 3050 4000 3050
+Connection ~ 3850 4000
+Wire Wire Line
+	3850 4000 4400 4000
+Wire Wire Line
+	3400 4000 3850 4000
+$Comp
+L Interface_USB:CH330N U1
+U 1 1 6033338E
+P 4400 3150
+F 0 "U1" H 4400 3631 50  0000 C CNN
+F 1 "CH330N" H 4400 3540 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 4250 3900 50  0001 C CNN
+F 3 "http://www.wch.cn/downloads/file/240.html" H 4300 3350 50  0001 C CNN
+	1    4400 3150
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
