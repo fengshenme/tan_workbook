@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/lineLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="状态:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/bluetooth_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="未连接" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/read_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:choiceMode="singleChoice"
+        app:layout_constraintBottom_toTopOf="@id/lineLayout_find"
+        />
+    <LinearLayout
+        android:id="@+id/lineLayout_find"
+        app:layout_constraintBottom_toTopOf="@id/lineLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:gravity="left"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp">
+
+        <Button
+            android:id="@+id/findTemp_bt"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@drawable/radius"
+            android:onClick="send_cmd_bt"
+            android:text="温度" />
+
+        <Button
+            android:id="@+id/find_distance_bt"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@drawable/radius"
+            android:onClick="send_cmd_bt"
+            android:text="距离" />
+
+        <Button
+            android:id="@+id/gas_strength_bt"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@drawable/radius"
+            android:onClick="send_cmd_bt"
+            android:text="气体" />
+        <Button
+            android:id="@+id/register_card_bt"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@drawable/radius"
+            android:onClick="send_cmd_bt"
+            android:text="注册" />
+        <Button
+            android:id="@+id/led1_bt"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@drawable/radius"
+            android:onClick="send_cmd_bt"
+            android:text="灯1" />
+        <Button
+            android:id="@+id/led2_bt"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@drawable/radius"
+            android:onClick="send_cmd_bt"
+            android:text="灯2" />
+        <Button
+            android:id="@+id/beep_bt"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/radius"
+            android:onClick="send_cmd_bt"
+            android:text="蜂鸣" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lineLayout2"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:gravity="left"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="0dp">
+
+        <Button
+            android:id="@+id/on_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@drawable/radius"
+            android:text="开启蓝牙" />
+
+        <Button
+            android:id="@+id/off_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@drawable/radius"
+            android:text="关闭蓝牙" />
+
+        <Button
+            android:id="@+id/paired_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:background="@drawable/radius"
+            android:text="连接已配对蓝牙" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="left"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+        <EditText
+            android:id="@+id/editText_send"
+            android:layout_width="256dp"
+            android:layout_height="match_parent"
+            android:layout_margin="3dp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/radius"
+            android:inputType="textMultiLine"
+            android:minLines="2"
+            android:text="要发送的指令"
+            android:textColor="#0d0d0d"
+
+            />
+
+        <Button
+            android:id="@+id/bt_send"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="3dp"
+            android:background="@drawable/radius"
+            android:text="发送" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
