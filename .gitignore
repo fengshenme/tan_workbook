@@ -3,3 +3,7 @@
 application-*.yaml
 application*.yaml
 /src/main/resource/application*
+*.project
+*.classpath
+/build/
+*.yaml
