@@ -7,3 +7,8 @@ application*.yaml
 *.classpath
 /build/
 *.yaml
+*.properties
+*.bin
+*.lock
+*.prefs
+
