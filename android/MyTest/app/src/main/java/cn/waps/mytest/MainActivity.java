@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }
-                    mReadArrayAdapter.add(find_name+":"+readMessage);
+                    mReadArrayAdapter.add(find_name + ":" + readMessage);
                     find_name = "";
                 }
 
@@ -192,6 +192,11 @@ public class MainActivity extends AppCompatActivity {
         } else
             Toast.makeText(getApplicationContext(), "蓝牙没有打开", Toast.LENGTH_SHORT).show();
 
+        if(mConnectedThread != null){
+            mConnectedThread.cancel();
+            mBluetoothStatus.setText("未连接");
+            mConnectedThread = null;
+        }
         new AlertDialog.Builder(MainActivity.this)
                 .setTitle("点击要连接的蓝牙")
                 .setAdapter(mBTArrayAdapter, (dialog, which) -> {
@@ -245,6 +250,7 @@ public class MainActivity extends AppCompatActivity {
                                         .sendToTarget();
                             }
 
+
                         }
                     }.start();
                 })
@@ -284,10 +290,16 @@ public class MainActivity extends AppCompatActivity {
      * @param sendText
      */
     private void send_cmd(String sendText) {
-        if (mConnectedThread != null) // 首先检查以确保线程已创建
+
+
+        if (mConnectedThread != null && mBTSocket != null) // 首先检查以确保线程已创建
         {
+            mConnectedThread.wr_stop();
+            mConnectedThread = new ConnectedThread(mBTSocket, mHandler);
+            mConnectedThread.start();
             Toast.makeText(getApplicationContext(), sendText, Toast.LENGTH_SHORT).show();
             mConnectedThread.write(sendText);
+            time_cou();
         } else
             Toast.makeText(getBaseContext(), "没有连接设备", Toast.LENGTH_SHORT).show();
     }
@@ -303,5 +315,24 @@ public class MainActivity extends AppCompatActivity {
         find_name = bt.getText().toString();
         send_cmd(cmdMap.get(v.getId()) + "\r\n");
 
+    }
+
+    private void time_cou() {
+        // 生成一个新线程以避免阻塞GUI线程 读取信息10秒时
+        new Thread() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 11; i++) {
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if(mConnectedThread != null)
+                mConnectedThread.wr_stop();
+
+            }
+        }.start();
     }
 }

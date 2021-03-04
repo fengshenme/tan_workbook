@@ -3,6 +3,7 @@ package cn.waps.mytest;
 import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,13 +31,15 @@ public class ConnectedThread extends Thread {
         mmInStream = tmpIn;
         mmOutStream = tmpOut;
     }
-
+    static boolean runFlag = true;
     @Override
     public void run() {
         byte[] buffer ;  // 流的缓冲区存储
         int bytes; //read()返回的字节数
         // 一直监听InputStream，直到出现异常
-        while (true) {
+        runFlag = true;
+        Log.d("line41 ct", "开始运行");
+        while (runFlag) {
             try {
                 // 从InputStream中读取
                 bytes = mmInStream.available();
@@ -50,10 +53,16 @@ public class ConnectedThread extends Thread {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-
                 break;
             }
         }
+
+    }
+
+    public void wr_stop()
+    {
+        runFlag = false;
+        Log.d("%s", "运行结束");
     }
 
     /* 从主活动中调用此函数，将数据发送到远程设备 */
