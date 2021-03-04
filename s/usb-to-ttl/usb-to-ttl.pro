@@ -1,4 +1,4 @@
-update=2021/2/20 13:40:18
+update=2021/2/26 10:02:06
 version=1
 last_client=kicad
 [general]
@@ -12,16 +12,6 @@ NetIExt=net
 version=1
 LibDir=
 [eeschema/libraries]
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=
-SpiceAjustPassiveValues=0
-LabSize=50
-ERC_TestSimilarLabels=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -57,7 +47,7 @@ ViaDiameter4=0.9
 ViaDrill4=0.6
 ViaDiameter5=1
 ViaDrill5=0.7
-dPairWidth1=0.28
+dPairWidth1=0.254
 dPairGap1=0.15
 dPairViaGap1=0.25
 dPairWidth2=0.28
@@ -262,6 +252,16 @@ ViaDiameter=0.7
 ViaDrill=0.4
 uViaDiameter=0.3
 uViaDrill=0.1
-dPairWidth=0.28
+dPairWidth=0.254
 dPairGap=0.15
 dPairViaGap=0.25
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=gerber/
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceAjustPassiveValues=0
+LabSize=50
+ERC_TestSimilarLabels=1

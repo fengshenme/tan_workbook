@@ -46,72 +46,10 @@ F 3 "~" H 6300 3150 50  0001 C CNN
 	1    6300 3150
 	1    0    0    1   
 $EndComp
-$Comp
-L Device:R R2
-U 1 1 60312436
-P 5650 2350
-F 0 "R2" H 5720 2396 50  0000 L CNN
-F 1 "4.7k" V 5650 2250 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 5580 2350 50  0001 C CNN
-F 3 "~" H 5650 2350 50  0001 C CNN
-	1    5650 2350
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R1
-U 1 1 60312B57
-P 5150 2300
-F 0 "R1" H 5220 2346 50  0000 L CNN
-F 1 "4.7k" V 5150 2200 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 5080 2300 50  0001 C CNN
-F 3 "~" H 5150 2300 50  0001 C CNN
-	1    5150 2300
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:LED D1
-U 1 1 60313D5B
-P 5150 2700
-F 0 "D1" V 5189 2582 50  0000 R CNN
-F 1 "LED" V 5098 2582 50  0000 R CNN
-F 2 "LED_SMD:LED_0603_1608Metric" H 5150 2700 50  0001 C CNN
-F 3 "~" H 5150 2700 50  0001 C CNN
-	1    5150 2700
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Device:LED D2
-U 1 1 60314F16
-P 5650 2750
-F 0 "D2" V 5689 2632 50  0000 R CNN
-F 1 "LED" V 5598 2632 50  0000 R CNN
-F 2 "LED_SMD:LED_0603_1608Metric" H 5650 2750 50  0001 C CNN
-F 3 "~" H 5650 2750 50  0001 C CNN
-	1    5650 2750
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	5150 2450 5150 2550
-Wire Wire Line
-	5650 2500 5650 2600
 Wire Wire Line
 	3100 2000 3400 2000
 Wire Wire Line
 	6100 2000 6100 2950
-Wire Wire Line
-	5150 2150 5150 2000
-Connection ~ 5150 2000
-Wire Wire Line
-	5150 2000 5650 2000
-Wire Wire Line
-	5650 2200 5650 2000
-Connection ~ 5650 2000
-Wire Wire Line
-	5650 2000 6100 2000
-Wire Wire Line
-	4800 3050 5150 3050
-Wire Wire Line
-	4800 3150 5650 3150
 Wire Wire Line
 	4800 3350 6100 3350
 Wire Wire Line
@@ -135,24 +73,10 @@ Wire Wire Line
 	3400 3650 3400 2000
 Connection ~ 3400 2000
 Wire Wire Line
-	3400 2000 3800 2000
-Wire Wire Line
 	3850 3650 3850 3050
 Wire Wire Line
 	4400 2850 4400 2000
 Connection ~ 4400 2000
-Wire Wire Line
-	4400 2000 5150 2000
-Wire Wire Line
-	5150 2850 5150 3050
-Connection ~ 5150 3050
-Wire Wire Line
-	5150 3050 6100 3050
-Wire Wire Line
-	5650 2900 5650 3150
-Connection ~ 5650 3150
-Wire Wire Line
-	5650 3150 6100 3150
 Wire Wire Line
 	2800 3650 2800 4000
 Wire Wire Line
@@ -188,19 +112,6 @@ F 3 "" H 2800 4000 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:PWR_FLAG #FLG01
-U 1 1 6032338F
-P 3400 4100
-F 0 "#FLG01" H 3400 4175 50  0001 C CNN
-F 1 "PWR_FLAG" H 3400 4273 50  0000 C CNN
-F 2 "" H 3400 4100 50  0001 C CNN
-F 3 "~" H 3400 4100 50  0001 C CNN
-	1    3400 4100
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	3400 4100 3400 4000
-$Comp
 L power:+5V #PWR02
 U 1 1 60325080
 P 3400 1850
@@ -213,32 +124,8 @@ F 3 "" H 3400 1850 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	3400 1850 3400 2000
-$Comp
-L power:PWR_FLAG #FLG02
-U 1 1 60325F7A
-P 3800 1800
-F 0 "#FLG02" H 3800 1875 50  0001 C CNN
-F 1 "PWR_FLAG" H 3800 1973 50  0000 C CNN
-F 2 "" H 3800 1800 50  0001 C CNN
-F 3 "~" H 3800 1800 50  0001 C CNN
-	1    3800 1800
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3800 1800 3800 2000
-Connection ~ 3800 2000
-Wire Wire Line
-	3800 2000 4400 2000
 Text Notes 3100 3250 0    50   ~ 0
-D+\n
-Text Notes 3100 3350 0    50   ~ 0
-D-
-Text Notes 4850 3050 0    50   ~ 0
-TXD
-Text Notes 4850 3150 0    50   ~ 0
-RXD
-Text Notes 4850 3350 0    50   ~ 0
-RTS
+\n
 Wire Wire Line
 	3850 3050 4000 3050
 Connection ~ 3850 4000
@@ -250,11 +137,62 @@ $Comp
 L Interface_USB:CH330N U1
 U 1 1 6033338E
 P 4400 3150
-F 0 "U1" H 4400 3631 50  0000 C CNN
-F 1 "CH330N" H 4400 3540 50  0000 C CNN
+F 0 "U1" H 4575 3400 50  0000 C CNN
+F 1 "CH330N" H 4600 2775 50  0000 C CNN
 F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 4250 3900 50  0001 C CNN
 F 3 "http://www.wch.cn/downloads/file/240.html" H 4300 3350 50  0001 C CNN
 	1    4400 3150
+	1    0    0    -1  
+$EndComp
+Text Label 3125 3250 0    50   ~ 0
+D+
+Text Label 3125 3350 0    50   ~ 0
+D-
+Text Label 4800 3050 0    50   ~ 0
+TXD
+Text Label 4950 3150 2    50   ~ 0
+RXD
+Text Label 4925 3350 2    50   ~ 0
+RTS
+Text Label 4400 2650 3    50   ~ 0
+VCC
+Text Label 3925 3050 2    50   ~ 0
+V3
+Wire Wire Line
+	4800 3150 6100 3150
+Wire Wire Line
+	4800 3050 6100 3050
+Wire Wire Line
+	4400 2000 6100 2000
+Wire Wire Line
+	3400 4100 3400 4000
+$Comp
+L power:PWR_FLAG #FLG01
+U 1 1 6032338F
+P 3400 4100
+F 0 "#FLG01" H 3400 4175 50  0001 C CNN
+F 1 "PWR_FLAG" H 3400 4273 50  0000 C CNN
+F 2 "" H 3400 4100 50  0001 C CNN
+F 3 "~" H 3400 4100 50  0001 C CNN
+	1    3400 4100
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3800 2000 4400 2000
+Wire Wire Line
+	3400 2000 3800 2000
+Connection ~ 3800 2000
+Wire Wire Line
+	3800 1800 3800 2000
+$Comp
+L power:PWR_FLAG #FLG02
+U 1 1 60325F7A
+P 3800 1800
+F 0 "#FLG02" H 3800 1875 50  0001 C CNN
+F 1 "PWR_FLAG" H 3800 1973 50  0000 C CNN
+F 2 "" H 3800 1800 50  0001 C CNN
+F 3 "~" H 3800 1800 50  0001 C CNN
+	1    3800 1800
 	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
