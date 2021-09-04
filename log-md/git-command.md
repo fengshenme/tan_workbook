@@ -13,8 +13,8 @@
 <!-- 提交到本地仓库 -->
 - git commit -m "提交信息"
 <!-- 推送远程仓库 -->
-- git plush 
-- git plush --set-upstream origin master
+- git push 
+- git push --set-upstream origin master
 
 
 ## termux 配置
