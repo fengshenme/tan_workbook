@@ -16,7 +16,6 @@
 - git push 
 - git push --set-upstream origin master
 
-
 ## termux 配置
 
 - pkg install libgmp
@@ -30,9 +29,4 @@
 - pkg install libzmq
 - pkg install clang
 - pkg install python
-
-
-
-
-
 

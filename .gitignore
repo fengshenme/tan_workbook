@@ -11,4 +11,4 @@ application*.yaml
 *.bin
 *.lock
 *.prefs
-
+/.ipynb*/
