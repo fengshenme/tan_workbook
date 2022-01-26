@@ -15,18 +15,3 @@
 <!-- 推送远程仓库 -->
 - git push 
 - git push --set-upstream origin master
-
-## termux 配置
-
-- pkg install libgmp
-- pkg install libmpc
-- pkg install libmpfr
-- pkg install libxml2
-- pkg install libxslt
-- pkg install freetype
-- pkg install libjpeg-turbo
-- pkg install libpng
-- pkg install libzmq
-- pkg install clang
-- pkg install python
-
