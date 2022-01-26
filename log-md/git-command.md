@@ -10,12 +10,13 @@
 
 <!-- 克隆仓库 -->
 - git clone git@github.com:fengshenme/java.git
+
+<!-- add change -->
+- git add .
+
 <!-- 提交到本地仓库 -->
 - git commit -m "提交信息"
 <!-- 推送远程仓库 -->
 - git push 
 - git push --set-upstream origin master
 
-
-
-- 123
